@@ -42,7 +42,7 @@ PROMPT_FORMAT = """<s>[INST] <<SYS>>
 
 
 # Convenience method to prompt llama2
-def prompt(prompt: str, system: str = None) -> dict:
+def prompt(prompt: str, system: str = None) -> str:
     system = system or DEFAULT_SYSTEM_PROMPT
     full_prompt = PROMPT_FORMAT % {"system": system.strip(), "user": prompt.strip()}
     response = requests.post("http://localhost:8086/", json={
@@ -64,11 +64,11 @@ def prompt(prompt: str, system: str = None) -> dict:
     if answer.startswith(full_prompt):
         answer = answer[len(full_prompt):].strip()
 
-    print('#################')
-    print(answer)
-    print('#################')          
+    #print('#################')
+    #print(answer)
+    #print('#################')          
 
-    return response.json()
+    return answer
 
 
 # This grabs a note from our corpus of curated (fake) notes (no PHI).
@@ -198,5 +198,5 @@ for fname in os.listdir(DIR_COVID):
     print(note)
     print('##################')
     response = prompt(note, prompt_simple)
-    with open(f"/home/ch112531/output/{fname}.json", 'w') as fp: 
-        json.dump(response, fp)
+    with open(f"/home/ch112531/output/{fname}.llm.simple", 'w') as fp: 
+        fp.write(response)
