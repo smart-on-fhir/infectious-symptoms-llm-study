@@ -8,8 +8,8 @@
 #
 ################################################################
 
-DIR_COVID = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes'
-DIR_MTSMAPLES = '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
+DIR_COVID= '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes'
+DIR_MTSMAPLES= '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
 
 ################################################################
 
@@ -42,9 +42,9 @@ PROMPT_FORMAT = """<s>[INST] <<SYS>>
 
 
 # Convenience method to prompt llama2
-def prompt(prompt: str, system: str = None) -> str:
+def prompt(note: str, system: str = None) -> str:
     system = system or DEFAULT_SYSTEM_PROMPT
-    full_prompt = PROMPT_FORMAT % {"system": system.strip(), "user": prompt.strip()}
+    full_prompt = PROMPT_FORMAT % {"system": system.strip(), "user": note.strip()}
     response = requests.post("http://localhost:8086/", json={
         "inputs": full_prompt,
         "options": {
@@ -70,20 +70,7 @@ def prompt(prompt: str, system: str = None) -> str:
 
     return answer
 
-
-# This grabs a note from our corpus of curated (fake) notes (no PHI).
-# Visit the following github directory to see the list of names you can use:
-# https://github.com/Machine-Learning-for-Medical-Language/ctakes-examples/tree/main/ctakes_examples/resources/curated
-def get_mtsample(name: str) -> str:
-    path = f"{DIR_MTSMAPLES}/{name}"
-    with open(path, "r", encoding="utf8") as f:
-        return f.read().strip()
     
-def get_covid_note(name: str) -> str:
-    path = f"{DIR_COVID}/{name}"
-    with open(path, "r", encoding="utf8") as f:
-        return f.read().strip()
-
 ################################################################
 
 symptom_list = [
@@ -180,7 +167,7 @@ criteria_exclude+= f'Exclude all symptom for this JSON of symptom synonyms:\n' +
 
 print(criteria_exclude)
 
-prompt_identity = 'Act as if you are a medical records reviewer for research. You will provide the best estimate without explaining your answers.'
+prompt_identity = 'Act as if you are a medical records reviewer for research. Do NOT explain your answers.'
 prompt_identity+= ' Always output your answer in JSON where the values are True or False keys are the name of each symptom:\n' + ',\n'.join(symptom_list) + '.\n\n'
 
 prompt_simple = prompt_identity +'\n'+ criteria_simple
@@ -189,14 +176,69 @@ prompt_verbose = prompt_identity +'\n'+ criteria_verbose
 
 prompt_select = prompt_simple
 
+
+# This grabs a note from our corpus of curated (fake) notes (no PHI).
+# Visit the following github directory to see the list of names you can use:
+# https://github.com/Machine-Learning-for-Medical-Language/ctakes-examples/tree/main/ctakes_examples/resources/curated
+def get_mtsample(name: str) -> str:
+    path = f"{DIR_MTSMAPLES}/{name}"
+    with open(path, "r", encoding="utf8") as f:
+        return f.read().strip()
+    
+def get_covid_note(name: str) -> str:
+    path = f"{DIR_COVID}/{name}"
+    with open(path, "r", encoding="utf8") as f:
+        return f.read().strip()
+
+def process_dir_covid(): 
+    for fname in os.listdir(DIR_COVID): 
+        note = get_covid_note(fname)
+        target = f'/home/ch112531/output/{fname}.llm.simple'
+
+        print('######################################################')
+    
+        if not os.path.exists(target):
+            print(f"{fname} processing....")
+            response = prompt(note, prompt_simple)
+            with open(f"/home/ch112531/output/{fname}.llm.simple", 'w') as fp: 
+                fp.write(response)
+        else:
+            print(f"{fname} SKIP (file exists)")
+
 ################################################################
 
-for fname in os.listdir(DIR_COVID): 
-    print(f"{fname} processing....")
-    note = get_covid_note(fname)
-    print('##################')
-    print(note)
-    print('##################')
-    response = prompt(note, prompt_simple)
-    with open(f"/home/ch112531/output/{fname}.llm.simple", 'w') as fp: 
-        fp.write(response)
+# for fname in os.listdir(DIR_COVID): 
+#     print(f"{fname} processing....")
+#     note = get_covid_note(fname)
+#     print('##################')
+#     print(note)
+#     print('##################')
+#     response = prompt(note, prompt_simple)
+#     with open(f"/home/ch112531/output/{fname}.llm.simple", 'w') as fp: 
+#         fp.write(response)
+
+################################################################
+#
+# Test max length before garbage output
+
+#bad1 = get_covid_note('5770373137.txt')
+#len(bad1) # 13,765 chars is ~3,441 tokens 
+#bad1_half = bad1[:int(len(bad1)/2)]
+#bad1_10k = bad1[:10000]
+
+bigfiles = ['5780576807.txt', '5881898894', '5944529801.txt','6308667711.txt','6558019128.txt','5839338440.txt','5937065894.txt']
+
+
+# agg = list() 
+
+# for i in range(1, 13): 
+#     print('####################')
+#     prct = (i*1000)/(len(bad1))
+#     print(f'chars=  #{i*1000}')
+#     print(f'percent= %{prct}')
+#     res = prompt(bad1[:(i*1000)], prompt_simple)
+
+#     print(res)
+#     agg.append(res)
+################################################################
+
