@@ -1,3 +1,7 @@
+import os
+import requests
+import json
+
 ################################################################
 # https://replicate.com/blog/how-to-prompt-llama
 # 
@@ -7,9 +11,10 @@
 # Speak like…
 #
 ################################################################
+# E2 directories
 
-DIR_COVID= '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes'
-DIR_MTSMAPLES= '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
+DIR_COVID = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes'
+DIR_MTSMAPLES = '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
 
 ################################################################
 
@@ -63,14 +68,9 @@ def prompt(note: str, system: str = None) -> str:
     # designing here for a single request, not a conversation.
     if answer.startswith(full_prompt):
         answer = answer[len(full_prompt):].strip()
-
-    #print('#################')
-    #print(answer)
-    #print('#################')          
-
     return answer
 
-    
+
 ################################################################
 
 symptom_list = [
@@ -90,50 +90,49 @@ crit1 = 'Encounter time. Symptoms must be relevant to the present encounter eith
 crit2 = 'Medical section heading. Patient symptoms are present and not related to past medical history or a medication prescribed unrelated to the present encounter.'
 crit3 = 'Positive symptom mentions must explicitly mention the symptom or synonym.'
 
-crit2_include=['Chief complaint',
-               'History of presenting illness',
-               'Review of systems',
-               'Physical exam',
-               'Vital signs',
-               'Assessment and plan',
-               'hospital course',
-               'Assessment and plan',
-               'diagnosis']
+crit2_include = ['Chief complaint',
+                 'History of presenting illness',
+                 'Review of systems',
+                 'Physical exam',
+                 'Vital signs',
+                 'Assessment and plan',
+                 'hospital course',
+                 'Assessment and plan',
+                 'diagnosis']
 
-crit2_exclude=[
-    'Past medical history',
-    'Social history',
-    'History',
-    'Medication list',
-    'Imaging',
-    'Diagnostic Study']
+crit2_exclude = ['Past medical history',
+                 'Social history',
+                 'History',
+                 'Medication list',
+                 'Imaging',
+                 'Diagnostic Study']
 
-crit3_include={
-      'Loss of taste or smell': ['Anosmia', 'loss of taste', 'loss of smell']
-    , 'Congestion or runny nose' : ['Rhinorrhea', 'congestion', 'discharge', 'nose is dripping', 'runny nose', 'stuffy nose']
-    , 'Cough' : ['Cough', 'Tussive or post-tussive', 'cough is unproductive', 'productive cough', 'dry cough', 'wet cough', 'producing sputum']
-    , 'Diarrhea' : ['Diarrhea', 'watery stool']
-    , 'Fatigue' : ['Fatigue', 'tired', 'exhausted', 'weary', 'malaise', 'feeling generally unwell']
-    , 'Fever or Chills' : ['Fever', 'pyrexia', 'chills', 'temperature greater than or equal 100.4 Fahrenheit or 38 celsius', 'Temperature >= 100.4F', 'Temperature >= 38C']
-    , 'Headache' : ['Headache', 'HA', 'migraine', 'cephalgia', 'head pain']
-    , 'Muscle or body aches' : ['muscle or body aches', 'muscle aches', 'generalized aches and pains', 'body aches', 'myalgias', 'myoneuralgia', 'soreness', 'generalized aches and pains']
-    , 'Nausea or vomiting' : ['Nausea or vomiting', 'Nausea', 'vomiting', 'emesis', 'throwing up', 'queasy', 'regurgitated']
-    , 'Shortness of breath or difficulty breathing' : ['Shortness of breath', 'difficulty breathing', 'SOB', 'Dyspnea', 'breathing is short', 'increased breathing', 'labored breathing', 'distressed breathing']
-    , 'Sore throat' : ['Sore throat', 'throat pain', 'pharyngeal pain', 'pharyngitis', 'odynophagia'] 
+crit3_include = {
+    'Loss of taste or smell': ['Anosmia', 'loss of taste', 'loss of smell'],
+    'Congestion or runny nose': ['Rhinorrhea', 'congestion', 'discharge', 'nose is dripping', 'runny nose', 'stuffy nose'],
+    'Cough': ['Cough', 'Tussive or post-tussive', 'cough is unproductive', 'productive cough', 'dry cough', 'wet cough', 'producing sputum'],
+    'Diarrhea': ['Diarrhea', 'watery stool'],
+    'Fatigue': ['Fatigue', 'tired', 'exhausted', 'weary', 'malaise', 'feeling generally unwell'],
+    'Fever or Chills': ['Fever', 'pyrexia', 'chills', 'temperature greater than or equal 100.4 Fahrenheit or 38 celsius', 'Temperature >= 100.4F', 'Temperature >= 38C'],
+    'Headache': ['Headache', 'HA', 'migraine', 'cephalgia', 'head pain'],
+    'Muscle or body aches': ['muscle or body aches', 'muscle aches', 'generalized aches and pains', 'body aches', 'myalgias', 'myoneuralgia', 'soreness', 'generalized aches and pains'],
+    'Nausea or vomiting': ['Nausea or vomiting', 'Nausea', 'vomiting', 'emesis', 'throwing up', 'queasy', 'regurgitated'],
+    'Shortness of breath or difficulty breathing': ['Shortness of breath', 'difficulty breathing', 'SOB', 'Dyspnea', 'breathing is short', 'increased breathing', 'labored breathing', 'distressed breathing'],
+    'Sore throat': ['Sore throat', 'throat pain', 'pharyngeal pain', 'pharyngitis', 'odynophagia']
 }
 
-crit3_exclude={
-      'Loss of taste or smell': ['Injury related to loss of taste or smell']
-    , 'Congestion or runny nose' : []
-    , 'Cough' : ['Wheezing', 'crackles', 'croup']
-    , 'Diarrhea' : ['Loose stool', 'bloody stool']
-    , 'Fatigue' : ['Looked ill']
-    , 'Fever or Chills' : ['Afebrile', 'felt warm']
-    , 'Headache' : ['Headache due to injury']
-    , 'Muscle or body aches' : ['Localized pain', 'injury', 'abdominal pain', 'lower back pain']
-    , 'Nausea or vomiting' : ['Gastritis', 'gastroparesis']
-    , 'Shortness of breath or difficulty breathing' : ['BiPAP', 'CPAP', 'oxygen need']
-    , 'Sore throat' : ['Streptococcus', 'dysphagia', 'hoarseness', 'red throat'] 
+crit3_exclude = {
+    'Loss of taste or smell': ['Injury related to loss of taste or smell'],
+    'Congestion or runny nose': [],
+    'Cough': ['Wheezing', 'crackles', 'croup'],
+    'Diarrhea': ['Loose stool', 'bloody stool'],
+    'Fatigue': ['Looked ill'],
+    'Fever or Chills': ['Afebrile', 'felt warm'],
+    'Headache': ['Headache due to injury'],
+    'Muscle or body aches': ['Localized pain', 'injury', 'abdominal pain', 'lower back pain'],
+    'Nausea or vomiting': ['Gastritis', 'gastroparesis'],
+    'Shortness of breath or difficulty breathing': ['BiPAP', 'CPAP', 'oxygen need'],
+    'Sore throat': ['Streptococcus', 'dysphagia', 'hoarseness', 'red throat']
 }
 crit3_exclude_list = list() 
 for outer in [val for val in crit3_exclude.values()]:
@@ -144,35 +143,35 @@ for outer in [val for val in crit3_exclude.values()]:
 criteria_simple = f'Three criteria define True or False for each symptom.\n Criteria 1 is {crit1}\n Criteria 2 is {crit2}\n Criteria 3 is {crit3}\n'
 
 criteria_verbose = f'Three criteria define True or False for each symptom.\n'
-criteria_verbose+= f'Criteria 1 is {crit1}\n\n'
+criteria_verbose += f'Criteria 1 is {crit1}\n\n'
 
-criteria_verbose+= f'Criteria 2 is {crit2}\n\n'
-criteria_verbose+= f'Include positive symptom mentions from these medical section headings :\n' + ',\n'.join(crit2_include) +'.\n\n'
-criteria_verbose+= f'Exclude any symptom mentions from these medical section headings :\n' + ',\n'.join(crit2_exclude) +'.\n\n'
+criteria_verbose += f'Criteria 2 is {crit2}\n\n'
+criteria_verbose += f'Include positive symptom mentions from these medical section headings :\n' + ',\n'.join(crit2_include) + '.\n\n'
+criteria_verbose += f'Exclude any symptom mentions from these medical section headings :\n' + ',\n'.join(crit2_exclude) + '.\n\n'
 
-criteria_verbose+= f'Criteria 3 is {crit3}\n\n'
-criteria_verbose+= f'Include positive symptom for this JSON of symptom synonyms:\n' + json.dumps(crit3_include) +'.\n\n'
-criteria_verbose+= f'Exclude all symptom for this JSON of symptom synonyms:\n' + json.dumps(crit3_exclude_list) +'.\n\n'
+criteria_verbose += f'Criteria 3 is {crit3}\n\n'
+criteria_verbose += f'Include positive symptom for this JSON of symptom synonyms:\n' + json.dumps(crit3_include) + '.\n\n'
+criteria_verbose += f'Exclude all symptom for this JSON of symptom synonyms:\n' + json.dumps(crit3_exclude_list) + '.\n\n'
 
 print(criteria_verbose)
 
 criteria_exclude = f'Three criteria define True or False for each symptom.\n'
-criteria_exclude+= f'Criteria 1 is {crit1}\n\n'
+criteria_exclude += f'Criteria 1 is {crit1}\n\n'
 
-criteria_exclude+= f'Criteria 2 is {crit2}\n\n'
-criteria_exclude+= f'Exclude any symptom mentions from these medical section headings :\n' + ',\n'.join(crit2_exclude) +'.\n\n'
+criteria_exclude += f'Criteria 2 is {crit2}\n\n'
+criteria_exclude += f'Exclude any symptom mentions from these medical section headings :\n' + ',\n'.join(crit2_exclude) + '.\n\n'
 
-criteria_exclude+= f'Criteria 3 is {crit3}\n\n'
-criteria_exclude+= f'Exclude all symptom for this JSON of symptom synonyms:\n' + json.dumps(crit3_exclude_list) +'.\n\n'
+criteria_exclude += f'Criteria 3 is {crit3}\n\n'
+criteria_exclude += f'Exclude all symptom for this JSON of symptom synonyms:\n' + json.dumps(crit3_exclude_list) + '.\n\n'
 
 print(criteria_exclude)
 
 prompt_identity = 'Act as if you are a medical records reviewer for research. Do NOT explain your answers.'
-prompt_identity+= ' Always output your answer in JSON where the values are True or False keys are the name of each symptom:\n' + ',\n'.join(symptom_list) + '.\n\n'
+prompt_identity += ' Always output your answer in JSON where the values are True or False keys are the name of each symptom:\n' + ',\n'.join(symptom_list) + '.\n\n'
 
-prompt_simple = prompt_identity +'\n'+ criteria_simple
-prompt_exclude = prompt_identity +'\n'+ criteria_exclude
-prompt_verbose = prompt_identity +'\n'+ criteria_verbose
+prompt_simple = prompt_identity + '\n' + criteria_simple
+prompt_exclude = prompt_identity + '\n' + criteria_exclude
+prompt_verbose = prompt_identity + '\n' + criteria_verbose
 
 prompt_select = prompt_simple
 
@@ -190,13 +189,17 @@ def get_covid_note(name: str) -> str:
     with open(path, "r", encoding="utf8") as f:
         return f.read().strip()
 
-def process_dir_covid(): 
-    for fname in os.listdir(DIR_COVID): 
+def process_dir(source_dir=DIR_COVID, output_dir='/home/ch112531/output') -> None:
+    """
+    Process all NOTES in $target_dir
+    :param source_dir: dir input
+    :param target_dir: dir output
+    """
+    for fname in os.listdir(source_dir):
         note = get_covid_note(fname)
-        target = f'/home/ch112531/output/{fname}.llm.simple'
+        target = f'{output_dir}/{fname}.llm.out'
 
         print('######################################################')
-    
         if not os.path.exists(target):
             print(f"{fname} processing....")
             response = prompt(note, prompt_simple)
@@ -204,41 +207,3 @@ def process_dir_covid():
                 fp.write(response)
         else:
             print(f"{fname} SKIP (file exists)")
-
-################################################################
-
-# for fname in os.listdir(DIR_COVID): 
-#     print(f"{fname} processing....")
-#     note = get_covid_note(fname)
-#     print('##################')
-#     print(note)
-#     print('##################')
-#     response = prompt(note, prompt_simple)
-#     with open(f"/home/ch112531/output/{fname}.llm.simple", 'w') as fp: 
-#         fp.write(response)
-
-################################################################
-#
-# Test max length before garbage output
-
-#bad1 = get_covid_note('5770373137.txt')
-#len(bad1) # 13,765 chars is ~3,441 tokens 
-#bad1_half = bad1[:int(len(bad1)/2)]
-#bad1_10k = bad1[:10000]
-
-bigfiles = ['5780576807.txt', '5881898894', '5944529801.txt','6308667711.txt','6558019128.txt','5839338440.txt','5937065894.txt']
-
-
-# agg = list() 
-
-# for i in range(1, 13): 
-#     print('####################')
-#     prct = (i*1000)/(len(bad1))
-#     print(f'chars=  #{i*1000}')
-#     print(f'percent= %{prct}')
-#     res = prompt(bad1[:(i*1000)], prompt_simple)
-
-#     print(res)
-#     agg.append(res)
-################################################################
-
