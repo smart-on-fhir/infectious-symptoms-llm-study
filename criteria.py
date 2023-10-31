@@ -154,7 +154,7 @@ def include_prompt():
     include += f'\nRule (2): {crit2} '
     include += f'\n Include positive symptoms from these medical section headings: ' + quote_join(crit2_include) + '.'
     include += f'\nRule (3): {crit3} '
-    include += f'\n Include positive mentions of these medical terms: ' + quote_join(quote_unpack(crit3_include)) + '.'
+    include += f'\n Include positive mentions of: ' + quote_join(quote_unpack(crit3_include)) + '.'
     return include
 
 ###############################################################################
@@ -188,22 +188,27 @@ def verbose_prompt():
     return verbose
 
 
-print('\n###############################################################')
-print('# identity_prompt() ')
-print(identity_prompt())
+def show_usage():
+    print('\n###############################################################')
+    print('# identity_prompt() ')
+    print(identity_prompt())
 
-print('\n###############################################################')
-print('# simple_prompt() ')
-print(simple_prompt())
+    print('\n###############################################################')
+    print('# simple_prompt() ')
+    print(simple_prompt())
 
-print('\n###############################################################')
-print('# include_prompt() ')
-print(include_prompt())
+    print('\n###############################################################')
+    print('# include_prompt() ')
+    print(include_prompt())
 
-print('\n###############################################################')
-print('# exclude_prompt() ')
-print(exclude_prompt())
+    print('\n###############################################################')
+    print('# exclude_prompt() ')
+    print(exclude_prompt())
 
-print('\n###############################################################')
-print('# verbose_prompt() ')
-print(exclude_prompt())
+    print('\n###############################################################')
+    print('# verbose_prompt() ')
+    print(verbose_prompt())
+
+
+if __name__ == "__main__":
+    show_usage()
