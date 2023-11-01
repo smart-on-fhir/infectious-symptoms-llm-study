@@ -55,7 +55,7 @@ symptom_list = [
 #
 crit1 = 'Symptoms must be positively documented and relevant to the presenting illness or reason for visit.'
 crit2 = 'Medical section headings must be specific to the present emergency department encounter.'
-crit3 = 'Positive symptom mentions must be definite medical synonym.'
+crit3 = 'Positive symptom mentions must be a definite medical synonym.'
 
 ###############################################################################
 #
@@ -70,16 +70,16 @@ crit1_exclude = ['symptoms that are negative or denied']
 # criteria 2: Medical Section Headings
 #
 crit2_include = ['Chief Complaint',
-                 'History of Present Illness',
+                 'History of Present Illness', 'HPI',
                  'Review of Systems',
                  'Physical Exam',
                  'Vital Signs',
                  'Assessment and Plan',
                  'Medical Decision Making']
 
-crit2_exclude = ['Past Medical History',
-                 'Family Medical',
-                 'Social History',
+crit2_exclude = ['Past Medical History', 'PMH'
+                 'Family History', 'FHX',
+                 'Social History', 'SHX',
                  'Medications',
                  'Allergies',
                  'Imaging',
