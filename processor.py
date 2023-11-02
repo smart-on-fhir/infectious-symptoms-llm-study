@@ -1,12 +1,13 @@
 import os
 import requests
-
+import json
+import random
 ################################################################
 # E2 directories
 
 DIR_MTSMAPLES = '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
 DIR_COVID = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes'
-DIR_OUTPUT = '/home/ch112531/output'
+DIR_OUTPUT = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output'
 
 def get_mtsample(name: str) -> str:
     path = f"{DIR_MTSMAPLES}/{name}"
@@ -94,13 +95,22 @@ def process_dir(source_dir: str, choice_prompt: str, output_ext) -> None:
         else:
             print(f"{target} SKIP (file exists)")
 
-def process_dir_multi_prompts(source_dir: str, multiple_prompts: dict) -> None:
+def process_dir_multi_prompts(source_dir: str, multiple_prompts: dict, skip_list=None) -> None:
     """
     Process all NOTES in $target_dir
     :param source_dir: dir input
     :param choice_prompt: selected prompt for LLM
     :param output_ext: extension to save file as
+    :param skip_list: notes to skip because known to fail. So far only 1 is failing (largest ED note in BCH)
     """
+    for output_ext, choice_prompt in multiple_prompts.items():
+        print('########################')
+        print('#' + output_ext + '\n')
+        print(choice_prompt)
+
+    with open(f'{DIR_OUTPUT}/multiple_prompts.json', 'w') as fp:
+        json.dump(multiple_prompts, fp)
+
     for fname in os.listdir(source_dir):
         note = get_covid_note(fname)
         for output_ext, choice_prompt in multiple_prompts.items():
@@ -108,9 +118,13 @@ def process_dir_multi_prompts(source_dir: str, multiple_prompts: dict) -> None:
 
             print('######################################################')
             if not os.path.exists(target):
-                print(f"{target} processing....")
-                response = prompt(note, choice_prompt) + '\n'
-                with open(target, 'w') as fp:
-                    fp.write(response)
+
+                if skip_list and fname in skip_list:
+                    print(f"{target} is believed to cause issues (SKIP)")
+                else:
+                    print(f"{target} processing....")
+                    response = prompt(note, choice_prompt) + '\n'
+                    with open(target, 'w') as fp:
+                        fp.write(response)
             else:
                 print(f"{target} SKIP (file exists)")
