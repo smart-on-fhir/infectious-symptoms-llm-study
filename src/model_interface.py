@@ -38,7 +38,6 @@ class TGIClient:
         if answer.startswith(payload):
             answer = answer[len(payload):].strip()
 
-        print(answer)
         return answer
 
 ###############################################################################
