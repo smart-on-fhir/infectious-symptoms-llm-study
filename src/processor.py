@@ -5,7 +5,7 @@ import datetime
 ################################################################
 # E2 directories
 
-DIR_MTSMAPLES = '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
+DIR_CURATED = '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
 DIR_COVID = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes'
 DIR_SMALL_BATCH = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-small-batches'
 DIR_OUTPUT = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output'
@@ -29,7 +29,7 @@ def get_curated_note(name: str) -> str:
     Visit the following github directory to see the list of names you can use:
     https://github.com/Machine-Learning-for-Medical-Language/ctakes-examples/tree/main/ctakes_examples/resources/curated
     """
-    path = f"{DIR_MTSMAPLES}/{name}"
+    path = f"{DIR_CURATED}/{name}"
     with open(path, "r", encoding="utf8") as f:
         return f.read().strip()
     
