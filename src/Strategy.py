@@ -2,9 +2,6 @@ from .Step import Step
 
 class Strategy: 
     def __init__(self, steps, model):
-        # Must be specified
-        if model == None: 
-          raise ValueError('A model interface must be supplied to a each step')
         self.model = model
         self.responses = []
         self.steps = [Step(**step_config, model=model, responses=self.responses) for step_config in steps]

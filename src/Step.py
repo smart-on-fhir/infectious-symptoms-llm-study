@@ -10,8 +10,6 @@ class Step:
         # Could be empty
         self.prompt_format = prompt_format
         # Must be specified
-        if model == None: 
-            raise ValueError('A model interface must be supplied to a each step')
         self.model = model
         # Array of responses is passed by reference for future use
         self.responses = responses
