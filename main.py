@@ -1,6 +1,6 @@
 import re
-from src.Strategy import Strategy
-from src.ModelInterface import LLAMA2Interface
+from src.strategy import Strategy
+from src.model_interface import LLAMA2Interface
 from src.processor import process_small_batch, process_dir
 from src.instructions import simple_prompt
 

@@ -1,4 +1,4 @@
-from .Step import Step
+from .step import Step
 
 class Strategy: 
     def __init__(self, steps, model):
