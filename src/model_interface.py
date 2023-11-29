@@ -10,7 +10,8 @@ PORT='8888'
 ###############################################################################
 #
 # TGIClient 
-# A client for making requests to the TGI API 
+# A client for making requests to the Text Generation Inference API 
+# See here for more: https://huggingface.co/docs/text-generation-inference/index
 #
 ################################################################
 class TGIClient: 
