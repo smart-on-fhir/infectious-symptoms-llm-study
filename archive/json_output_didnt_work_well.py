@@ -84,28 +84,33 @@ symptom_list = [
     'Loss of taste or smell',
     'Muscle or body aches',
     'Nausea or vomiting',
-    'Sore throat']
+    'Sore throat'
+]
 
 crit1 = 'Encounter time. Symptoms must be relevant to the present encounter either as the reason for visit, documented symptom, or observed sign.'
 crit2 = 'Medical section heading. Patient symptoms are present and not related to past medical history or a medication prescribed unrelated to the present encounter.'
 crit3 = 'Positive symptom mentions must explicitly mention the symptom or synonym.'
 
-crit2_include = ['Chief complaint',
-                 'History of presenting illness',
-                 'Review of systems',
-                 'Physical exam',
-                 'Vital signs',
-                 'Assessment and plan',
-                 'hospital course',
-                 'Assessment and plan',
-                 'diagnosis']
+crit2_include = [
+    'Chief complaint',
+    'History of presenting illness',
+    'Review of systems',
+    'Physical exam',
+    'Vital signs',
+    'Assessment and plan',
+    'hospital course',
+    'Assessment and plan',
+    'diagnosis'
+]
 
-crit2_exclude = ['Past medical history',
-                 'Social history',
-                 'History',
-                 'Medication list',
-                 'Imaging',
-                 'Diagnostic Study']
+crit2_exclude = [
+    'Past medical history',
+    'Social history',
+    'History',
+    'Medication list',
+    'Imaging',
+    'Diagnostic Study'
+]
 
 crit3_include = {
     'Loss of taste or smell': ['Anosmia', 'loss of taste', 'loss of smell'],

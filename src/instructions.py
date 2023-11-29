@@ -47,7 +47,8 @@ symptom_list = [
     'Loss of taste or smell',
     'Muscle or body aches',
     'Nausea or vomiting',
-    'Sore throat']
+    'Sore throat'
+]
 
 ###############################################################################
 #
@@ -69,21 +70,25 @@ crit1_exclude = ['symptoms that are negative or denied']
 #
 # criteria 2: Medical Section Headings
 #
-crit2_include = ['Chief Complaint',
-                 'History of Present Illness', 'HPI',
-                 'Review of Systems',
-                 'Physical Exam',
-                 'Vital Signs',
-                 'Assessment and Plan',
-                 'Medical Decision Making']
+crit2_include = [
+    'Chief Complaint',
+    'History of Present Illness', 'HPI',
+    'Review of Systems',
+    'Physical Exam',
+    'Vital Signs',
+    'Assessment and Plan',
+    'Medical Decision Making'
+]
 
-crit2_exclude = ['Past Medical History', 'PMH'
-                 'Family History', 'FHX',
-                 'Social History', 'SHX',
-                 'Medications',
-                 'Allergies',
-                 'Imaging',
-                 'Diagnostic Study']
+crit2_exclude = [
+    'Past Medical History', 'PMH'
+    'Family History', 'FHX',
+    'Social History', 'SHX',
+    'Medications',
+    'Allergies',
+    'Imaging',
+    'Diagnostic Study'
+]
 
 ###############################################################################
 #
