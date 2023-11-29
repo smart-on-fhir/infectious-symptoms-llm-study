@@ -60,11 +60,11 @@ class LLAMA2Interface():
         self.tgiClient = TGIClient(url)
         # This is the formatting that Llama2's chat model is trained on.
         # https://huggingface.co/blog/llama2#how-to-prompt-llama-2
-        self.default_prompt = DEFAULT_PROMPT_FORMAT
+        self.default_prompt_format = DEFAULT_PROMPT_FORMAT
 
     # Fills the model's prompt-format with instructions, context, and system information
     def saturate_prompt(self, instruction: str, context: str, system:str = None,  prompt_format: str = None):
-        prompt_format = prompt_format or self.default_prompt
+        prompt_format = prompt_format or self.default_prompt_format
         full_prompt = prompt_format % { 
             "instruction": instruction, 
             "context": context,
