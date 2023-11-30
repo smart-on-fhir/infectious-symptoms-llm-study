@@ -10,7 +10,7 @@ from src.instructions import simple_instruction
 # Use LLAMA2 as our interface
 # 
 
-URL=f"{os.environ["HOST"]}:{os.environ["PORT"]}/"
+URL=f"{os.environ['HOST']}:{os.environ['PORT']}/"
 llama2 = LLAMA2Interface(URL)
 
 
