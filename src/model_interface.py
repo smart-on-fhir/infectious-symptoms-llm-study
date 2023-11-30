@@ -19,7 +19,7 @@ class TGIClient:
         self.url = url
 
     # Makes API call and parses response
-    def call(self, payload): 
+    def fetch_llm_response(self, payload): 
         response = requests.post(self.url, json={
             "inputs": payload,
             "options": {
@@ -81,5 +81,5 @@ class LLAMA2Interface():
             context=context, 
             system=system
         )
-        return self.tgiClient.call(payload)
+        return self.tgiClient.fetch_llm_response(payload)
 
