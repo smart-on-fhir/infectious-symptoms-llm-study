@@ -31,6 +31,12 @@ def quote_unpack(synonyms: dict) -> list:
             unpacked.append(inner)
     return unpacked
 
+def join_lines(lines: list) -> str:
+    """
+    :param lines: a list of lines to concatenate 
+    :return: a single string joining all list-items with newlines, including a trailing newline
+    """ 
+    return '\n'.join(lines) + '\n'
 
 ###############################################################################
 #
@@ -153,42 +159,42 @@ Again, use chain of thought methodology to justify your summaries.
 #
 
 identity = [
-    'Summarize the emergency department ED note using simple language',
-    'Output the positively documented COVID-19 symptoms',
-    'Symptoms only need to be positively mentioned once to be included',
-    'Do NOT explain your answers'
+    'Summarize the emergency department ED note using simple language.',
+    'Output the positively documented COVID-19 symptoms.',
+    'Symptoms only need to be positively mentioned once to be included.',
+    'Do NOT explain your answers.'
 ]
 def identity_instruction():
-    return '.\n'.join(identity) + '.\n'
+    return join_lines(identity)
 
 identity_no_covid = [
-    'Summarize the emergency department ED note using simple language',
-    'Output the positively documented symptoms',
-    'Symptoms only need to be positively mentioned once to be included',
-    'Do NOT explain your answers'
+    'Summarize the emergency department ED note using simple language.',
+    'Output the positively documented symptoms.',
+    'Symptoms only need to be positively mentioned once to be included.',
+    'Do NOT explain your answers.'
 ]
 def identity_no_covid_instruction():
-    return '.\n'.join(identity_no_covid) + '.\n'
+    return join_lines(identity_no_covid)
 
 identity_no_covid_specific_symptoms = [
-    'Summarize the emergency department ED note using simple language',
-    'Output only present positive (+) mentions of symptoms relating to: ' + ', '.join(symptom_list),
-    'Symptoms only need to be positively mentioned once to be included',
-    'Do NOT explain your answers'
+    'Summarize the emergency department ED note using simple language.',
+    'Output only present positive (+) mentions of symptoms relating to: ' + ', '.join(symptom_list) + '.',
+    'Symptoms only need to be positively mentioned once to be included.',
+    'Do NOT explain your answers.'
 ]
 def identity_no_covid_specific_symptoms_instruction():
-    return '.\n'.join(identity_no_covid_specific_symptoms) + '.\n'
+    return join_lines(identity_no_covid_specific_symptoms)
 
 def identity_chain_of_thought_instruction(): 
-    return '.\n'.join([CHAIN_OF_THOUGHT_instruction, *identity])
+    return join_lines([CHAIN_OF_THOUGHT_instruction, *identity])
 
 def identity_symptom_specific_instruction(symptom: str): 
-    return '.\n'.join([
-    'Summarize ' + symptom + ' information from this department ED note using simple language',
-    'Output only present positive (+) mentions of symptoms relating to ' + symptom,
-    'Symptoms only need to be positively mentioned once to be included',
-    'Do NOT mention symptoms unrelated to ' + symptom,
-    'Do NOT explain your answers'
+    return join_lines([
+    'Summarize ' + symptom + ' information from this department ED note using simple language.',
+    'Output only present positive (+) mentions of symptoms relating to ' + symptom + '.',,
+    'Symptoms only need to be positively mentioned once to be included.',
+    'Do NOT mention symptoms unrelated to ' + symptom + '.',
+    'Do NOT explain your answers.'
 ])
 
 ###############################################################################
