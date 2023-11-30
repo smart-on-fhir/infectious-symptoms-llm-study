@@ -45,24 +45,24 @@ def get_covid_note(name: str = None) -> str:
     Returns the note and the note's name (helpful when one is selected randomly)
     """
     note_dir = DIR_COVID
-    if (name): 
-        path = f"{note_dir}/{name}"
-        with open(path, "r", encoding="utf8") as f:
-            return f.read().strip(), name
-    # If no name is provided, select a note at random
-    files = os.listdir(note_dir)
-    files = [file for file in files if file.replace('.txt','') in get_target_notes()]
-    file = files[random.randrange(len(files))]
-    print("# Using file: ")
-    print(file)
-    with open(os.path.join(note_dir, file), "r", encoding="utf8") as f:
-        return f.read().strip(), file
+    if not name: 
+        # If no name is provided, select a note at random
+        files = os.listdir(note_dir)
+        files = [file for file in files if file.replace('.txt','') in get_target_notes()]
+        file = files[random.randrange(len(files))]
+        print("# Using file: ")
+        print(file)
+        with open(os.path.join(note_dir, file), "r", encoding="utf8") as f:
+            return f.read().strip(), file
+    path = f"{note_dir}/{name}"
+    with open(path, "r", encoding="utf8") as f:
+        return f.read().strip(), name
 
 
 ################################################################
 # Note processing methods
 # 
-def process_dir_single_strategy(source_dir: str, strategy: str, output_ext) -> None:
+def process_dir_single_strategy(source_dir: str, strategy: str, output_ext: str) -> None:
     """
     Process all NOTES in $target_dir for a single strategy
     :param source_dir: dir input
@@ -82,7 +82,7 @@ def process_dir_single_strategy(source_dir: str, strategy: str, output_ext) -> N
         else:
             print(f"{target} SKIP (file exists)")
 
-def process_dir(experiment: dict, source_dir: str = DIR_COVID, note_list=get_target_notes(), skip_list=None) -> None:
+def process_dir(experiment: dict, source_dir: str = DIR_COVID, note_list = None, skip_list = None) -> None:
     """
     Process all NOTES in $target_dir
     :param experiment: dictionary of prompting strategies to run  
@@ -90,6 +90,7 @@ def process_dir(experiment: dict, source_dir: str = DIR_COVID, note_list=get_tar
     :param note_list: notes to process because we have labels for them; TARGET_NOTES by default
     :param skip_list: notes to skip because known to fail. So far only 1 is failing (largest ED note in BCH)
     """
+    note_list = note_list or get_target_notes()
     for output_ext, strategy in experiment.items():
         print('########################')
         print('#' + output_ext + '\n')
