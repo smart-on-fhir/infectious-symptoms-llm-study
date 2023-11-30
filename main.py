@@ -1,5 +1,6 @@
 import re
 import os
+from dotenv import load_dotenv
 from src.strategy import Strategy
 from src.model_interface import LLAMA2Interface
 from src.processor import process_small_batch, process_dir
@@ -9,7 +10,7 @@ from src.instructions import simple_instruction
 #
 # Use LLAMA2 as our interface
 # 
-
+load_dotenv()
 URL=f"{os.environ['HOST']}:{os.environ['PORT']}/"
 llama2 = LLAMA2Interface(URL)
 
