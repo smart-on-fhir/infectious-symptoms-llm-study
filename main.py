@@ -1,21 +1,23 @@
 import re
+import os
 from src.strategy import Strategy
 from src.model_interface import LLAMA2Interface
 from src.processor import process_small_batch, process_dir
 from src.instructions import simple_instruction
 
-# For sans-notebook context running on the same network
-# NOTE: Make sure you've updated IPs as needed
-HOST="http://10.38.4.72"
-PORT='8888'
-# For notebook version working via ssh forwarding
-# HOST="http://localhost"
-# PORT='8086'
-URL=f"{HOST}:{PORT}/"
-
+###############################################################################
+#
 # Use LLAMA2 as our interface
+# 
+
+URL=f"{os.environ["HOST"]}:{os.environ["PORT"]}/"
 llama2 = LLAMA2Interface(URL)
 
+
+###############################################################################
+#
+# Custom preprocessor: whitespace normalization
+# 
 # Find all instances of multiple white space repeated
 pattern = r"(\s){2,}"
 # Replace it with one instance via capture group
@@ -23,6 +25,11 @@ replacement = r"\1"
 def whitespace_normalize(s: str): 
     return re.sub(pattern, replacement, s).strip()
 
+
+###############################################################################
+#
+# Simplification second-pass
+# 
 simplify_instruction = """
 You are an expert editor reviewing a clinical note summary. 
 Previous reviewer may have included irrelevant, negative symptoms in their summarization. 
@@ -32,6 +39,10 @@ ONLY reply with the summary.
 Do NOT explain your answers.
 """
 
+###############################################################################
+#
+# Defining strategies with the components above!
+# 
 simpleDoublePassStrategy = Strategy([
     {
         "instruction": simple_instruction(),
@@ -43,7 +54,6 @@ simpleDoublePassStrategy = Strategy([
         "preprocess": whitespace_normalize,
     }
 ], model=llama2)
-
 simpleSinglePassStrategy = Strategy([
     {
         "instruction": simple_instruction(),
@@ -51,6 +61,11 @@ simpleSinglePassStrategy = Strategy([
     }
 ], model=llama2)
 
+
+###############################################################################
+#
+# Building experiment with strategies 
+# 
 experiment = { 
   "simpleDoublePassStrategy": simpleDoublePassStrategy,
   "simpleSinglePassStrategy": simpleSinglePassStrategy,

@@ -1,12 +1,5 @@
 import requests
 
-# For sans-notebook context running on the same network
-HOST="http://10.38.4.72"
-PORT='8888'
-# For notebook version working via ssh forwarding
-# HOST="http://localhost"
-# PORT='8086'
-
 ###############################################################################
 #
 # TGIClient 
