@@ -191,7 +191,7 @@ def identity_chain_of_thought_instruction():
 def identity_symptom_specific_instruction(symptom: str): 
     return join_lines([
     'Summarize ' + symptom + ' information from this department ED note using simple language.',
-    'Output only present positive (+) mentions of symptoms relating to ' + symptom + '.',,
+    'Output only present positive (+) mentions of symptoms relating to ' + symptom + '.',
     'Symptoms only need to be positively mentioned once to be included.',
     'Do NOT mention symptoms unrelated to ' + symptom + '.',
     'Do NOT explain your answers.'
