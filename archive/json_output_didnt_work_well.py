@@ -14,7 +14,7 @@ import json
 # E2 directories
 
 DIR_COVID = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes'
-DIR_MTSMAPLES = '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
+DIR_CURATED = '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
 
 ################################################################
 
@@ -84,28 +84,33 @@ symptom_list = [
     'Loss of taste or smell',
     'Muscle or body aches',
     'Nausea or vomiting',
-    'Sore throat']
+    'Sore throat'
+]
 
 crit1 = 'Encounter time. Symptoms must be relevant to the present encounter either as the reason for visit, documented symptom, or observed sign.'
 crit2 = 'Medical section heading. Patient symptoms are present and not related to past medical history or a medication prescribed unrelated to the present encounter.'
 crit3 = 'Positive symptom mentions must explicitly mention the symptom or synonym.'
 
-crit2_include = ['Chief complaint',
-                 'History of presenting illness',
-                 'Review of systems',
-                 'Physical exam',
-                 'Vital signs',
-                 'Assessment and plan',
-                 'hospital course',
-                 'Assessment and plan',
-                 'diagnosis']
+crit2_include = [
+    'Chief complaint',
+    'History of presenting illness',
+    'Review of systems',
+    'Physical exam',
+    'Vital signs',
+    'Assessment and plan',
+    'hospital course',
+    'Assessment and plan',
+    'diagnosis'
+]
 
-crit2_exclude = ['Past medical history',
-                 'Social history',
-                 'History',
-                 'Medication list',
-                 'Imaging',
-                 'Diagnostic Study']
+crit2_exclude = [
+    'Past medical history',
+    'Social history',
+    'History',
+    'Medication list',
+    'Imaging',
+    'Diagnostic Study'
+]
 
 crit3_include = {
     'Loss of taste or smell': ['Anosmia', 'loss of taste', 'loss of smell'],
@@ -179,8 +184,8 @@ prompt_select = prompt_simple
 # This grabs a note from our corpus of curated (fake) notes (no PHI).
 # Visit the following github directory to see the list of names you can use:
 # https://github.com/Machine-Learning-for-Medical-Language/ctakes-examples/tree/main/ctakes_examples/resources/curated
-def get_mtsample(name: str) -> str:
-    path = f"{DIR_MTSMAPLES}/{name}"
+def get_curated(name: str) -> str:
+    path = f"{DIR_CURATED}/{name}"
     with open(path, "r", encoding="utf8") as f:
         return f.read().strip()
     
