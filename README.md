@@ -13,6 +13,3 @@ Our goal of experimenting with an LLM is to create an effective way of interacti
 
 - `processor.py`: Techniques for processing an experiment – i.e. dictionary of strategies – over a large quantity of notes. Two common methods you'll use are `process_small_batch`, for running an experiment on a small batch of notes that you can review outside of the typical output-to-compare pipeline, and `process_dir`, for running an experiment on an entire directory of notes and generating results to process in the E2 output directory. 
 
-
-
-

@@ -152,17 +152,21 @@ Again, use chain of thought methodology to justify your summaries.
 # Identity
 #
 
-identity = ['Summarize the emergency department ED note using simple language',
-            'Output the positively documented COVID-19 symptoms',
-            'Symptoms only need to be positively mentioned once to be included',
-            'Do NOT explain your answers']
+identity = [
+    'Summarize the emergency department ED note using simple language',
+    'Output the positively documented COVID-19 symptoms',
+    'Symptoms only need to be positively mentioned once to be included',
+    'Do NOT explain your answers'
+]
 def identity_prompt():
     return '.\n'.join(identity) + '.\n'
 
-identity_no_covid = ['Summarize the emergency department ED note using simple language',
-                     'Output the positively documented symptoms',
-                     'Symptoms only need to be positively mentioned once to be included',
-                     'Do NOT explain your answers']
+identity_no_covid = [
+    'Summarize the emergency department ED note using simple language',
+    'Output the positively documented symptoms',
+    'Symptoms only need to be positively mentioned once to be included',
+    'Do NOT explain your answers'
+]
 def identity_no_covid_prompt():
     return '.\n'.join(identity_no_covid) + '.\n'
 
