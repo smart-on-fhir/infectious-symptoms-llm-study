@@ -5,9 +5,15 @@ HuggingFace's Text Generation Inference (TGI) API to identify successful prompti
 
 ## Getting Started
 
-To generate some experimental output, create an `.env` file based on our `.env.template` file. Make
-sure that the HOST is pointing to the correct IP address or to localhost, depending on where your
-LLM API lives relative to where you're running this tool. Then, using at least python v3.9.16, run:
+To generate some experimental output:
+
+1. Create an `.env` file based on our `.env.template` file. Ensure HOST is pointing to the
+   correct IP address or to localhost, depending on where your LLM API lives relative to where you're
+   running this tool.
+2. Using at least python v3.9.16, ensure that packages in `requirements.txt` are installed (consider
+   creating a venv with `python -m venv venv`, activating that venv with `source venv/bin/activate`
+   and installing dependencies with `python -m pip install -r requirements.txt`).
+3. Once dependencies are installed, run:
 
 ```shell
 python main.py
