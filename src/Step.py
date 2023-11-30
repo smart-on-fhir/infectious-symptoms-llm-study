@@ -34,4 +34,4 @@ class Step:
             cleaned_context = self.preprocess('\n'.join(self.responses))
         else:
             raise ValueError('Unrecognized input type ' + self.step_type)
-        return self.model.call(prompt_format=self.prompt_format, instruction=self.instruction, context=cleaned_context)
+        return self.model.fetch_llm_response(prompt_format=self.prompt_format, instruction=self.instruction, context=cleaned_context)

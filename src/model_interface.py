@@ -74,7 +74,7 @@ class LLAMA2Interface():
         }
         return full_prompt
 
-    def call(self, instruction: str, context:str, prompt_format: str = None, system:str = None):
+    def fetch_llm_response(self, instruction: str, context:str, prompt_format: str = None, system:str = None):
         payload = self.saturate_prompt(
             prompt_format=prompt_format, 
             instruction=instruction, 
