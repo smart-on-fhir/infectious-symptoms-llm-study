@@ -1,9 +1,10 @@
-default_preprocess = lambda s : s.strip()
+# Default pre-process is the identity fn
+default_preprocess = lambda s : s
 class Step:
     def __init__(self, instruction, model, responses, step_type : str = "default", preprocess = default_preprocess, prompt_format : str = None):
-        # By default, preprocess should strip leading and trailing spaces
-        self.preprocess = preprocess 
-        # Process the instruction
+        # Always strip the resulting string
+        self.preprocess = lambda s: preprocess(s).strip()
+        # Process the instruction 
         self.instruction = preprocess(instruction)
         # Should be covered in the run methods; "default" by default
         self.step_type = step_type
