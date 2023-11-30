@@ -2,7 +2,7 @@ import re
 from src.strategy import Strategy
 from src.model_interface import LLAMA2Interface
 from src.processor import process_small_batch, process_dir
-from src.instructions import simple_prompt
+from src.instructions import simple_instruction
 
 # For sans-notebook context running on the same network
 # NOTE: Make sure you've updated IPs as needed
@@ -34,7 +34,7 @@ Do NOT explain your answers.
 
 simpleDoublePassStrategy = Strategy([
     {
-        "instruction": simple_prompt(),
+        "instruction": simple_instruction(),
         "preprocess": whitespace_normalize,
     },
     {
@@ -46,7 +46,7 @@ simpleDoublePassStrategy = Strategy([
 
 simpleSinglePassStrategy = Strategy([
     {
-        "instruction": simple_prompt(),
+        "instruction": simple_instruction(),
         "preprocess": whitespace_normalize,
     }
 ], model=llama2)
