@@ -5,15 +5,21 @@ import datetime
 ################################################################
 # E2 directories
 
-DIR_CURATED = '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
-DIR_COVID = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes'
+DIR_CURATED     = '/lab-share/CHIP-Mandl-e2/Public/autollm/ctakes-examples/ctakes_examples/resources/curated'
+DIR_COVID       = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes'
 DIR_SMALL_BATCH = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-small-batches'
-DIR_OUTPUT = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output'
-
+DIR_OUTPUT      = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output'
+TARGET_NOTES    = '/lab-share/CHIP-Mandl-e2/Public/covid-llm/target-notes.json'
 
 ################################################################
 # Helpers for creating folders and getting notes
 # 
+def get_target_notes(): 
+    """
+    Returns a list of target notes from a well-known spot on disc
+    """
+    with open(TARGET_NOTES, "r", encoding="utf8") as target_notes: 
+        return json.load(target_notes)
 def createDatedFolder(path: str): 
     """
     Creates a folder for the current day at a given path.
@@ -38,17 +44,18 @@ def get_covid_note(name: str = None) -> str:
     Retrieves a given covid note or selects one randomly; 
     Returns the note and the note's name (helpful when one is selected randomly)
     """
-    path = DIR_COVID + "/" if DIR_COVID else f"/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes/"
+    note_dir = DIR_COVID
     if (name): 
-        with open(path + name, "r", encoding="utf8") as f:
+        path = f"{note_dir}/{name}"
+        with open(path, "r", encoding="utf8") as f:
             return f.read().strip(), name
     # If no name is provided, select a note at random
-    files = os.listdir(path)
-    files = [file for file in files if file.replace('.txt','') in TARGET_NOTES]
+    files = os.listdir(note_dir)
+    files = [file for file in files if file.replace('.txt','') in get_target_notes()]
     file = files[random.randrange(len(files))]
     print("# Using file: ")
     print(file)
-    with open(path + file, "r", encoding="utf8") as f:
+    with open(os.path.join(note_dir, file), "r", encoding="utf8") as f:
         return f.read().strip(), file
 
 
@@ -75,7 +82,7 @@ def process_dir_single_strategy(source_dir: str, strategy: str, output_ext) -> N
         else:
             print(f"{target} SKIP (file exists)")
 
-def process_dir(experiment: dict, source_dir: str = DIR_COVID, note_list=TARGET_NOTES, skip_list=None) -> None:
+def process_dir(experiment: dict, source_dir: str = DIR_COVID, note_list=get_target_notes(), skip_list=None) -> None:
     """
     Process all NOTES in $target_dir
     :param experiment: dictionary of prompting strategies to run  
@@ -101,8 +108,13 @@ def process_dir(experiment: dict, source_dir: str = DIR_COVID, note_list=TARGET_
 
             print('######################################################')
             if not os.path.exists(target):
+                # if we have a skip-list and its in it, ignore
                 if skip_list and fname in skip_list:
                     print(f"{target} is believed to cause issues (SKIP)")
+                # if we have a note-list, skip notes not in our list 
+                elif note_list and (fname.replace('.txt', '') not in note_list):
+                    print(f"{fname} is not in the list of notes to inspect (SKIP)")
+                    continue
                 else:
                     print(f"{target} processing....")
                     response = strategy.run(note) + '\n'
