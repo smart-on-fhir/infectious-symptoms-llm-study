@@ -20,10 +20,11 @@ def get_target_notes():
     """
     with open(TARGET_NOTES, "r", encoding="utf8") as target_notes: 
         return json.load(target_notes)
-def createDatedFolder(path: str): 
+def create_dated_folder(path: str): 
     """
     Creates a folder for the current day at a given path.
     Useful for running small-batch experiment over multiple days against the same notes.
+    Returns the path to the dated directory
     """
     mydir = os.path.join(path or os.getcwd(), datetime.datetime.now().strftime('%Y-%m-%d'))
     os.makedirs(mydir, exist_ok=True)
@@ -132,15 +133,19 @@ def process_small_batch(experiment: dict, dir: str = DIR_SMALL_BATCH, n: int = 1
     :param n: number of notes to process; 10 by default 
     """
     # Create unique dir for this run 
-    new_dir = createDatedFolder(dir)
+    dated_dir = create_dated_folder(dir)
     for _ in range(n): 
         # select a random note
         note, name = get_covid_note()
         for strategy_name, strategy in experiment.items():
-            print("###################################")
-            print(f"# strategy_name: '{strategy_name}'")
-            print("###################################")
-            response = strategy.run(note) + "\n"
-            # Record result
-            with open(os.path.join(new_dir, strategy_name + "-" + name), "w+", encoding="utf8") as fp: 
-                fp.write(response)
+            target = f'{dated_dir}/{name}.{strategy_name}'
+            if not os.path.exists(target):
+                print("###################################")
+                print(f"# strategy_name: '{strategy_name}'")
+                print("###################################")
+                response = strategy.run(note) + "\n"
+                # Record result
+                with open(target, "w+", encoding="utf8") as fp: 
+                    fp.write(response)
+            else:
+                print(f"{target} SKIP (file exists)")
