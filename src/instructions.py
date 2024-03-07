@@ -157,252 +157,104 @@ Again, use chain of thought methodology to justify your summaries.
 #
 # Identity
 #
-
 identity = [
-    'Summarize the emergency department ED note using simple language.',
     'Output the positively documented COVID-19 symptoms.',
     'Symptoms only need to be positively mentioned once to be included.',
-    'Do NOT explain your answers.'
 ]
 def identity_instruction():
     return join_lines(identity)
-
-identity_no_covid = [
-    'Summarize the emergency department ED note using simple language.',
-    'Output the positively documented symptoms.',
-    'Symptoms only need to be positively mentioned once to be included.',
-    'Do NOT explain your answers.'
-]
-def identity_no_covid_instruction():
-    return join_lines(identity_no_covid)
-
-identity_no_covid_specific_symptoms = [
-    'Summarize the emergency department ED note using simple language.',
-    'Output only present positive (+) mentions of symptoms relating to: ' + ', '.join(symptom_list) + '.',
-    'Symptoms only need to be positively mentioned once to be included.',
-    'Do NOT explain your answers.'
-]
-def identity_no_covid_specific_symptoms_instruction():
-    return join_lines(identity_no_covid_specific_symptoms)
-
-def identity_chain_of_thought_instruction(): 
-    return join_lines([CHAIN_OF_THOUGHT_instruction, *identity])
-
-def identity_symptom_specific_instruction(symptom: str): 
-    return join_lines([
-    'Summarize ' + symptom + ' information from this department ED note using simple language.',
-    'Output only present positive (+) mentions of symptoms relating to ' + symptom + '.',
-    'Symptoms only need to be positively mentioned once to be included.',
-    'Do NOT mention symptoms unrelated to ' + symptom + '.',
-    'Do NOT explain your answers.'
-])
 
 ###############################################################################
 #
 # Simple prompt
 #
+simple = [
+    identity_instruction(),
+    f'Follow these rules:',
+    f'Rule (1): {crit1}',
+    f'Rule (2): {crit2}',
+    f'Rule (3): {crit3}',
+]
 def simple_instruction():
-    simple = identity_instruction()
-    simple += f'\nFollow these rules:'
-    simple += f'\nRule (1): {crit1} '
-    simple += f'\nRule (2): {crit2} '
-    simple += f'\nRule (3): {crit3} '
-    return simple
-def simple_no_covid_instruction():
-    simple = identity_no_covid_instruction()
-    simple += f'\nFollow these rules:'
-    simple += f'\nRule (1): {crit1} '
-    simple += f'\nRule (2): {crit2} '
-    simple += f'\nRule (3): {crit3} '
-    return simple
-def simple_no_covid_specific_symptoms_instruction():
-    simple = identity_no_covid_specific_symptoms_instruction()
-    simple += f'\nFollow these rules:'
-    simple += f'\nRule (1): {crit1} '
-    simple += f'\nRule (2): {crit2} '
-    simple += f'\nRule (3): {crit3} '
-    return simple
-def simple_chain_of_thought_instruction():
-    simple = identity_chain_of_thought_instruction()
-    simple += f'\nFollow these rules:'
-    simple += f'\nRule (1): {crit1} '
-    simple += f'\nRule (2): {crit2} '
-    simple += f'\nRule (3): {crit3} '
-    return simple
-def simple_specific_symptom_instruction(symptom: str):
-    simple = identity_symptom_specific_instruction(symptom)
-    simple += f'\nFollow these rules:'
-    simple += f'\nRule (1): {crit1} '
-    simple += f'\nRule (2): {crit2} '
-    simple += f'\nRule (3): {crit3} '
-    return simple
+    return join_lines(simple)
+
 
 ###############################################################################
 #
 # Inclusion specifics
 #
+include = [
+    identity_instruction(),
+    f'Follow these rules:',
+    f'Rule (1): {crit1}',
+    f'Rule (2): {crit2}',
+    # Include criteria don't end with periods
+    f'Include positive symptoms from these medical section headings: {quote_join(crit2_include)}.',
+    f'Rule (3): {crit3}',
+    # Include criteria don't end with periods
+    f'Include positive mentions of: {quote_join(quote_unpack(crit3_include))}.',
+]
 def include_instruction():
-    include = identity_instruction()
-    include += f'\nFollow these rules:'
-    include += f'\nRule (1): {crit1} '
-    include += f'\nRule (2): {crit2} '
-    include += f'\n Include positive symptoms from these medical section headings: ' + quote_join(crit2_include) + '.'
-    include += f'\nRule (3): {crit3} '
-    include += f'\n Include positive mentions of: ' + quote_join(quote_unpack(crit3_include)) + '.'
-    return include
-def include_no_covid_instruction():
-    include = identity_no_covid_instruction()
-    include += f'\nFollow these rules:'
-    include += f'\nRule (1): {crit1} '
-    include += f'\nRule (2): {crit2} '
-    include += f'\n Include positive symptoms from these medical section headings: ' + quote_join(crit2_include) + '.'
-    include += f'\nRule (3): {crit3} '
-    include += f'\n Include positive mentions of: ' + quote_join(quote_unpack(crit3_include)) + '.'
-    return include
-def include_myalgia_instruction():
-    include = identity_instruction()
-    include += f'\nFollow these rules:'
-    include += f'\nRule (1): {crit1} '
-    include += f'\nRule (2): {crit2} '
-    include += f'\n Include positive symptoms from these medical section headings: ' + quote_join(crit2_include) + '.'
-    include += f'\nRule (3): {crit3} '
-    include += f'\n Include positive mentions of: ' + quote_join(quote_unpack(crit3_include_myalgia)) + '.'
-    return include
-def include_no_covid_myalgia_instruction():
-    include = identity_no_covid_instruction()
-    include += f'\nFollow these rules:'
-    include += f'\nRule (1): {crit1} '
-    include += f'\nRule (2): {crit2} '
-    include += f'\n Include positive symptoms from these medical section headings: ' + quote_join(crit2_include) + '.'
-    include += f'\nRule (3): {crit3} '
-    include += f'\n Include positive mentions of: ' + quote_join(quote_unpack(crit3_include_myalgia)) + '.'
-    return include
+    return join_lines(include)
 
 ###############################################################################
 #
 # Exclusion specifics
 #
+
+exclude = [
+    identity_instruction(),
+    f'Follow these rules:',
+    f'Rule (1): {crit1}',
+    f'Rule (2): {crit2}',
+    f'Exclude symptoms from these medical section headings: {quote_join(crit2_exclude)}.'
+    f'Rule (3): {crit3}',
+    f'Exclude these symptoms: {quote_join(quote_unpack(crit3_exclude))}.',
+]
 def exclude_instruction():
-    exclude = identity_instruction()
-    exclude += f'\nFollow these rules:'
-    exclude += f'\nRule (1): {crit1} '
-    exclude += f'\nRule (2): {crit2} '
-    exclude += f'\n Exclude symptoms from these medical section headings: ' + quote_join(crit2_exclude) + '.'
-    exclude += f'\nRule (3): {crit3} '
-    exclude += f'\n Exclude these symptoms: ' + quote_join(quote_unpack(crit3_exclude)) + '.'
-    return exclude
-def exclude_no_covid_instruction():
-    exclude = identity_no_covid_instruction()
-    exclude += f'\nFollow these rules:'
-    exclude += f'\nRule (1): {crit1} '
-    exclude += f'\nRule (2): {crit2} '
-    exclude += f'\n Exclude symptoms from these medical section headings: ' + quote_join(crit2_exclude) + '.'
-    exclude += f'\nRule (3): {crit3} '
-    exclude += f'\n Exclude these symptoms: ' + quote_join(quote_unpack(crit3_exclude)) + '.'
-    return exclude
+    return join_lines(exclude)
 
 ###############################################################################
 #
 # Verbose specifics
 #
+verbose = [ 
+    identity_instruction(),
+    f'Follow these rules:',
+    f'Rule (1): {crit1}',
+    f'Rule (2): {crit2}',
+    f'Include positive symptoms from these medical section headings: {quote_join(crit2_include)}.',
+    f'Exclude all symptoms from these medical section headings: {quote_join(crit2_exclude)}.',
+    f'Rule (3): {crit3}',
+    f'Include positive mentions of these medical terms: {quote_join(quote_unpack(crit3_include))}.',
+    f'Exclude these symptoms: {quote_join(quote_unpack(crit3_exclude))}.',
+]
 def verbose_instruction():
-    verbose = identity_instruction()
-    verbose += f'\nFollow these rules:'
-    verbose += f'\nRule (1): {crit1} '
-    verbose += f'\nRule (2): {crit2} '
-    verbose += f'\n Include positive symptoms from these medical section headings: ' + quote_join(crit2_include) + '.'
-    verbose += f'\n Exclude all symptoms from these medical section headings: ' + quote_join(crit2_exclude) + '.'
-    verbose += f'\nRule (3): {crit3} '
-    verbose += f'\n Include positive mentions of these medical terms: ' + quote_join(quote_unpack(crit3_include)) + '.'
-    verbose += f'\n Exclude these symptoms: ' + quote_join(quote_unpack(crit3_exclude)) + '.'
-    return verbose
-def verbose_no_covid_instruction():
-    verbose = identity_no_covid_instruction()
-    verbose += f'\nFollow these rules:'
-    verbose += f'\nRule (1): {crit1} '
-    verbose += f'\nRule (2): {crit2} '
-    verbose += f'\n Include positive symptoms from these medical section headings: ' + quote_join(crit2_include) + '.'
-    verbose += f'\n Exclude all symptoms from these medical section headings: ' + quote_join(crit2_exclude) + '.'
-    verbose += f'\nRule (3): {crit3} '
-    verbose += f'\n Include positive mentions of these medical terms: ' + quote_join(quote_unpack(crit3_include)) + '.'
-    verbose += f'\n Exclude these symptoms: ' + quote_join(quote_unpack(crit3_exclude)) + '.'
-    return verbose
+    return join_lines(verbose)
 
 
 # See the prompts we've defined so far
-def show_usage():
+def show_instructions():
     print('\n###############################################################')
     print('# identity_instruction() ')
     print(identity_instruction())
-
-    print('\n###############################################################')
-    print('# identity_no_covid_instruction() ')
-    print(identity_no_covid_instruction())
-
-    print('\n###############################################################')
-    print('# identity_no_covid_specific_symptoms_instruction() ')
-    print(identity_no_covid_specific_symptoms_instruction())
-
-    print('\n###############################################################')
-    print('# identity_chain_of_thought_instruction() ')
-    print(identity_chain_of_thought_instruction())
-
-    print('\n###############################################################')
-    print('# identity_symptom_specific_instruction(' + symptom_list[0] + ') ')
-    print(identity_symptom_specific_instruction(symptom_list[0]))
 
     print('\n###############################################################')
     print('# simple_instruction() ')
     print(simple_instruction())
 
     print('\n###############################################################')
-    print('# simple_no_covid_instruction() ')
-    print(simple_no_covid_instruction())
-
-    print('\n###############################################################')
-    print('# simple_no_covid_specific_symptoms_instruction() ')
-    print(simple_no_covid_specific_symptoms_instruction())
-
-    print('\n###############################################################')
-    print('# simple_chain_of_thought_instruction() ')
-    print(simple_chain_of_thought_instruction())
-
-    print('\n###############################################################')
-    print('# simple_specific_symptom_instruction(' + symptom_list[0] + ') ')
-    print(simple_specific_symptom_instruction(symptom_list[0]))
-
-    print('\n###############################################################')
     print('# include_instruction() ')
     print(include_instruction())
-
-    print('\n###############################################################')
-    print('# include_no_covid_instruction() ')
-    print(include_no_covid_instruction())
-
-    print('\n###############################################################')
-    print('# include_myalgia_instruction() ')
-    print(include_myalgia_instruction())
-
-    print('\n###############################################################')
-    print('# include_no_covid_myalgia_instruction() ')
-    print(include_no_covid_myalgia_instruction())
 
     print('\n###############################################################')
     print('# exclude_instruction() ')
     print(exclude_instruction())
 
     print('\n###############################################################')
-    print('# exclude_no_covid_instruction() ')
-    print(exclude_no_covid_instruction())
-
-    print('\n###############################################################')
     print('# verbose_instruction() ')
     print(verbose_instruction())
 
-    print('\n###############################################################')
-    print('# verbose_no_covid_instruction() ')
-    print(verbose_no_covid_instruction())
-
 
 if __name__ == "__main__":
-    show_usage()
+    show_instructions()

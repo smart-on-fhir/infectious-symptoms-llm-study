@@ -26,35 +26,17 @@ class TGIClient:
 
         answer = response.json()[0]["generated_text"]
         
-        # The answer includes the prompt, to make it easier to feed previous
-        # history back to llama2 so it learns from a conversation. But we are
-        # designing here for a single request, not a conversation.
+        # In case the answer includes the prompt
         if answer.startswith(payload):
             answer = answer[len(payload):].strip()
 
         return answer
 
-###############################################################################
-#
-# LLAMA2 
-# An interface for LLAMA2 models
-#
-################################################################
-# 
-# This is the formatting that Llama2's chat model is trained on.
-# https://huggingface.co/blog/llama2#how-to-prompt-llama-2
-DEFAULT_PROMPT_FORMAT = """<s>[INST] <<SYS>>
-%(instruction)s
-<</SYS>>
-
-%(context)s [/INST]"""
-class LLAMA2Interface(): 
-    def __init__(self, url):
-        self.url = url or f"{HOST}:{PORT}/"
+class CommonLLMInterface(): 
+    def __init__(self, url, default_prompt_format):
+        self.url = url
         self.tgiClient = TGIClient(url)
-        # This is the formatting that Llama2's chat model is trained on.
-        # https://huggingface.co/blog/llama2#how-to-prompt-llama-2
-        self.default_prompt_format = DEFAULT_PROMPT_FORMAT
+        self.default_prompt_format = default_prompt_format
 
     # Fills the model's prompt-format with instructions, context, and system information
     def saturate_prompt(self, instruction: str, context: str, system:str = None,  prompt_format: str = None):
@@ -75,4 +57,36 @@ class LLAMA2Interface():
             system=system
         )
         return self.tgiClient.fetch_llm_response(payload)
+
+
+
+###############################################################################
+#
+# LLAMA2 
+#
+################################################################
+# 
+# This is the formatting that Llama2's chat model is trained on.
+# https://huggingface.co/blog/llama2#how-to-prompt-llama-2
+LLAMA2_DEFAULT_PROMPT_FORMAT = """<s>[INST] <<SYS>>
+%(instruction)s
+<</SYS>>
+
+%(context)s [/INST]"""
+class LLAMA2Interface(CommonLLMInterface): 
+    def __init__(self, url):
+        CommonLLMInterface.__init__(self, url, LLAMA2_DEFAULT_PROMPT_FORMAT)
+
+###############################################################################
+#
+# Mixtral 
+#
+################################################################
+# 
+# This is the formatting that Llama2's chat model is trained on.
+# https://huggingface.co/blog/llama2#how-to-prompt-llama-2
+MIXTRAL_DEFAULT_PROMPT_FORMAT = "[INST]%(instruction)s \n%(context)s [/INST]"
+class MixtralInterface(CommonLLMInterface): 
+    def __init__(self, url):
+        CommonLLMInterface.__init__(self, url, MIXTRAL_DEFAULT_PROMPT_FORMAT)
 
