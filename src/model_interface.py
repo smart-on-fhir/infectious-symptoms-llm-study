@@ -37,6 +37,9 @@ class CommonLLMInterface():
         self.url = url
         self.tgiClient = TGIClient(url)
         self.default_prompt_format = default_prompt_format
+    
+    def get_model_info(self): 
+        return requests.get(self.url+'info').json()
 
     # Fills the model's prompt-format with instructions, context, and system information
     def saturate_prompt(self, instruction: str, context: str, system:str = None,  prompt_format: str = None):

@@ -6,7 +6,7 @@ import datetime
 # E2 directories
 
 DEFAULT_CONFIG = {
-    'DIR_TUNING'          : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes',
+    'DIR_TUNING'          : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-tuning',
     'DIR_OUTPUT_TUNING'   : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-paper',
     'DIR_INPUT'           : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/cerner',
     'DIR_OUTPUT'          : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-paper',
@@ -34,7 +34,7 @@ class NoteProcessor():
         os.makedirs(mydir, exist_ok=True)
         return mydir
     
-    def get_note(self, note_dir: str, name: str = None, only_these_notes = None) -> tuple[str, str]:
+    def get_note(self, note_dir: str, name: str = None, only_these_notes = None):
         """
         Retrieves a given covid note based on name, or selects one randomly;
         will limit selection to only_these_notes if defined,
@@ -53,7 +53,7 @@ class NoteProcessor():
         with open(path, "r", encoding="utf8") as f:
             return f.read().strip(), name
 
-    def get_sample_input_note(self, name: str = None) -> tuple[str, str]:
+    def get_sample_input_note(self, name: str = None):
         """
         Retrieves a given covid note or selects one randomly; 
         Returns the note and the note's name (helpful when one is selected randomly)
@@ -61,7 +61,7 @@ class NoteProcessor():
         return self.get_note(self.note_config["DIR_INPUT"], name)
 
 
-    def get_sample_tuning_note(self, name: str = None) -> tuple[str, str]:
+    def get_sample_tuning_note(self, name: str = None):
         """
         Retrieves a given covid note or selects one randomly; 
         Returns the note and the note's name (helpful when one is selected randomly)
@@ -87,10 +87,10 @@ class NoteProcessor():
             json.dump(serialized_experiment, fp)
 
         # For all files in the source directory
-        for fname in os.listdir(input_dir):
+        for index, fname in enumerate(os.listdir(input_dir)):
             note, _ = self.get_note(input_dir, fname)
             print("###################################")
-            print(f"# note: '{name}'")
+            print(f"# Note {index + 1}: '{fname}'")
             print("###################################")
             for strategy_name, strategy in experiment.items():
                 target = f'{output_dir}/{fname}.{strategy_name}'
@@ -110,6 +110,7 @@ class NoteProcessor():
                             fp.write(response)
                 else:
                     print(f"{target} SKIP (file exists)")
+        print("###########\n# DONE\n###########\n")
 
     def run_prompt_tuning(self, experiment: dict, experiment_name: str = 'prompt-tuning-experiment'):  
         """
