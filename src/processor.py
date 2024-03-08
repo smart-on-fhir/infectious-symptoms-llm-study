@@ -14,7 +14,7 @@ DEFAULT_CONFIG = {
 }
 
 class NoteProcessor(): 
-    def __init__(self, note_config):
+    def __init__(self, note_config = None):
         self.note_config = DEFAULT_CONFIG if not note_config else {**DEFAULT_CONFIG, **note_config}
 
     def get_prompt_tuning_note_ids(self): 
