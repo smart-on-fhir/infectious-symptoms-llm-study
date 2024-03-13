@@ -8,7 +8,7 @@ import datetime
 DEFAULT_CONFIG = {
     'DIR_TUNING'          : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-tuning',
     'DIR_OUTPUT_TUNING'   : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-paper',
-    'DIR_INPUT'           : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/cerner',
+    'DIR_INPUT'           : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-cerner',
     'DIR_OUTPUT'          : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-paper',
     'PROMPT_TUNING_NOTES' : '/lab-share/CHIP-Mandl-e2/Public/covid-llm/prompt-tuning-notes.json',
 }

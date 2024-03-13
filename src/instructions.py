@@ -113,20 +113,6 @@ crit3_include = {
     'Shortness of breath or difficulty breathing': ['shortness of breath', 'difficulty breathing', 'SOB', 'Dyspnea', 'breathing is short', 'increased breathing', 'labored breathing', 'distressed breathing'],
     'Sore throat': ['sore throat', 'throat pain', 'pharyngeal pain', 'pharyngitis', 'odynophagia']
 }
-# With Myalgia changes
-crit3_include_myalgia = {
-    'Loss of taste or smell': ['anosmia', 'loss of taste', 'loss of smell'],
-    'Congestion or runny nose': ['rhinorrhea', 'congestion', 'discharge', 'nose is dripping', 'runny nose', 'stuffy nose'],
-    'Cough': ['cough', 'tussive or post-tussive', 'cough is unproductive', 'productive cough', 'dry cough', 'wet cough', 'producing sputum'],
-    'Diarrhea': ['diarrhea', 'watery stool'],
-    'Fatigue': ['fatigue', 'tired', 'exhausted', 'weary', 'malaise', 'feeling generally unwell'],
-    'Fever or Chills': ['fever', 'pyrexia', 'chills', 'temperature greater than or equal 100.4 Fahrenheit or 38 celsius', 'Temperature >= 100.4F', 'Temperature >= 38C'],
-    'Headache': ['headache', 'HA', 'migraine', 'cephalgia', 'head pain'],
-    'Myalgia': ['muscle or body aches', 'muscle aches', 'generalized aches and pains', 'body aches', 'myalgia', 'myalgias', 'myoneuralgia', 'soreness', 'generalized aches and pains'],
-    'Nausea or vomiting': ['nausea or vomiting', 'Nausea', 'vomiting', 'emesis', 'throwing up', 'queasy', 'regurgitated'],
-    'Shortness of breath or difficulty breathing': ['shortness of breath', 'difficulty breathing', 'SOB', 'Dyspnea', 'breathing is short', 'increased breathing', 'labored breathing', 'distressed breathing'],
-    'Sore throat': ['sore throat', 'throat pain', 'pharyngeal pain', 'pharyngitis', 'odynophagia']
-}
 crit3_exclude = {
     'Loss of taste or smell': ['injury related to loss of taste or smell'],
     'Congestion or runny nose': [],
