@@ -17,28 +17,34 @@ class NoteProcessor():
     def __init__(self, note_config = None):
         self.note_config = DEFAULT_CONFIG if not note_config else {**DEFAULT_CONFIG, **note_config}
 
-    def get_prompt_tuning_note_ids(self): 
+    def _get_prompt_tuning_note_ids(self): 
         """
-        Returns a list of notes ids used for for prompt-tuning 
+        :returns: list of notes ids used for for prompt-tuning 
         """
         with open(self.note_config["PROMPT_TUNING_NOTES"], "r", encoding="utf8") as target_notes: 
             return json.load(target_notes)
 
-    def create_dated_folder(self, path: str): 
+    def _create_dated_folder(self, path: str): 
         """
         Creates a folder for the current day at a given path.
         Useful for running small-batch experiment over multiple days against the same notes.
-        Returns the path to the dated directory
+        :param path: where to create the new directory
+        :returns: path to the newly created, dated directory
         """
         mydir = os.path.join(path or os.getcwd(), datetime.datetime.now().strftime('%Y-%m-%d'))
         os.makedirs(mydir, exist_ok=True)
         return mydir
     
-    def get_note(self, note_dir: str, name: str = None, only_these_notes = None):
+    def _get_note(self, note_dir: str, name: str = None, only_these_notes = None):
         """
         Retrieves a given covid note based on name, or selects one randomly;
         will limit selection to only_these_notes if defined,
-        Returns the note and the note's name (helpful when one is selected randomly)
+        :param note_dir: where the notes are found
+        :type note_dir: str
+        :param name: The file to be retrieved
+        :type name: str, optional
+        :param: A subset of notes to look at
+        :returns: the note and the note's name (helpful when one is selected randomly)
         """
         # If no name is provided, select a note at random
         if not name: 
@@ -55,18 +61,22 @@ class NoteProcessor():
 
     def get_sample_input_note(self, name: str = None):
         """
-        Retrieves a given covid note or selects one randomly; 
-        Returns the note and the note's name (helpful when one is selected randomly)
+        Retrieves a given covid note or selects one randomly from the input directory
+        :param name: The note to get
+        :type name: str, optional
+        :returns: the note and the note's name (helpful when one is selected randomly)
         """
-        return self.get_note(self.note_config["DIR_INPUT"], name)
+        return self._get_note(self.note_config["DIR_INPUT"], name)
 
 
     def get_sample_tuning_note(self, name: str = None):
         """
-        Retrieves a given covid note or selects one randomly; 
-        Returns the note and the note's name (helpful when one is selected randomly)
+        Retrieves a given covid note or selects one randomly from the tuning diredctory; 
+        :param name: The note to get
+        :type name: str, optional
+        :returns: the note and the note's name (helpful when one is selected randomly)
         """
-        return self.get_note(self.note_config["DIR_TUNING"], name, self.get_prompt_tuning_note_ids())
+        return self._get_note(self.note_config["DIR_TUNING"], name, self._get_prompt_tuning_note_ids())
 
 
     def _process_dir(self, input_dir: str, output_dir : str, experiment: dict, experiment_name: str = 'experiment', note_list = None, skip_list = None) -> None:
@@ -88,7 +98,7 @@ class NoteProcessor():
 
         # For all files in the source directory
         for index, fname in enumerate(os.listdir(input_dir)):
-            note, _ = self.get_note(input_dir, fname)
+            note, _ = self._get_note(input_dir, fname)
             print("###################################")
             print(f"# Note {index + 1}: '{fname}'")
             print("###################################")
@@ -123,7 +133,7 @@ class NoteProcessor():
             self.note_config["DIR_OUTPUT_TUNING"],
             experiment,
             experiment_name,
-            note_list=self.get_prompt_tuning_note_ids()
+            note_list=self._get_prompt_tuning_note_ids()
         )
 
     def run_analysis(self, experiment: dict, experiment_name: str = 'analysis-experiment'):  
