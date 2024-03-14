@@ -107,7 +107,7 @@ class NoteProcessor():
                 # Skip if we already have the file
                 if os.path.exists(target):
                     print(f"{target} SKIP (file exists)")
-                    next()
+                    continue
                 # if we have a skip-list and its in it, ignore
                 if skip_list and fname in skip_list:
                     print(f"{target} is believed to cause issues (SKIP)")
