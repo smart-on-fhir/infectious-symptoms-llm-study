@@ -94,22 +94,24 @@ class NoteProcessor():
             print("###################################")
             for strategy_name, strategy in experiment.items():
                 target = f'{output_dir}/{fname}.{strategy_name}'
-                if not os.path.exists(target):
-                    # if we have a skip-list and its in it, ignore
-                    if skip_list and fname in skip_list:
-                        print(f"{target} is believed to cause issues (SKIP)")
-                    # if we have a note-list, skip notes not in our list 
-                    # remove any .txt extensions
-                    elif note_list and (fname.replace('.txt', '') not in note_list):
-                        print(f"{fname} is not in the list of notes to inspect (SKIP)")
-                        continue
-                    else:
-                        print(f"{target} processing....")
-                        response = strategy.run(note) + '\n'
-                        with open(target, 'w') as fp:
-                            fp.write(response)
-                else:
+                # Skip if we already have the file
+                if os.path.exists(target):
                     print(f"{target} SKIP (file exists)")
+                    next()
+                # if we have a skip-list and its in it, ignore
+                if skip_list and fname in skip_list:
+                    print(f"{target} is believed to cause issues (SKIP)")
+                # if we have a note-list, skip notes not in our list 
+                # remove any .txt extensions
+                elif note_list and (fname.replace('.txt', '') not in note_list):
+                    print(f"{fname} is not in the list of notes to inspect (SKIP)")
+                    continue
+                else:
+                    print(f"{target} processing....")
+                    response = strategy.run(note) + '\n'
+                    with open(target, 'w') as fp:
+                        fp.write(response)
+                    
         print("###########\n# DONE\n###########\n")
 
     def run_prompt_tuning(self, experiment: dict, experiment_name: str = 'prompt-tuning-experiment'):  
