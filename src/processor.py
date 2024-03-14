@@ -124,7 +124,7 @@ class NoteProcessor():
                     
         print("###########\n# DONE\n###########\n")
 
-    def run_prompt_tuning(self, experiment: dict, experiment_name: str = 'prompt-tuning-experiment'):  
+    def run_prompt_tuning(self, experiment: dict, experiment_name: str = 'prompt-tuning-experiment', note_list = None, skip_list = None):  
         """
         Run prompt-tuning data set to determine the most performant prompt
         """
@@ -133,10 +133,12 @@ class NoteProcessor():
             self.note_config["DIR_OUTPUT_TUNING"],
             experiment,
             experiment_name,
-            note_list=self._get_prompt_tuning_note_ids()
+            # Note list for tuning should be the tuning subset by default
+            note_list=note_list or self._get_prompt_tuning_note_ids(),
+            skip_list=skip_list,
         )
 
-    def run_analysis(self, experiment: dict, experiment_name: str = 'analysis-experiment'):  
+    def run_analysis(self, experiment: dict, experiment_name: str = 'analysis-experiment', note_list = None, skip_list = None):  
         """
         Run prompt-tuning data set to determine the most performant prompt
         """
@@ -146,4 +148,6 @@ class NoteProcessor():
             self.note_config["DIR_OUTPUT"],
             experiment,
             experiment_name,
+            note_list=note_list,
+            skip_list=skip_list,
         )
