@@ -1,5 +1,5 @@
-# Default pre-process is the identity fn
 default_preprocess = lambda s : s
+
 class Step:
     def __init__(self, instruction, model, responses, step_type : str = "default", preprocess = default_preprocess, prompt_format : str = None):
         # Always strip the resulting string
@@ -19,7 +19,7 @@ class Step:
         return {
             "instruction": self.instruction, 
             "step_type": self.step_type,
-            "prompt_format": self.prompt_format or "No custom prompt format",
+            "prompt_format": self.prompt_format or self.model.default_prompt_format,
             "preprocess": "default" if self.preprocess is default_preprocess else "custom"
         }
 
