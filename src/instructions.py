@@ -144,8 +144,10 @@ Again, use chain of thought methodology to justify your summaries.
 # Identity
 #
 identity = [
-    'Output the positively documented COVID-19 symptoms.',
+    'You are a helpful assistant identifying COVID-19 symptoms from emergency department notes.',
+    'Output the positively documented COVID-19 symptoms, looking out specifically for the following: ' + ', '.join(symptom_list) + '.',
     'Symptoms only need to be positively mentioned once to be included.',
+    'Do not mention symptoms that are not present in the note.',
 ]
 def identity_instruction():
     return join_lines(identity)

@@ -86,8 +86,8 @@ class LLAMA2Interface(CommonLLMInterface):
 #
 ################################################################
 # 
-# This is the formatting that Llama2's chat model is trained on.
-# https://huggingface.co/blog/llama2#how-to-prompt-llama-2
+# This is the formatting that mixtral's instruction model is trained on.
+# https://www.promptingguide.ai/models/mixtral#prompt-engineering-guide-for-mixtral-8x7b
 MIXTRAL_DEFAULT_PROMPT_FORMAT = "[INST]%(instruction)s \n%(context)s [/INST]"
 class MixtralInterface(CommonLLMInterface): 
     def __init__(self, url):
