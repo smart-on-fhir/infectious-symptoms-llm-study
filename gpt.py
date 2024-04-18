@@ -11,8 +11,10 @@ from src.processor import NoteProcessor
 # Use GPT3.5; get some env variables
 #
 noteConfig = {
+    # "DIR_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-tuning",
     "DIR_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-gpt-exp/tuning",
     "DIR_OUTPUT_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-gpt-tuning",
+    # "DIR_INPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-original-study/i2b2",
     "DIR_INPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-gpt-exp/original",
     "DIR_OUTPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-gpt",
 }

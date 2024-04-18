@@ -23,6 +23,7 @@ class NoteProcessor:
         )
         self.sleep = sleep
         self.sleepRate = sleepRate  # in seconds
+        self.stats = {}
 
     def _get_prompt_tuning_note_ids(self):
         """
@@ -112,13 +113,13 @@ class NoteProcessor:
         :param note_list: notes to process because we have labels for them; None by default
         :param skip_list: notes to skip because of documented reasons; None by default
         """
+        self.stats = {}
         # Record experiment configuration in output
         with open(f"{output_dir}/{experiment_name}.json", "w") as fp:
             serialized_experiment = {}
             for key, value in experiment.items():
                 serialized_experiment[key] = value.toJSON()
             json.dump(serialized_experiment, fp)
-
         # For all files in the source directory
         for index, fname in enumerate(os.listdir(input_dir)):
             note, _ = self._get_note(input_dir, fname)
@@ -126,6 +127,11 @@ class NoteProcessor:
             print(f"# Note {index + 1}: '{fname}'")
             print("###################################")
             for strategy_name, strategy in experiment.items():
+                # Track the number of notes processed for stats purposes, for each strategy
+                self.stats[strategy_name] = {} 
+                self.stats[strategy_name]["total_tokens"] = 0
+                self.stats[strategy_name]["notes_processed"] = 0
+
                 target = f"{output_dir}/{fname}.{strategy_name}"
                 # Skip if we already have the file
                 if os.path.exists(target):
@@ -141,12 +147,20 @@ class NoteProcessor:
                     continue
                 else:
                     if self.sleep:
-                        print("Taking a brief pause for ", self.sleepRate, "s")
+                        print(f"...Taking a brief pause for {self.sleepRate}s")
                         time.sleep(self.sleepRate)
                     print(f"{target} processing....")
-                    response = strategy.run(note) + "\n"
+                    # One more note is being processed
+                    self.stats[strategy_name]["notes_processed"] += 1
+                    strategy_response = strategy.run(note)
+                    # Tracka total tokens used across this process call
+                    self.stats[strategy_name]["total_tokens"] += strategy_response["total_tokens"]
                     with open(target, "w") as fp:
-                        fp.write(response)
+                        fp.write(strategy_response["text"] + "\n")
+            
+            # Record stats
+            with open(f"{output_dir}/{experiment_name}.tokens.json", "w") as fp:
+                json.dump(self.stats, fp)
 
         print("###########\n# DONE\n###########\n")
 

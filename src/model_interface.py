@@ -1,5 +1,5 @@
 import os
-
+import time
 import requests
 from dotenv import load_dotenv
 from openai import AzureOpenAI
@@ -86,7 +86,6 @@ class Gpt3Interface(LlmInterface):
             context=context,
             system=system,
         )
-
         response = self.client.chat.completions.create(
             model=self.model,  # model = "deployment_name".
             messages=[
@@ -94,7 +93,13 @@ class Gpt3Interface(LlmInterface):
                 {"role": "user", "content": payload},
             ],
         )
-        return response.choices[0].message.content
+        # Based on https://platform.openai.com/docs/guides/text-generation/chat-completions-response-format
+        return { 
+            "text": response.choices[0].message.content, 
+            "stats": {
+                "total_tokens": response.usage.total_tokens
+            }
+        }
 
 
 ###############################################################################
@@ -114,6 +119,7 @@ class TgiClient:
             self.url,
             json={
                 "inputs": payload,
+                "details": True,
                 "options": {
                     "wait_for_model": True,
                 },
@@ -124,13 +130,21 @@ class TgiClient:
         )
         response.raise_for_status()
 
-        answer = response.json()[0]["generated_text"]
+        # Based on https://huggingface.github.io/text-generation-inference/#/ 
+        respone = response.json()[0]
+        text = response["generated_text"]
+        total_tokens = len(response["details"]["prefill"]) + response["details"]["generated_tokens"]
 
         # In case the answer includes the prompt
-        if answer.startswith(payload):
-            answer = answer[len(payload) :].strip()
+        if text.startswith(payload):
+            text = text[len(payload) :].strip()
 
-        return answer
+        return { 
+            "text": text, 
+            "stats": {
+                "total_tokens": total_tokens
+            }
+        }
 
 
 ###############################################################################
@@ -178,7 +192,9 @@ class TgiInterface(LlmInterface):
             context=context,
             system=system,
         )
-        return self.client.fetch_llm_response(payload)
+        response = self.client.fetch_llm_response(payload)
+        return response
+
 
 
 ###############################################################################
