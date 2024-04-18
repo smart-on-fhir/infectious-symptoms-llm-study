@@ -128,7 +128,7 @@ class NoteProcessor:
             print("###################################")
             for strategy_name, strategy in experiment.items():
                 # Track the number of notes processed for stats purposes, for each strategy
-                self.stats[strategy_name] = {} 
+                self.stats[strategy_name] = {}
                 self.stats[strategy_name]["total_tokens"] = 0
                 self.stats[strategy_name]["notes_processed"] = 0
 
@@ -154,10 +154,12 @@ class NoteProcessor:
                     self.stats[strategy_name]["notes_processed"] += 1
                     strategy_response = strategy.run(note)
                     # Tracka total tokens used across this process call
-                    self.stats[strategy_name]["total_tokens"] += strategy_response["total_tokens"]
+                    self.stats[strategy_name]["total_tokens"] += strategy_response[
+                        "total_tokens"
+                    ]
                     with open(target, "w") as fp:
                         fp.write(strategy_response["text"] + "\n")
-            
+
             # Record stats
             with open(f"{output_dir}/{experiment_name}.tokens.json", "w") as fp:
                 json.dump(self.stats, fp)

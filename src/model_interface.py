@@ -1,5 +1,4 @@
 import os
-import time
 import requests
 from dotenv import load_dotenv
 from openai import AzureOpenAI
@@ -94,11 +93,9 @@ class Gpt3Interface(LlmInterface):
             ],
         )
         # Based on https://platform.openai.com/docs/guides/text-generation/chat-completions-response-format
-        return { 
-            "text": response.choices[0].message.content, 
-            "stats": {
-                "total_tokens": response.usage.total_tokens
-            }
+        return {
+            "text": response.choices[0].message.content,
+            "stats": {"total_tokens": response.usage.total_tokens},
         }
 
 
@@ -130,21 +127,18 @@ class TgiClient:
         )
         response.raise_for_status()
 
-        # Based on https://huggingface.github.io/text-generation-inference/#/ 
-        respone = response.json()[0]
-        text = response["generated_text"]
-        total_tokens = len(response["details"]["prefill"]) + response["details"]["generated_tokens"]
+        # Based on https://huggingface.github.io/text-generation-inference/#/
+        json = response.json()[0]
+        text = json["generated_text"]
+        total_tokens = (
+            len(json["details"]["prefill"]) + json["details"]["generated_tokens"]
+        )
 
         # In case the answer includes the prompt
         if text.startswith(payload):
             text = text[len(payload) :].strip()
 
-        return { 
-            "text": text, 
-            "stats": {
-                "total_tokens": total_tokens
-            }
-        }
+        return {"text": text, "stats": {"total_tokens": total_tokens}}
 
 
 ###############################################################################
@@ -194,7 +188,6 @@ class TgiInterface(LlmInterface):
         )
         response = self.client.fetch_llm_response(payload)
         return response
-
 
 
 ###############################################################################

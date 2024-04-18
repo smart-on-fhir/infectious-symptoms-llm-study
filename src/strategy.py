@@ -15,7 +15,7 @@ class Strategy:
         return [step.toJSON() for step in self.steps]
 
     def run(self, context):
-        self.total_tokens = 0 
+        self.total_tokens = 0
         self.responses.clear()
         for step in self.steps:
             response = step.run(context)
