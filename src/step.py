@@ -25,7 +25,7 @@ class Step:
         # Array of responses is passed by reference for future use
         self.responses = responses
 
-    def toJSON(self):
+    def to_json(self):
         return {
             "instruction": self.instruction,
             "step_type": self.step_type,

@@ -1,14 +1,16 @@
 from functools import reduce
 
 from src.covid_study_strategies import build_strategies
-from src.model_interface import Gpt3Interface
+
+# from src.model_interface import AzureGptModel
+from src.models import AzureGptModel
 
 ## Custom methods
 from src.processor import NoteProcessor
 
 ###############################################################################
 #
-# Use GPT3.5; get some env variables
+# Use Azure GPT; get some env variables
 #
 noteConfig = {
     # "DIR_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-tuning",
@@ -19,7 +21,7 @@ noteConfig = {
     "DIR_OUTPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-gpt",
 }
 note_processor = NoteProcessor(noteConfig, sleepRate=2)
-model = Gpt3Interface()
+model = AzureGptModel()
 
 
 ###############################################################################

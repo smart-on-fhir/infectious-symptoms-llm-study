@@ -1,7 +1,7 @@
-import os
 import requests
-from src.models.llm_interface import LlmInterface 
+from src.models.llm_interface import LlmInterface
 from src.models.tgi_client import TgiClient
+
 
 ###############################################################################
 #
@@ -50,4 +50,3 @@ class TgiInterface(LlmInterface):
         )
         response = self.client.fetch_llm_response(payload)
         return response
-

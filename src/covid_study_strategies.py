@@ -1,4 +1,4 @@
-from .instructions import (
+from src.instructions import (
     exclude_instruction,
     identity_instruction,
     include_instruction,
@@ -7,7 +7,7 @@ from .instructions import (
     symptom_list,
     verbose_instruction,
 )
-from .strategy import Strategy
+from src.strategy import Strategy
 
 
 def build_strategies(model):
@@ -81,9 +81,6 @@ def build_strategies(model):
     #
     # JSON Strats, Double Pass
     #
-    ##################################################
-    #
-    # JSON double-pass: fix previous text
     #
     jsonFixInst = join_lines(
         [

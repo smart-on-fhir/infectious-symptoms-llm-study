@@ -1,4 +1,4 @@
-from .step import Step
+from src.step import Step
 
 
 class Strategy:
@@ -11,8 +11,8 @@ class Strategy:
         ]
         self.total_tokens = 0
 
-    def toJSON(self):
-        return [step.toJSON() for step in self.steps]
+    def to_json(self):
+        return [step.to_json() for step in self.steps]
 
     def run(self, context):
         self.total_tokens = 0

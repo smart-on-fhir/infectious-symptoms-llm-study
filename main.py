@@ -1,7 +1,7 @@
 from functools import reduce
 
 from src.covid_study_strategies import build_strategies
-from src.model_interface import LLAMA2Interface
+from src.model_interface import LLAMA2Model
 
 ## Custom methods
 from src.processor import NoteProcessor
@@ -21,7 +21,7 @@ noteConfig = {
     "DIR_INPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-original-study/i2b2",
 }
 note_processor = NoteProcessor(noteConfig)
-model = LLAMA2Interface(URL)
+model = LLAMA2Model(URL)
 
 
 def list_experiment_strategies(exp):

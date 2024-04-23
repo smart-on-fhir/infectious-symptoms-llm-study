@@ -117,8 +117,8 @@ class NoteProcessor:
         # Record experiment configuration in output
         with open(f"{output_dir}/{experiment_name}.json", "w") as fp:
             serialized_experiment = {}
-            for key, value in experiment.items():
-                serialized_experiment[key] = value.toJSON()
+            for exp_name, exp in experiment.items():
+                serialized_experiment[exp_name] = exp.to_json()
             json.dump(serialized_experiment, fp)
         # For all files in the source directory
         for index, fname in enumerate(os.listdir(input_dir)):

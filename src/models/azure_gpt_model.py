@@ -1,9 +1,11 @@
-import os 
+import os
 from dotenv import load_dotenv
 from openai import AzureOpenAI
-from src.models.llm_interface import LlmInterface 
+from src.models.llm_interface import LlmInterface
 
 load_dotenv()
+
+
 ###############################################################################
 #
 # Gpt3Interface using the AzureOpenAI client
@@ -67,5 +69,3 @@ class AzureGptModel(LlmInterface):
             "text": response.choices[0].message.content,
             "stats": {"total_tokens": response.usage.total_tokens},
         }
-
-
