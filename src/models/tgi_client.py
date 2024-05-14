@@ -18,13 +18,15 @@ class TgiClient:
             self.url,
             json={
                 "inputs": payload,
-                "details": True,
-                "options": {
-                    "wait_for_model": True,
-                },
                 "parameters": {
-                    "max_new_tokens": 1000,
-                },
+                    "details": True,
+                    "options": {
+                        "wait_for_model": True,
+                    },
+                    "parameters": {
+                        "max_new_tokens": 1000,
+                    },
+                }
             },
         )
         response.raise_for_status()

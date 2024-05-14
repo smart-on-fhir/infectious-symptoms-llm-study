@@ -113,13 +113,22 @@ class NoteProcessor:
         :param note_list: notes to process because we have labels for them; None by default
         :param skip_list: notes to skip because of documented reasons; None by default
         """
-        self.stats = {}
+        start = datetime.datetime.now()
+        print('START: ', start)
+        self.stats = {
+            "start": start
+        }
         # Record experiment configuration in output
         with open(f"{output_dir}/{experiment_name}.json", "w") as fp:
             serialized_experiment = {}
             for exp_name, exp in experiment.items():
                 serialized_experiment[exp_name] = exp.to_json()
             json.dump(serialized_experiment, fp)
+        # Track the number of notes processed for stats purposes, for each strategy
+        for strategy_name, strategy in experiment.items():
+            self.stats[strategy_name] = {}
+            self.stats[strategy_name]["total_tokens"] = 0
+            self.stats[strategy_name]["notes_processed"] = 0
         # For all files in the source directory
         for index, fname in enumerate(os.listdir(input_dir)):
             note, _ = self._get_note(input_dir, fname)
@@ -127,11 +136,6 @@ class NoteProcessor:
             print(f"# Note {index + 1}: '{fname}'")
             print("###################################")
             for strategy_name, strategy in experiment.items():
-                # Track the number of notes processed for stats purposes, for each strategy
-                self.stats[strategy_name] = {}
-                self.stats[strategy_name]["total_tokens"] = 0
-                self.stats[strategy_name]["notes_processed"] = 0
-
                 target = f"{output_dir}/{fname}.{strategy_name}"
                 # Skip if we already have the file
                 if os.path.exists(target):
@@ -160,9 +164,13 @@ class NoteProcessor:
                     with open(target, "w") as fp:
                         fp.write(strategy_response["text"] + "\n")
 
-            # Record stats
-            with open(f"{output_dir}/{experiment_name}.tokens.json", "w") as fp:
-                json.dump(self.stats, fp)
+        # Record stats
+        end = datetime.datetime.now()
+        print('END: ', end)
+        print("TIME TO FINISH: ", end)
+        self.stats["end"] = end
+        with open(f"{output_dir}/{experiment_name}.tokens.json", "w") as fp:
+            json.dump(self.stats, fp, default=str)
 
         print("###########\n# DONE\n###########\n")
 
@@ -176,6 +184,7 @@ class NoteProcessor:
         """
         Run prompt-tuning data set to determine the most performant prompt
         """
+
         self._process_dir(
             self.note_config["DIR_TUNING"],
             self.note_config["DIR_OUTPUT_TUNING"],

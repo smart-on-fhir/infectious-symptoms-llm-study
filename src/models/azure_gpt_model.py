@@ -25,7 +25,8 @@ class AzureGptModel(LlmInterface):
         self.default_prompt_format = GPT_DEFAULT_PROMPT_FORMAT
 
     def get_model_info(self):
-        return self.client.models.retrieve(self.model)
+        raise NotImplementedError
+        # return self.client.models.retrieve(self.model)
 
     # Fills the model's prompt-format with instructions, context, and system information
     def saturate_prompt(
