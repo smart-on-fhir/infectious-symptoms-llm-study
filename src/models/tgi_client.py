@@ -20,12 +20,7 @@ class TgiClient:
                 "inputs": payload,
                 "parameters": {
                     "details": True,
-                    "options": {
-                        "wait_for_model": True,
-                    },
-                    "parameters": {
-                        "max_new_tokens": 1000,
-                    },
+                    "max_new_tokens": 1000,
                 }
             },
         )

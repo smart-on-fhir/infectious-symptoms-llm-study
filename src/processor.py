@@ -157,18 +157,26 @@ class NoteProcessor:
                     # One more note is being processed
                     self.stats[strategy_name]["notes_processed"] += 1
                     strategy_response = strategy.run(note)
-                    # Tracka total tokens used across this process call
+                    # Track total tokens used across this process call
                     self.stats[strategy_name]["total_tokens"] += strategy_response[
                         "total_tokens"
                     ]
                     with open(target, "w") as fp:
                         fp.write(strategy_response["text"] + "\n")
+                    
+                    # Regularly write stats to disk in case we exit prematurely
+                    self.stats["end"] = datetime.datetime.now()
+                    self.stats["runtime"] = self.stats["end"] - self.stats["start"]
+                    with open(f"{output_dir}/{experiment_name}.tokens.json", "w") as fp:
+                        json.dump(self.stats, fp, default=str)
+                    
 
-        # Record stats
+        # Record stats and log that we're done
         end = datetime.datetime.now()
         print('END: ', end)
-        print("TIME TO FINISH: ", end)
         self.stats["end"] = end
+        print("TIME TO FINISH: ", self.stats["end"] - self.stats["start"])
+        self.stats["runtime"] = self.stats["end"] - self.stats["start"]
         with open(f"{output_dir}/{experiment_name}.tokens.json", "w") as fp:
             json.dump(self.stats, fp, default=str)
 
