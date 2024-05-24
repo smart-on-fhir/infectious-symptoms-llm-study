@@ -4,23 +4,25 @@
 #
 ###############################################################################
 class LlmInterface:
+    prompt_format: str
+
     def get_model_info(self):
         pass
 
+    # Fills the model's prompt-format with instructions & context
     def saturate_prompt(
         self,
         instruction: str,
         context: str,
-        system: str = None,
-        prompt_format: str = None,
     ):
-        pass
+        return self.prompt_format % {
+            "instruction": instruction,
+            "context": context,
+        }
 
     def fetch_llm_response(
         self,
         instruction: str,
         context: str,
-        prompt_format: str = None,
-        system: str = None,
     ):
         pass

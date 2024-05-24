@@ -10,14 +10,14 @@ from src.instructions import (
 from src.strategy import Strategy
 
 
-def build_strategies(model):
+def build_strategies():
     ##################################################
     #
     # Basic Strats
     #
-    def newStrat(inst, prompt_format: str = None):
+    def newStrat(inst):
         return Strategy(
-            [{"instruction": inst, "prompt_format": prompt_format}], model=model
+            [{"instruction": inst}]
         )
 
     # 5 Simple Strategies
@@ -40,13 +40,12 @@ def build_strategies(model):
         ]
     )
 
-    def newStratDoublePass(inst, prompt_format: str = None):
+    def newStratDoublePass(inst):
         return Strategy(
             [
-                {"instruction": inst, "prompt_format": prompt_format},
+                {"instruction": inst},
                 {"instruction": simplify, "step_type": "previous"},
             ],
-            model=model,
         )
 
     # 5 Double-Pass Strategies
@@ -98,7 +97,6 @@ def build_strategies(model):
                 {"instruction": inst + jsonSchemaInst},
                 {"instruction": jsonFixInst, "step_type": "previous"},
             ],
-            model=model,
         )
 
     # 5 Simple Strategies, JSON with Double Pass

@@ -2,11 +2,10 @@ from src.step import Step
 
 
 class Strategy:
-    def __init__(self, steps, model):
-        self.model = model
+    def __init__(self, steps):
         self.responses = []
         self.steps = [
-            Step(**step_config, model=model, responses=self.responses)
+            Step(**step_config, responses=self.responses)
             for step_config in steps
         ]
         self.total_tokens = 0
@@ -14,12 +13,11 @@ class Strategy:
     def to_json(self):
         return [step.to_json() for step in self.steps]
 
-    def run(self, context):
+    def run(self, model, context):
         self.total_tokens = 0
         self.responses.clear()
         for step in self.steps:
-            response = step.run(context)
-            # TODO: fix the confusion b/t responses and responses' text
+            response = step.run(model, context)
             self.responses.append(response["text"])
             self.total_tokens += response["stats"]["total_tokens"]
         # Only the final response is returned

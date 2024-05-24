@@ -3,27 +3,45 @@ import json
 import os
 import random
 import time
-
-################################################################
-# E2 directories
-
-DEFAULT_CONFIG = {
-    "DIR_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-tuning",
-    "DIR_OUTPUT_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-paper",
-    "DIR_INPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-cerner",
-    "DIR_OUTPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-paper",
-    "PROMPT_TUNING_NOTES": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/prompt-tuning-notes.json",
-}
-
+from pathlib import Path
 
 class NoteProcessor:
-    def __init__(self, note_config=None, sleep=True, sleepRate=5):
-        self.note_config = (
-            DEFAULT_CONFIG if not note_config else {**DEFAULT_CONFIG, **note_config}
-        )
+    def __init__(self, model, note_config=None, sleep=True, sleepRate=5):
+        self.model = model 
+
+        self.note_config = self._parse_note_config(note_config)
         self.sleep = sleep
         self.sleepRate = sleepRate  # in seconds
         self.stats = {}
+
+    def _parse_note_config(self, note_config): 
+        """
+        :param note_config: A path or inline JSON dict corresponding to a note_config
+        :returns: a loaded JSON dict corresponding to a note_config
+        """
+        final_note_config = note_config 
+        # Check if the note_config is an inline JSON dict or a path to one 
+        if isinstance(final_note_config, dict): 
+            # No conversions needed; future validation could go here
+            pass
+        elif isinstance(final_note_config, str): 
+            with Path(final_note_config) as file: 
+                if file.is_file(): 
+                    final_note_config = json.load(file.open())
+                else:
+                    raise ValueError("note_config should be an inline config dictionary or a valid path to a config; instead received: ", str(note_config))
+        else: 
+            raise ValueError("note_config should be an inline config dictionary or a valid path to a config; instead received: ", str(note_config))
+        
+        # Combine with a default config if there is one; 
+        # otherwise we expect all properties to exist on the provided config
+        # TODO: Not hard-code this path maybe? Override from env var?
+        with Path('./note_config/default.json') as file: 
+            if file.is_file():
+                DEFAULT_CONFIG = json.load(file.open())
+        return (
+            final_note_config if not DEFAULT_CONFIG else {**DEFAULT_CONFIG, **final_note_config}
+        )
 
     def _get_prompt_tuning_note_ids(self):
         """
@@ -156,7 +174,7 @@ class NoteProcessor:
                     print(f"{target} processing....")
                     # One more note is being processed
                     self.stats[strategy_name]["notes_processed"] += 1
-                    strategy_response = strategy.run(note)
+                    strategy_response = strategy.run(self.model, note)
                     # Track total tokens used across this process call
                     self.stats[strategy_name]["total_tokens"] += strategy_response[
                         "total_tokens"

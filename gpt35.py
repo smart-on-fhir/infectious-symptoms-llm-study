@@ -8,16 +8,8 @@ from src.processor import NoteProcessor
 #
 # Build model and note processor 
 #
-noteConfig = {
-    # "DIR_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-gpt-exp/tuning",
-    "DIR_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-tuning",
-    "DIR_OUTPUT_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-gpt-tuning",
-    # "DIR_INPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-gpt-exp/original",
-    "DIR_INPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-original-study/i2b2",
-    "DIR_OUTPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-gpt",
-}
-note_processor = NoteProcessor(noteConfig, sleepRate=2)
 model = AzureGptModel()
+note_processor = NoteProcessor(model, './note_config/gpt3_api.json', sleepRate=2)
 
 ###############################################################################
 #
@@ -61,5 +53,5 @@ def list_experiment_strategies(exp):
 
 if __name__ == "__main__":
     list_experiment_strategies(analysis_exp)
-    note_processor.run_prompt_tuning(experiment=tuning_exp)
-    note_processor.run_analysis(experiment=analysis_exp)
+    note_processor.run_prompt_tuning(experiment=tuning_exp, experiment_name="gpt3-tuning")
+    note_processor.run_analysis(experiment=analysis_exp, experiment_name="gpt3-analysis")

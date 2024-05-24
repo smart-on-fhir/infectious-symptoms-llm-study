@@ -11,22 +11,16 @@ load_dotenv()
 #
 # Build model and note processor 
 #
-noteConfig = {
-    "DIR_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-tuning",
-    "DIR_OUTPUT_TUNING": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-prompt-tuning-timing",
-    "DIR_INPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/notes-original-study/i2b2",
-    "DIR_OUTPUT": "/lab-share/CHIP-Mandl-e2/Public/covid-llm/output-open-llms",
-}
-note_processor = NoteProcessor(noteConfig, sleep=False)
 HOST = os.getenv("HOST")
 PORT = os.getenv("PORT")
 model = MixtralModel(url=f'{HOST}:{PORT}')
+note_processor = NoteProcessor(model, './note_config/open_llm.json', sleep=False)
 
 ###############################################################################
 #
 # Building experiment with strategies
 #
-all_strategies = build_strategies(model)
+all_strategies = build_strategies()
 tuning_exp = {
     "prompt-mixtral-Simple": all_strategies["simple"],
     "prompt-mixtral-Identity": all_strategies["identity"],

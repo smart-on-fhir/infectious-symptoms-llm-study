@@ -1,19 +1,20 @@
 # llm-covid-prompts
 
-Boilerplate classes and helper methods for running prompt experiments against LLAMA2 models served via
-HuggingFace's Text Generation Inference (TGI) API to identify successful prompting strategy.
+Boilerplate classes and helper methods for running prompt experiments against LLAMA2/Mixtral/GPT models served via
+HuggingFace's Text Generation Inference (TGI) API or Azure's Open AI API to identify successful prompting strategies.
 
 ## Getting Started
 
 To generate some experimental output:
 
-1. Create an `.env` file based on our `.env.template` file. Ensure HOST is pointing to the correct IP address or to , depending on where your LLM API lives relative to where you're running this tool.
+1. Create an `.env` file based on our `.env.template` file. Ensure HOST is pointing to the correct IP address to communicate with your LLM API. Alternatively, if you're using a service-based API, ensure you have entered in all the necessary API tokens and endpoint vars. 
 2. Using at least python v3.9.16, ensure that packages in `requirements.txt` are installed 
-  - (consider creating a venv with `python -m venv venv`, activating that venv with `source venv/bin/activate`and installing dependencies with `python -m pip install -r requirements.txt`).
-3. Once dependencies are installed, run:
-
+  - Consider creating a venv with `python -m venv venv`, activating that venv with `source venv/bin/activate` and installing dependencies with `python -m pip install -r requirements.txt`.
+3. Once dependencies are installed, define a note-config file that you will use for your experiment, building off of `_example.json`. This will define where the clinical notes for tuning and your final analysis live, where the output for both of these steps should be written, and if only a subset of notes should be examined in the tuning phase. 
+  - Note: You can define a `default.json` note_config to set some default values for all 5 required fields. This allows other note_configs to build off that, changing only what they need.
+4. Run an experiment! We have scripts for many of the experiments we conducted. For example, if you had an instance of llama2 running and wanted to replicate our results try: 
 ```shell
-python main.py
+python llama2.py
 ```
 
 ## Terminology
@@ -23,13 +24,10 @@ a given task – we can think of this as creating an effective prompting Strateg
 easier in the future, we define certain classes and methods that plug and play together to make for a
 flexible, Strategy-experimentation playground. In our example experiment – see `main.py` – you'll see how we use the following:
 
-- `LLAMA2Interface`: An interface for making LLAMA2 inferences given a prompt_format, an instruction,
-  some context over which the LLM should reason, and an optional system message (this is unused by
-  LLAMA2's default prompt, but it is common in other prompts and potentially useful)
-
-- `Strategy`: The logic of a given prompting-strategy. Each strategy is made up a list of one or
+- `Strategy`: The logic of a given prompting-strategy. Each strategy is made of one or
   many different Steps. The result of a Strategy is always the output of the last Step in its sequence.
-  The input to a strategy is always the clinical content the LLM is reasoning over, but how Steps use this input may vary.
+  The input to a strategy in the context of our experiments is always the clinical content the LLM is reasoning over,
+  but how Steps use this input may vary.
 
 - `Step`: The atomic unit of a Strategy. Steps are run by a Strategy, and each Step corresponds to
   a call to a ModelInterface. There are three different types of Steps, each presenting different text
@@ -45,8 +43,4 @@ flexible, Strategy-experimentation playground. In our example experiment – see
 - `instructions.py`: All of the instructions to LLMs that we've tested so far. Think of this as a
   library of instruction to pull from within your Steps and Strategies.
 
-- `processor.py`: Techniques for processing an experiment – i.e. dictionary of strategies – over a
-  large quantity of notes. Two common methods you'll use are `process_small_batch`, for running an
-  experiment on a small batch of notes that you can review outside of the typical output-to-compare
-  pipeline, and `process_dir`, for running an experiment on an entire directory of notes and generating
-  results to process in the E2 output directory.
+- `processor.py`: A NoteProcessor class, which iterates over a set of notes and runs a given experiment against a given mode. The two methods of interest are `note_processor.run_prompt_tuning` and `note_processor.run_analysis`, for running prompt_tuning and analysis experiments respectively.
