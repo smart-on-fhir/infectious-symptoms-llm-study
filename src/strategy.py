@@ -1,18 +1,24 @@
-from .step import Step
+from src.step import Step
 
-class Strategy: 
-    def __init__(self, steps, model):
-        self.model = model
+
+class Strategy:
+    def __init__(self, steps):
         self.responses = []
-        self.steps = [Step(**step_config, model=model, responses=self.responses) for step_config in steps]
-    
-    def toJSON(self):
-        return [step.toJSON() for step in self.steps]
+        self.steps = [
+            Step(**step_config, responses=self.responses)
+            for step_config in steps
+        ]
+        self.total_tokens = 0
 
-    def run(self, context):
+    def to_json(self):
+        return [step.to_json() for step in self.steps]
+
+    def run(self, model, context):
+        self.total_tokens = 0
         self.responses.clear()
-        for step in self.steps: 
-            response = step.run(context)
-            self.responses.append(response)
+        for step in self.steps:
+            response = step.run(model, context)
+            self.responses.append(response["text"])
+            self.total_tokens += response["stats"]["total_tokens"]
         # Only the final response is returned
-        return self.responses[-1]
+        return {"text": self.responses[-1], "total_tokens": self.total_tokens}
