@@ -162,3 +162,4 @@ cython_debug/
 # Custom
 note_config/*
 !note_config/_example.json
+.env.*

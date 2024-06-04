@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from src.symptom_study_strategies import build_strategies
 from src.models import LLAMA2Model
 from src.processor import NoteProcessor
-load_dotenv()
+load_dotenv(".env.llama")
 
 ###############################################################################
 #
