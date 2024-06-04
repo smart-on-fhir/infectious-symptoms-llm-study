@@ -14,6 +14,8 @@ load_dotenv()
 HOST = os.getenv("HOST")
 PORT = os.getenv("PORT")
 model = LLAMA3Model(url=f'{HOST}:{PORT}')
+
+
 note_processor = NoteProcessor(model, './note_config/llama3.json', sleep=False)
 
 

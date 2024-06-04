@@ -13,14 +13,19 @@ class TgiClient:
         self.url = url
 
     # Makes API call and parses response
-    def fetch_llm_response(self, payload):
+    def fetch_llm_response(self, payload, request_parameters = {}):
+        # Common default parameters used by all models
+        default_parameters = {
+            "details": True,
+            "max_new_tokens": 1000,
+        }
         response = requests.post(
             self.url,
             json={
                 "inputs": payload,
                 "parameters": {
-                    "details": True,
-                    "max_new_tokens": 1000,
+                    **default_parameters,
+                    **request_parameters,
                 }
             },
         )

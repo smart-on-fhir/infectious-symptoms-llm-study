@@ -22,10 +22,11 @@ class TgiInterface(LlmInterface):
         self,
         instruction: str,
         context: str,
+        request_parameters: object = {}
     ):
         payload = self.saturate_prompt(
             instruction=instruction,
             context=context,
         )
-        response = self.client.fetch_llm_response(payload)
+        response = self.client.fetch_llm_response(payload, request_parameters)
         return response
