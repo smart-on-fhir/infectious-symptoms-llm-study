@@ -1,6 +1,6 @@
 from functools import reduce
 
-from src.covid_study_strategies import build_strategies
+from src.symptom_study_strategies import build_strategies
 from src.models import AzureGptModel
 from src.processor import NoteProcessor
 
@@ -10,7 +10,7 @@ from src.processor import NoteProcessor
 #
 # Use the gpt4Turbo deployment - named very simply
 model = AzureGptModel(model="gpt-4")
-note_processor = NoteProcessor(model, './note_config/gpt4_api.json' sleepRate=5)
+note_processor = NoteProcessor(model, './note_config/gpt_api.json' sleepRate=5)
 
 ###############################################################################
 #
@@ -45,7 +45,7 @@ tuning_exp = {
 }
 
 analysis_exp = { 
-    "covidstudy-gpt4Turbo-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
+    "symptomstudy-gpt4Turbo-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
 }
 
 if __name__ == "__main__":

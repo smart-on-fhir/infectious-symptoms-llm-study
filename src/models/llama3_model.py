@@ -22,6 +22,7 @@ LLAMA3_PARAMETERS = {
 class LLAMA3Model(TgiInterface):
     def __init__(self, url):
         TgiInterface.__init__(self, url, LLAMA3_DEFAULT_PROMPT_FORMAT)
+        
     def fetch_llm_response(self, instruction: str, context: str, request_parameters: object = {}): 
         # Make sure we use the LLAMA3 specific stop keyword parameters by default
         combined_parameters = {

@@ -2,7 +2,7 @@ import os
 from functools import reduce
 from dotenv import load_dotenv
 
-from src.covid_study_strategies import build_strategies
+from src.symptom_study_strategies import build_strategies
 from src.models import LLAMA3Model
 from src.processor import NoteProcessor
 load_dotenv()
@@ -11,9 +11,8 @@ load_dotenv()
 #
 # Build model and note processor 
 #
-HOST = os.getenv("HOST")
-PORT = os.getenv("PORT")
-model = LLAMA3Model(url=f'{HOST}:{PORT}')
+URL = os.getenv("TGI_URL")
+model = LLAMA3Model(url=URL)
 
 
 note_processor = NoteProcessor(model, './note_config/llama3.json', sleep=False)
@@ -51,7 +50,7 @@ tuning_exp = {
 }
 
 analysis_exp = { 
-    "covidstudy-llama3-SimpleJSON": all_strategies["simpleJSON"],
+    "symptomstudy-llama3-SimpleJSON": all_strategies["simpleJSON"],
 }
 
 

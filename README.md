@@ -1,4 +1,4 @@
-# llm-covid-prompts
+# llm-symptom-prompts
 
 Boilerplate classes and helper methods for running prompt experiments against LLAMA2/Mixtral/GPT models served via
 HuggingFace's Text Generation Inference (TGI) API or Azure's Open AI API to identify successful prompting strategies.

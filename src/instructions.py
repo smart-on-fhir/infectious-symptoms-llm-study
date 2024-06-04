@@ -26,7 +26,7 @@ def quote_join(criteria: list, sep=", ") -> str:
 def quote_unpack(synonyms: dict) -> list:
     """
     :param synonyms: dictionary of synonyms (example: criteria 3)
-    :return: list of synonym terms defined for each key (covid symptom)
+    :return: list of synonym terms defined for each key (symptom)
     """
     unpacked = list()
     for outer in [val for val in synonyms.values()]:
@@ -45,7 +45,7 @@ def join_lines(lines: list) -> str:
 
 ###############################################################################
 #
-# COVID Symptoms
+# Infectious Respiratory Disease Symptoms
 #
 symptom_list = [
     "Congestion or runny nose",
@@ -220,8 +220,8 @@ Again, use chain of thought methodology to justify your summaries.
 # Identity
 #
 identity = [
-    "You are a helpful assistant identifying COVID-19 symptoms from emergency department notes.",
-    "Output the positively documented COVID-19 symptoms, looking out specifically for the following: "
+    "You are a helpful assistant identifying symptoms from emergency department notes, that could relate to respiratory diseases.",
+    "Output positively documented symptoms, looking out specifically for the following: "
     + ", ".join(symptom_list)
     + ".",
     "Symptoms only need to be positively mentioned once to be included.",

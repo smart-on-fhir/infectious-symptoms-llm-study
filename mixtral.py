@@ -2,7 +2,7 @@ import os
 from functools import reduce
 from dotenv import load_dotenv
 
-from src.covid_study_strategies import build_strategies
+from src.symptom_study_strategies import build_strategies
 from src.models import MixtralModel
 from src.processor import NoteProcessor
 load_dotenv()
@@ -11,9 +11,8 @@ load_dotenv()
 #
 # Build model and note processor 
 #
-HOST = os.getenv("HOST")
-PORT = os.getenv("PORT")
-model = MixtralModel(url=f'{HOST}:{PORT}')
+URL = os.getenv("TGI_URL")
+model = MixtralModel(url=URL)
 note_processor = NoteProcessor(model, './note_config/open_llm.json', sleep=False)
 
 ###############################################################################
@@ -48,7 +47,7 @@ tuning_exp = {
 }
 
 analysis_exp = { 
-    "covidstudy-mixtral-SimpleJSON": all_strategies["simpleJSON"],
+    "symptomstudy-mixtral-SimpleJSON": all_strategies["simpleJSON"],
 }
 
 

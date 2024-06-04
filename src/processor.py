@@ -67,7 +67,7 @@ class NoteProcessor:
 
     def _get_note(self, note_dir: str, name: str = None, only_these_notes=None):
         """
-        Retrieves a given covid note based on name, or selects one randomly;
+        Retrieves a given ed note based on name, or selects one randomly;
         will limit selection to only_these_notes if defined,
         :param note_dir: where the notes are found
         :type note_dir: str
@@ -95,7 +95,7 @@ class NoteProcessor:
 
     def get_sample_input_note(self, name: str = None):
         """
-        Retrieves a given covid note or selects one randomly from the input directory
+        Retrieves a given ed note or selects one randomly from the input directory
         :param name: The note to get
         :type name: str, optional
         :returns: the note and the note's name (helpful when one is selected randomly)
@@ -104,7 +104,7 @@ class NoteProcessor:
 
     def get_sample_tuning_note(self, name: str = None):
         """
-        Retrieves a given covid note or selects one randomly from the tuning diredctory;
+        Retrieves a given ed note or selects one randomly from the tuning diredctory;
         :param name: The note to get
         :type name: str, optional
         :returns: the note and the note's name (helpful when one is selected randomly)

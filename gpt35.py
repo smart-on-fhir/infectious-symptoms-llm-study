@@ -1,6 +1,6 @@
 from functools import reduce
 
-from src.covid_study_strategies import build_strategies
+from src.symptom_study_strategies import build_strategies
 from src.models import AzureGptModel
 from src.processor import NoteProcessor
 
@@ -9,7 +9,7 @@ from src.processor import NoteProcessor
 # Build model and note processor 
 #
 model = AzureGptModel()
-note_processor = NoteProcessor(model, './note_config/gpt3_api.json', sleepRate=2)
+note_processor = NoteProcessor(model, './note_config/gpt_api.json', sleepRate=2)
 
 ###############################################################################
 #
@@ -43,7 +43,7 @@ tuning_exp = {
 }
 
 analysis_exp = { 
-    "covidstudy-gpt35Turbo-SimpleJSON": all_strategies["simpleJSON"],
+    "symptomstudy-gpt35Turbo-SimpleJSON": all_strategies["simpleJSON"],
 }
 
 
