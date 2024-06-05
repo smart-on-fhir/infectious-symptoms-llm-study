@@ -1,21 +1,28 @@
+import os 
 from functools import reduce
+from dotenv import load_dotenv
 
 from src.symptom_study_strategies import build_strategies
 from src.models import AzureGptModel
 from src.processor import NoteProcessor
+load_dotenv(".env.gpt35")
 
 ###############################################################################
 #
 # Build model and note processor 
 #
-model = AzureGptModel()
+url = os.getenv("AZURE_OPENAI_ENDPOINT")
+api_key = os.getenv("AZURE_OPENAI_API_KEY")
+model_type = os.getenv("AZURE_OPENAI_DEPLOYMENT")
+model = AzureGptModel(url=url, api_key=api_key, model_type=model_type)
 note_processor = NoteProcessor(model, './note_config/gpt_api.json', sleepRate=2)
 
 ###############################################################################
 #
 # Building experiment with strategies
 #
-all_strategies = build_strategies(model)
+all_strategies = build_strategies()
+
 tuning_exp = {
     "prompt-gpt35Turbo-Simple": all_strategies["simple"],
     "prompt-gpt35Turbo-Identity": all_strategies["identity"],
@@ -52,6 +59,6 @@ def list_experiment_strategies(exp):
 
 
 if __name__ == "__main__":
-    list_experiment_strategies(analysis_exp)
+    list_experiment_strategies(tuning_exp)
     note_processor.run_prompt_tuning(experiment=tuning_exp, experiment_name="gpt3-tuning")
-    note_processor.run_analysis(experiment=analysis_exp, experiment_name="gpt3-analysis")
+    # note_processor.run_analysis(experiment=analysis_exp, experiment_name="gpt3-analysis")

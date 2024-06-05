@@ -1,15 +1,20 @@
+import os 
 from functools import reduce
+from dotenv import load_dotenv
 
 from src.symptom_study_strategies import build_strategies
 from src.models import AzureGptModel
 from src.processor import NoteProcessor
+load_dotenv(".env.gpt4")
 
 ###############################################################################
 #
 # Build model and note processor 
 #
-# Use the gpt4Turbo deployment - named very simply
-model = AzureGptModel(model="gpt-4")
+url = os.getenv("AZURE_OPENAI_ENDPOINT")
+api_key = os.getenv("AZURE_OPENAI_API_KEY")
+model_type = os.getenv("AZURE_OPENAI_DEPLOYMENT")
+model = AzureGptModel(url=url, api_key=api_key, model_type=model_type)
 note_processor = NoteProcessor(model, './note_config/gpt_api.json' sleepRate=5)
 
 ###############################################################################
@@ -48,9 +53,10 @@ analysis_exp = {
     "symptomstudy-gpt4Turbo-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
 }
 
+def list_experiment_strategies(exp):
+    return reduce(lambda k1, k2: k1 + ", " + k2, exp.keys())
+
 if __name__ == "__main__":
-    # print(model.get_model_info())
-    # print(model.client)
-    print('starting gpt4Turbo experiments')
-    # note_processor.run_prompt_tuning(experiment=tuning_exp)
-    note_processor.run_analysis(experiment=analysis_exp, experiment_name="gpt4-analysis")
+    list_experiment_strategies(tuning_exp)
+    note_processor.run_prompt_tuning(experiment=tuning_exp)
+    # note_processor.run_analysis(experiment=analysis_exp, experiment_name="gpt4-analysis")

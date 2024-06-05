@@ -8,6 +8,8 @@ HuggingFace's Text Generation Inference (TGI) API or Azure's Open AI API to iden
 To generate some experimental output:
 
 1. Create an `.env` file based on our `.env.template` file. Ensure HOST is pointing to the correct IP address to communicate with your LLM API. Alternatively, if you're using a service-based API, ensure you have entered in all the necessary API tokens and endpoint vars. 
+  - Note that to use our pre-made scripts, you should create an .env file specific to the script/model. For example, the `llama2.py` script looks for a `.env.llama2` env file. 
+  feel free to change this as needed, but be aware of it when making your env file.
 2. Using at least python v3.9.16, ensure that packages in `requirements.txt` are installed 
   - Consider creating a venv with `python -m venv venv`, activating that venv with `source venv/bin/activate` and installing dependencies with `python -m pip install -r requirements.txt`.
 3. Once dependencies are installed, define a note-config file that you will use for your experiment, building off of `_example.json`. This will define where the clinical notes for tuning and your final analysis live, where the output for both of these steps should be written, and if only a subset of notes should be examined in the tuning phase. 

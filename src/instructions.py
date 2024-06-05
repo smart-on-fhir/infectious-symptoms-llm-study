@@ -220,7 +220,7 @@ Again, use chain of thought methodology to justify your summaries.
 # Identity
 #
 identity = [
-    "You are a helpful assistant identifying symptoms from emergency department notes, that could relate to respiratory diseases.",
+    "You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.",
     "Output positively documented symptoms, looking out specifically for the following: "
     + ", ".join(symptom_list)
     + ".",
