@@ -22,25 +22,25 @@ note_processor = NoteProcessor(model, './note_config/open_llm.json', sleep=False
 #
 all_strategies = build_strategies()
 tuning_exp = {
-    "prompt-llama2-Simple": all_strategies["simple"],
+    "prompt-llama2-Rules": all_strategies["rules"],
     "prompt-llama2-Identity": all_strategies["identity"],
     "prompt-llama2-Include": all_strategies["include"],
     "prompt-llama2-Exclude": all_strategies["exclude"],
     "prompt-llama2-Verbose": all_strategies["verbose"],
     # DoublePass
-    "prompt-llama2-SimpleDoublePass": all_strategies["simpleDoublePass"],
+    "prompt-llama2-RulesDoublePass": all_strategies["rulesDoublePass"],
     "prompt-llama2-IdentityDoublePass": all_strategies["identityDoublePass"],
     "prompt-llama2-IncludeDoublePass": all_strategies["includeDoublePass"],
     "prompt-llama2-ExcludeDoublePass": all_strategies["excludeDoublePass"],
     "prompt-llama2-VerboseDoublePass": all_strategies["verboseDoublePass"],
     # JSON
-    "prompt-llama2-SimpleJSON": all_strategies["simpleJSON"],
+    "prompt-llama2-RulesJSON": all_strategies["rulesJSON"],
     "prompt-llama2-IdentityJSON": all_strategies["identityJSON"],
     "prompt-llama2-IncludeJSON": all_strategies["includeJSON"],
     "prompt-llama2-ExcludeJSON": all_strategies["excludeJSON"],
     "prompt-llama2-VerboseJSON": all_strategies["verboseJSON"],
     # JSON Double Pass
-    "prompt-llama2-SimpleJSONDoublePass": all_strategies["simpleJSONDoublePass"],
+    "prompt-llama2-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
     "prompt-llama2-IdentityJSONDoublePass": all_strategies["identityJSONDoublePass"],
     "prompt-llama2-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
     "prompt-llama2-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
@@ -48,7 +48,7 @@ tuning_exp = {
 }
 
 analysis_exp = { 
-    "symptomstudy-llama2-SimpleJSON": all_strategies["simpleJSON"],
+    "symptomstudy-llama2-RulesJSON": all_strategies["rulesJSON"],
 }
 
 
@@ -59,4 +59,4 @@ def list_experiment_strategies(exp):
 if __name__ == "__main__":
     list_experiment_strategies(analysis_exp)
     note_processor.run_prompt_tuning(experiment=tuning_exp, experiment_name="llama2-tuning")
-    note_processor.run_analysis(experiment=analysis_exp, experiment_name="llama2-analysis")
+    # note_processor.run_analysis(experiment=analysis_exp, experiment_name="llama2-analysis")

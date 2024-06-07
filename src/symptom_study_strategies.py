@@ -3,7 +3,7 @@ from src.instructions import (
     identity_instruction,
     include_instruction,
     join_lines,
-    simple_instruction,
+    rules_instruction,
     symptom_list,
     verbose_instruction,
 )
@@ -20,9 +20,9 @@ def build_strategies():
             [{"instruction": inst}]
         )
 
-    # 5 Simple Strategies
-    sampleSimple = newStrat(simple_instruction())
+    # 5 Strategies
     sampleIdentity = newStrat(identity_instruction())
+    sampleRules = newStrat(rules_instruction())
     sampleInclude = newStrat(include_instruction())
     sampleExclude = newStrat(exclude_instruction())
     sampleVerbose = newStrat(verbose_instruction())
@@ -49,7 +49,7 @@ def build_strategies():
         )
 
     # 5 Double-Pass Strategies
-    sampleSimpleDoublePass = newStratDoublePass(simple_instruction())
+    sampleRulesDoublePass = newStratDoublePass(rules_instruction())
     sampleIdentityDoublePass = newStratDoublePass(identity_instruction())
     sampleIncludeDoublePass = newStratDoublePass(include_instruction())
     sampleExcludeDoublePass = newStratDoublePass(exclude_instruction())
@@ -69,8 +69,8 @@ def build_strategies():
             "Never explain yourself, and only reply with JSON.",
         ]
     )
-    # 5 Simple Strategies, JSON
-    sampleSimpleJSON = newStrat(simple_instruction() + jsonSchemaInst)
+    # 5 Baseline Strategies, JSON
+    sampleRulesJSON = newStrat(rules_instruction() + jsonSchemaInst)
     sampleIdentityJSON = newStrat(identity_instruction() + jsonSchemaInst)
     sampleIncludeJSON = newStrat(include_instruction() + jsonSchemaInst)
     sampleExcludeJSON = newStrat(exclude_instruction() + jsonSchemaInst)
@@ -99,30 +99,30 @@ def build_strategies():
             ],
         )
 
-    # 5 Simple Strategies, JSON with Double Pass
-    sampleSimpleJSONDoublePass = jsonStratDoublePass(simple_instruction())
+    # 5 Baseline Strategies, JSON with Double Pass
+    sampleRulesJSONDoublePass = jsonStratDoublePass(rules_instruction())
     sampleIdentityJSONDoublePass = jsonStratDoublePass(identity_instruction())
     sampleIncludeJSONDoublePass = jsonStratDoublePass(include_instruction())
     sampleExcludeJSONDoublePass = jsonStratDoublePass(exclude_instruction())
     sampleVerboseJSONDoublePass = jsonStratDoublePass(verbose_instruction())
 
     return {
-        "simple": sampleSimple,
+        "rules": sampleRules,
         "identity": sampleIdentity,
         "include": sampleInclude,
         "exclude": sampleExclude,
         "verbose": sampleVerbose,
-        "simpleDoublePass": sampleSimpleDoublePass,
+        "rulesDoublePass": sampleRulesDoublePass,
         "identityDoublePass": sampleIdentityDoublePass,
         "includeDoublePass": sampleIncludeDoublePass,
         "excludeDoublePass": sampleExcludeDoublePass,
         "verboseDoublePass": sampleVerboseDoublePass,
-        "simpleJSON": sampleSimpleJSON,
+        "rulesJSON": sampleRulesJSON,
         "identityJSON": sampleIdentityJSON,
         "includeJSON": sampleIncludeJSON,
         "excludeJSON": sampleExcludeJSON,
         "verboseJSON": sampleVerboseJSON,
-        "simpleJSONDoublePass": sampleSimpleJSONDoublePass,
+        "rulesJSONDoublePass": sampleRulesJSONDoublePass,
         "identityJSONDoublePass": sampleIdentityJSONDoublePass,
         "includeJSONDoublePass": sampleIncludeJSONDoublePass,
         "excludeJSONDoublePass": sampleExcludeJSONDoublePass,

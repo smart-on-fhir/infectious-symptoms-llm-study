@@ -235,9 +235,9 @@ def identity_instruction():
 
 ###############################################################################
 #
-# Simple prompt
+# Rules prompt
 #
-simple = [
+rules = [
     identity_instruction(),
     "Follow these rules:",
     f"Rule (1): {crit1}",
@@ -246,8 +246,8 @@ simple = [
 ]
 
 
-def simple_instruction():
-    return join_lines(simple)
+def rules_instruction():
+    return join_lines(rules)
 
 
 ###############################################################################
@@ -319,8 +319,8 @@ def show_instructions():
     print(identity_instruction())
 
     print("\n###############################################################")
-    print("# simple_instruction() ")
-    print(simple_instruction())
+    print("# rules_instruction() ")
+    print(rules_instruction())
 
     print("\n###############################################################")
     print("# include_instruction() ")
