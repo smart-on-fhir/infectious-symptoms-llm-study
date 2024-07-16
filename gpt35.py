@@ -13,8 +13,9 @@ load_dotenv(".env.gpt35")
 #
 url = os.getenv("AZURE_OPENAI_ENDPOINT")
 api_key = os.getenv("AZURE_OPENAI_API_KEY")
+api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 model_type = os.getenv("AZURE_OPENAI_DEPLOYMENT")
-model = AzureGptModel(url=url, api_key=api_key, model_type=model_type)
+model = AzureGptModel(url=url, api_key=api_key, api_version=api_version model_type=model_type)
 note_processor = NoteProcessor(model, "./note_config/gpt_api.json", sleepRate=2)
 
 ###############################################################################

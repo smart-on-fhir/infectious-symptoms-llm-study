@@ -12,11 +12,11 @@ load_dotenv()
 #
 ###############################################################################
 class AzureGptModel(LlmInterface):
-    def __init__(self, url=None, api_key=None, model_type=None):
+    def __init__(self, url=None, api_key=None, api_version=None, model_type=None):
         self.client = AzureOpenAI(
             azure_endpoint=url or os.getenv("AZURE_OPENAI_ENDPOINT"),
             api_key=api_key or os.getenv("AZURE_OPENAI_API_KEY"),
-            api_version="2024-02-01",
+            api_version=api_version or os.getenv("AZURE_OPENAI_API_VERSION"),
         )
         self.model_type = model_type or os.getenv("AZURE_OPENAI_DEPLOYMENT")
         self.prompt_format = (
