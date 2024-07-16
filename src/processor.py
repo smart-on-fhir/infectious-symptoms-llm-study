@@ -137,6 +137,7 @@ class NoteProcessor:
             "start": start
         }
         # Record experiment configuration in output
+        os.makedirs(f"{output_dir}", exist_ok=True)
         with open(f"{output_dir}/{experiment_name}.json", "w") as fp:
             serialized_experiment = {}
             for exp_name, exp in experiment.items():

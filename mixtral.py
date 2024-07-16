@@ -1,5 +1,4 @@
 import os
-from functools import reduce
 from dotenv import load_dotenv
 
 from src.symptom_study_strategies import build_strategies
@@ -50,12 +49,6 @@ analysis_exp = {
     "symptomstudy-mixtral-RulesJSON": all_strategies["rulesJSON"],
 }
 
-
-def list_experiment_strategies(exp):
-    return reduce(lambda k1, k2: k1 + ", " + k2, exp.keys())
-
-
 if __name__ == "__main__":
-    list_experiment_strategies(analysis_exp)
     note_processor.run_prompt_tuning(experiment=tuning_exp, experiment_name="mixtral-tuning")
-    # note_processor.run_analysis(experiment=analysis_exp, experiment_name="mixtral-analysis")
+    note_processor.run_analysis(experiment=analysis_exp, experiment_name="mixtral-analysis")

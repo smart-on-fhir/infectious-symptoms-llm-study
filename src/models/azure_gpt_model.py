@@ -25,7 +25,6 @@ class AzureGptModel(LlmInterface):
 
     def get_model_info(self):
         raise NotImplementedError
-        # return self.client.models.retrieve(self.model_type)
 
     def fetch_llm_response(
         self,

@@ -1,5 +1,4 @@
 import os 
-from functools import reduce
 from dotenv import load_dotenv
 
 from src.symptom_study_strategies import build_strategies
@@ -53,10 +52,6 @@ analysis_exp = {
     "symptomstudy-gpt4Turbo-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
 }
 
-def list_experiment_strategies(exp):
-    return reduce(lambda k1, k2: k1 + ", " + k2, exp.keys())
-
 if __name__ == "__main__":
-    list_experiment_strategies(tuning_exp)
-    note_processor.run_prompt_tuning(experiment=tuning_exp)
-    # note_processor.run_analysis(experiment=analysis_exp, experiment_name="gpt4-analysis")
+    note_processor.run_prompt_tuning(experiment=tuning_exp, experiment_name="gpt4-tuning")
+    note_processor.run_analysis(experiment=analysis_exp, experiment_name="gpt4-analysis")

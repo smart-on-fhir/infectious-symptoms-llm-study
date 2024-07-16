@@ -1,5 +1,4 @@
 import os
-from functools import reduce
 from dotenv import load_dotenv
 
 from src.symptom_study_strategies import build_strategies
@@ -13,8 +12,6 @@ load_dotenv(".env.llama3")
 #
 URL = os.getenv("TGI_URL")
 model = LLAMA3Model(url=URL)
-
-
 note_processor = NoteProcessor(model, './note_config/llama3.json', sleep=False)
 
 
@@ -54,11 +51,6 @@ analysis_exp = {
 }
 
 
-def list_experiment_strategies(exp):
-    return reduce(lambda k1, k2: k1 + ", " + k2, exp.keys())
-
-
 if __name__ == "__main__":
-    list_experiment_strategies(analysis_exp)
     note_processor.run_prompt_tuning(experiment=tuning_exp, experiment_name="llama3-tuning")
     note_processor.run_analysis(experiment=analysis_exp, experiment_name="llama3-analysis")
