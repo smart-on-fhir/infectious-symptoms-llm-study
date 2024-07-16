@@ -13,7 +13,7 @@ class TgiClient:
         self.url = url
 
     # Makes API call and parses response
-    def fetch_llm_response(self, payload, request_parameters = {}):
+    def fetch_llm_response(self, payload, request_parameters={}):
         # Common default parameters used by all models
         default_parameters = {
             "details": True,
@@ -26,7 +26,7 @@ class TgiClient:
                 "parameters": {
                     **default_parameters,
                     **request_parameters,
-                }
+                },
             },
         )
         response.raise_for_status()

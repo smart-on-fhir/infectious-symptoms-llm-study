@@ -5,42 +5,51 @@ import random
 import time
 from pathlib import Path
 
+
 class NoteProcessor:
     def __init__(self, model, note_config=None, sleep=True, sleepRate=5):
-        self.model = model 
+        self.model = model
 
         self.note_config = self._parse_note_config(note_config)
         self.sleep = sleep
         self.sleepRate = sleepRate  # in seconds
         self.stats = {}
 
-    def _parse_note_config(self, note_config): 
+    def _parse_note_config(self, note_config):
         """
         :param note_config: A path or inline JSON dict corresponding to a note_config
         :returns: a loaded JSON dict corresponding to a note_config
         """
-        final_note_config = note_config 
-        # Check if the note_config is an inline JSON dict or a path to one 
-        if isinstance(final_note_config, dict): 
+        final_note_config = note_config
+        # Check if the note_config is an inline JSON dict or a path to one
+        if isinstance(final_note_config, dict):
             # No conversions needed; future validation could go here
             pass
-        elif isinstance(final_note_config, str): 
-            with Path(final_note_config) as file: 
-                if file.is_file(): 
+        elif isinstance(final_note_config, str):
+            with Path(final_note_config) as file:
+                if file.is_file():
                     final_note_config = json.load(file.open())
                 else:
-                    raise ValueError("note_config should be an inline config dictionary or a valid path to a config; instead received: ", str(note_config))
-        else: 
-            raise ValueError("note_config should be an inline config dictionary or a valid path to a config; instead received: ", str(note_config))
-        
-        # Combine with a default config if there is one; 
+                    raise ValueError(
+                        "note_config should be an inline config dictionary or a valid path to a config; instead received: ",
+                        str(note_config),
+                    )
+        else:
+            raise ValueError(
+                "note_config should be an inline config dictionary or a valid path to a config; instead received: ",
+                str(note_config),
+            )
+
+        # Combine with a default config if there is one;
         # otherwise we expect all properties to exist on the provided config
         # TODO: Not hard-code this path maybe? Override from env var?
-        with Path('./note_config/default.json') as file: 
+        with Path("./note_config/default.json") as file:
             if file.is_file():
                 DEFAULT_CONFIG = json.load(file.open())
         return (
-            final_note_config if not DEFAULT_CONFIG else {**DEFAULT_CONFIG, **final_note_config}
+            final_note_config
+            if not DEFAULT_CONFIG
+            else {**DEFAULT_CONFIG, **final_note_config}
         )
 
     def _get_prompt_tuning_note_ids(self):
@@ -132,10 +141,8 @@ class NoteProcessor:
         :param skip_list: notes to skip because of documented reasons; None by default
         """
         start = datetime.datetime.now()
-        print('START: ', start)
-        self.stats = {
-            "start": start
-        }
+        print("START: ", start)
+        self.stats = {"start": start}
         # Record experiment configuration in output
         os.makedirs(f"{output_dir}", exist_ok=True)
         with open(f"{output_dir}/{experiment_name}.json", "w") as fp:
@@ -182,17 +189,16 @@ class NoteProcessor:
                     ]
                     with open(target, "w") as fp:
                         fp.write(strategy_response["text"] + "\n")
-                    
+
                     # Regularly write stats to disk in case we exit prematurely
                     self.stats["end"] = datetime.datetime.now()
                     self.stats["runtime"] = self.stats["end"] - self.stats["start"]
                     with open(f"{output_dir}/{experiment_name}.tokens.json", "w") as fp:
                         json.dump(self.stats, fp, default=str)
-                    
 
         # Record stats and log that we're done
         end = datetime.datetime.now()
-        print('END: ', end)
+        print("END: ", end)
         self.stats["end"] = end
         print("TIME TO FINISH: ", self.stats["end"] - self.stats["start"])
         self.stats["runtime"] = self.stats["end"] - self.stats["start"]

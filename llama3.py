@@ -4,15 +4,16 @@ from dotenv import load_dotenv
 from src.symptom_study_strategies import build_strategies
 from src.models import LLAMA3Model
 from src.processor import NoteProcessor
+
 load_dotenv(".env.llama3")
 
 ###############################################################################
 #
-# Build model and note processor 
+# Build model and note processor
 #
 URL = os.getenv("TGI_URL")
 model = LLAMA3Model(url=URL)
-note_processor = NoteProcessor(model, './note_config/llama3.json', sleep=False)
+note_processor = NoteProcessor(model, "./note_config/llama3.json", sleep=False)
 
 
 ###############################################################################
@@ -46,11 +47,15 @@ tuning_exp = {
     "prompt-llama3-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
 }
 
-analysis_exp = { 
+analysis_exp = {
     "symptomstudy-llama3-RulesJSON": all_strategies["rulesJSON"],
 }
 
 
 if __name__ == "__main__":
-    note_processor.run_prompt_tuning(experiment=tuning_exp, experiment_name="llama3-tuning")
-    note_processor.run_analysis(experiment=analysis_exp, experiment_name="llama3-analysis")
+    note_processor.run_prompt_tuning(
+        experiment=tuning_exp, experiment_name="llama3-tuning"
+    )
+    note_processor.run_analysis(
+        experiment=analysis_exp, experiment_name="llama3-analysis"
+    )

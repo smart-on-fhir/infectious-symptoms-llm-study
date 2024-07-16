@@ -4,15 +4,16 @@ from dotenv import load_dotenv
 from src.symptom_study_strategies import build_strategies
 from src.models import MixtralModel
 from src.processor import NoteProcessor
+
 load_dotenv(".env.mixtral")
 
 ###############################################################################
 #
-# Build model and note processor 
+# Build model and note processor
 #
 URL = os.getenv("TGI_URL")
 model = MixtralModel(url=URL)
-note_processor = NoteProcessor(model, './note_config/open_llm.json', sleep=False)
+note_processor = NoteProcessor(model, "./note_config/open_llm.json", sleep=False)
 
 ###############################################################################
 #
@@ -45,10 +46,14 @@ tuning_exp = {
     "prompt-mixtral-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
 }
 
-analysis_exp = { 
+analysis_exp = {
     "symptomstudy-mixtral-RulesJSON": all_strategies["rulesJSON"],
 }
 
 if __name__ == "__main__":
-    note_processor.run_prompt_tuning(experiment=tuning_exp, experiment_name="mixtral-tuning")
-    note_processor.run_analysis(experiment=analysis_exp, experiment_name="mixtral-analysis")
+    note_processor.run_prompt_tuning(
+        experiment=tuning_exp, experiment_name="mixtral-tuning"
+    )
+    note_processor.run_analysis(
+        experiment=analysis_exp, experiment_name="mixtral-analysis"
+    )

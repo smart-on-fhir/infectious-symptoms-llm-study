@@ -16,9 +16,7 @@ def build_strategies():
     # Basic Strats
     #
     def newStrat(inst):
-        return Strategy(
-            [{"instruction": inst}]
-        )
+        return Strategy([{"instruction": inst}])
 
     # 5 Strategies
     sampleIdentity = newStrat(identity_instruction())

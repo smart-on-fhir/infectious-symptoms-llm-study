@@ -5,8 +5,7 @@ class Strategy:
     def __init__(self, steps):
         self.responses = []
         self.steps = [
-            Step(**step_config, responses=self.responses)
-            for step_config in steps
+            Step(**step_config, responses=self.responses) for step_config in steps
         ]
         self.total_tokens = 0
 

@@ -4,15 +4,16 @@ from dotenv import load_dotenv
 from src.symptom_study_strategies import build_strategies
 from src.models import MixtralModel
 from src.processor import NoteProcessor
+
 load_dotenv(".env.mixtral8x22b")
 
 ###############################################################################
 #
-# Build model and note processor 
+# Build model and note processor
 #
 URL = os.getenv("TGI_URL")
 model = MixtralModel(url=URL)
-note_processor = NoteProcessor(model, './note_config/open_llm.json', sleep=False)
+note_processor = NoteProcessor(model, "./note_config/open_llm.json", sleep=False)
 
 ###############################################################################
 #
@@ -38,18 +39,30 @@ tuning_exp = {
     "prompt-mixtral8x22b-ExcludeJSON": all_strategies["excludeJSON"],
     "prompt-mixtral8x22b-VerboseJSON": all_strategies["verboseJSON"],
     # JSON Double Pass
-    "prompt-mixtral8x22b-IdentityJSONDoublePass": all_strategies["identityJSONDoublePass"],
+    "prompt-mixtral8x22b-IdentityJSONDoublePass": all_strategies[
+        "identityJSONDoublePass"
+    ],
     "prompt-mixtral8x22b-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
-    "prompt-mixtral8x22b-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
-    "prompt-mixtral8x22b-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
-    "prompt-mixtral8x22b-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
+    "prompt-mixtral8x22b-IncludeJSONDoublePass": all_strategies[
+        "includeJSONDoublePass"
+    ],
+    "prompt-mixtral8x22b-ExcludeJSONDoublePass": all_strategies[
+        "excludeJSONDoublePass"
+    ],
+    "prompt-mixtral8x22b-VerboseJSONDoublePass": all_strategies[
+        "verboseJSONDoublePass"
+    ],
 }
 
-analysis_exp = { 
+analysis_exp = {
     "symptomstudy-mixtral8x22b-RulesJSON": all_strategies["rulesJSON"],
 }
 
 
 if __name__ == "__main__":
-    note_processor.run_prompt_tuning(experiment=tuning_exp, experiment_name="mixtral8x22b-tuning")
-    note_processor.run_analysis(experiment=analysis_exp, experiment_name="mixtral8x22b-analysis")
+    note_processor.run_prompt_tuning(
+        experiment=tuning_exp, experiment_name="mixtral8x22b-tuning"
+    )
+    note_processor.run_analysis(
+        experiment=analysis_exp, experiment_name="mixtral8x22b-analysis"
+    )

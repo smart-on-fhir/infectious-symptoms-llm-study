@@ -19,10 +19,7 @@ class TgiInterface(LlmInterface):
         return requests.get(self.url + "info").json()
 
     def fetch_llm_response(
-        self,
-        instruction: str,
-        context: str,
-        request_parameters: object = {}
+        self, instruction: str, context: str, request_parameters: object = {}
     ):
         payload = self.saturate_prompt(
             instruction=instruction,
