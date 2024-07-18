@@ -55,13 +55,13 @@ tuning_exp = {
 }
 
 analysis_exp = {
-    "symptomstudy-gpt35Turbo-RulesJSON": all_strategies["rulesJSON"],
+    "symptomstudy-gpt35Turbo-IdentityJSON": all_strategies["IdentityJSON"],
 }
 
 if __name__ == "__main__":
-    note_processor.run_prompt_tuning(
-        experiment=tuning_exp, experiment_name="gpt3-tuning"
-    )
+    # note_processor.run_prompt_tuning(
+    #     experiment=tuning_exp, experiment_name="gpt3-tuning"
+    # )
     note_processor.run_analysis(
         experiment=analysis_exp, experiment_name="gpt3-analysis"
     )

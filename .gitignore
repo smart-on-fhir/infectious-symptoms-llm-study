@@ -163,3 +163,4 @@ cython_debug/
 note_config/*
 !note_config/_example.json
 .env.*
+data

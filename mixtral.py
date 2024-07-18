@@ -47,13 +47,13 @@ tuning_exp = {
 }
 
 analysis_exp = {
-    "symptomstudy-mixtral-RulesJSON": all_strategies["rulesJSON"],
+    "symptomstudy-mixtral-ExcludeJSON": all_strategies["excludeJSON"],
 }
 
 if __name__ == "__main__":
-    note_processor.run_prompt_tuning(
-        experiment=tuning_exp, experiment_name="mixtral-tuning"
-    )
+    # note_processor.run_prompt_tuning(
+    #     experiment=tuning_exp, experiment_name="mixtral-tuning"
+    # )
     note_processor.run_analysis(
         experiment=analysis_exp, experiment_name="mixtral-analysis"
     )

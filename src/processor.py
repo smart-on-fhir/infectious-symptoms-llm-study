@@ -54,12 +54,16 @@ class NoteProcessor:
 
     def _get_prompt_tuning_note_ids(self):
         """
-        :returns: list of notes ids used for for prompt-tuning
+        :returns: list of notes ids used for for prompt-tuning; None if no such list exists in config
         """
-        with open(
-            self.note_config["PROMPT_TUNING_NOTES"], encoding="utf8"
-        ) as target_notes:
-            return json.load(target_notes)
+        try:
+            with open(
+                self.note_config["PROMPT_TUNING_NOTES"], encoding="utf8"
+            ) as target_notes:
+                return json.load(target_notes)
+        except Exception as e:
+            print("Cannot load prompt tuning-specific notes; returning None")
+            return None
 
     def _create_dated_folder(self, path: str):
         """
@@ -82,7 +86,7 @@ class NoteProcessor:
         :type note_dir: str
         :param name: The file to be retrieved
         :type name: str, optional
-        :param: A subset of notes to look at
+        :param only_these_notes: A subset of notes to look at
         :returns: the note and the note's name (helpful when one is selected randomly)
         """
         # If no name is provided, select a note at random

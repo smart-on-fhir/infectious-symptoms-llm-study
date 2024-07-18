@@ -48,14 +48,14 @@ tuning_exp = {
 }
 
 analysis_exp = {
-    "symptomstudy-llama2-RulesJSON": all_strategies["rulesJSON"],
+    "symptomstudy-llama2-IdentityJSON": all_strategies["IdentityJSON"],
 }
 
 
 if __name__ == "__main__":
-    note_processor.run_prompt_tuning(
-        experiment=tuning_exp, experiment_name="llama2-tuning"
-    )
+    # note_processor.run_prompt_tuning(
+    #     experiment=tuning_exp, experiment_name="llama2-tuning"
+    # )
     note_processor.run_analysis(
         experiment=analysis_exp, experiment_name="llama2-analysis"
     )

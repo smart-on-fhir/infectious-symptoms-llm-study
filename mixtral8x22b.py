@@ -60,9 +60,9 @@ analysis_exp = {
 
 
 if __name__ == "__main__":
-    note_processor.run_prompt_tuning(
-        experiment=tuning_exp, experiment_name="mixtral8x22b-tuning"
-    )
+    # note_processor.run_prompt_tuning(
+    #     experiment=tuning_exp, experiment_name="mixtral8x22b-tuning"
+    # )
     note_processor.run_analysis(
         experiment=analysis_exp, experiment_name="mixtral8x22b-analysis"
     )
