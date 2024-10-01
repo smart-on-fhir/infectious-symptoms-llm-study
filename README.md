@@ -1,8 +1,18 @@
 # Detecting Infectious Respiratory Disease Symptoms using LLMs
 
-Code used in CHIP's study on detecting infectious respiratory disease symptoms using large language models (LLMs). Code includes the experiments used in our study, as well as boilerplate classes/helper methods for running additional prompt experiments against LLAMA2/Mixtral/GPT models served via HuggingFace's Text Generation Inference (TGI) API or Azure's Open AI API to identify successful prompting strategies.
+Results and code used in CHIP's study on detecting infectious respiratory disease symptoms using large language models (LLMs). Code includes the experiments used in our study, as well as boilerplate classes/helper methods for running additional prompt experiments against LLAMA2/Mixtral/GPT models served via HuggingFace's Text Generation Inference (TGI) API or Azure's Open AI API to identify successful prompting strategies.
 
-## Generating LLM Symptom Responses
+## Results: Prompt, Test, and Validation Results
+
+In this repo's `results` folder you can find three sub-directories containing the tabular results of our experiments: 
+- `results/prompt`: Results of experiments identifying, for each LLM model, the optimal prompting scenario combining prompting instructions and output parsing pipelines. Four models are explored, and each model explores 20 different prompting scenarios. Models' symptom output are evaluated against a prompt-specific dataset. Files are named using the following pattern: 
+  - `accuracy-{annotator}-prompt-{model}-{promptingScenario}`
+- `results/test`: Results of experiments identifying the optimal model for this respiratory disease symptom identification task, comparing the performance of model's using each model's optimal prompting scenario. Four models are explored. Models' symptom output are evaluated against a test-specific dataset, and are compared against two annotators. Files are named using the following pattern: 
+  - `accuracy-{annotator}-test-{model}-{optimalScenarioForThisModel}`
+- `results/validation`: Results of experiments validating the performance of our optimal model against a novel data provider for this respiratory disease symptom identification task. Files are named using the following pattern: 
+  - `TBD`
+
+## Replicating: Generating LLM Symptom Responses
 
 To generate some experimental output using an Azure-hosted GPT4 instance as an example:
 
@@ -20,7 +30,7 @@ python gpt4.py
 
 This will run a single experiment using a single prompting strategy – for GPT4, that's the optimal-identified Include instruction and the JSON pipeline. For each `<NOTE_ID>.txt` file, a corresponding `<NOTE_ID>.txt.<STRATEGY>`file will be generated in your note-config specified output directory, where `NOTE_ID` is the note's ID and `STRATEGY` corresponds to the prompting strategy's name. If you're following along exactly, you should see several files named `<NOTE_ID>.txt.symptomstudy-gpt4Turbo-IncludeJSON`.
 
-## Getting Chart Review Results from LLM Symptom Responses
+## Replicating: Getting Chart Review Results from LLM Symptom Responses
 
 After generating symptom predictions, you can translate those files into a format that the [SMART on FHIR Chart Review](https://docs.smarthealthit.org/cumulus/chart-review/) module can consume, enabling comparisons against ground-truth labelled symptoms data exported from LabelStudio. Note that this feature expects you to upload notes to Label Studio using Cumulus ETL's `upload-notes` command. That way the document IDs get stored correctly as Label Studio metadata. 
 
@@ -41,7 +51,7 @@ chart-review accuracy --save <GROUND_TRUTH_ANNOTATOR> symptomstudy-gpt4Turbo-Inc
 ```
 
 
-## Troubleshooting
+## Replicating: Troubleshooting
 
 > What if I didn't use the Cumulus ETL's `upload-notes` command when setting up my Label Studio environment with clinical notes? 
 
@@ -64,7 +74,7 @@ We encourage you to! That said, our pipeline for processing text data was more c
 3. Create a script that translates the CTAKEs document references into a label format akin to the `jsonToLabels.py` script. 
 4. Use this label file in your chart-review analysis, as done above. 
 
-## Terminology
+# Replicating: Project Structure and Terminology
 
 Our goal of experimenting with an LLM is to create an effective way of interacting with a model for
 a given task – we can think of this as creating an effective prompting Strategy. To make this process

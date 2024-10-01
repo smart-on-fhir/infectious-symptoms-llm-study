@@ -1,0 +1,13 @@
+F1	Sens	Spec	PPV	NPV	TP	FN	TN	FP	Label
+0.831	0.918	0.941	0.758	0.983	179	16	903	57	*
+0.926	0.926	0.974	0.926	0.974	25	2	76	2	Congestion or runny nose
+1.0	1.0	1.0	1.0	1.0	29	0	76	0	Cough
+0.632	0.857	0.939	0.5	0.989	6	1	92	6	Diarrhea
+0.72	0.562	1.0	1.0	0.927	9	7	89	0	Dyspnea
+0.588	1.0	0.767	0.417	1.0	15	0	69	21	Fatigue
+0.964	0.952	0.984	0.976	0.969	40	2	62	1	Fever or chills
+0.889	0.857	0.989	0.923	0.978	12	2	90	1	Headache
+1.0	1.0	1.0	1.0	1.0	3	0	102	0	Loss of taste or smell
+0.414	0.857	0.837	0.273	0.988	6	1	82	16	Muscle or body aches
+0.945	0.963	0.974	0.929	0.987	26	1	76	2	Nausea or vomiting
+0.667	1.0	0.918	0.5	1.0	8	0	89	8	Sore throat
