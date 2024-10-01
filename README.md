@@ -6,8 +6,8 @@ Results and code used in CHIP's study on detecting infectious respiratory diseas
 
 In this repo's `results` folder you can find three sub-directories containing the tabular results of our experiments: 
 - `results/prompt`: Results of experiments identifying, for each LLM model, the optimal prompting scenario combining prompting instructions and output parsing pipelines. Four models are explored, and each model explores 20 different prompting scenarios. Models' symptom output are evaluated against a prompt-specific dataset. Files are named using the following pattern: 
-  - `accuracy-{annotator}-prompt-{model}-{promptingScenario}`
-- `results/test`: Results of experiments identifying the optimal model for this respiratory disease symptom identification task, comparing the performance of model's using each model's optimal prompting scenario. Four models are explored. Models' symptom output are evaluated against a test-specific dataset, and are compared against two annotators. Files are named using the following pattern: 
+  - `accuracy-prompt-{model}-{promptingScenario}`
+- `results/test`: Results of experiments identifying the optimal model for this respiratory disease symptom identification task, comparing the performance of model's using each model's optimal prompting scenario. Four models are explored. Models' symptom output are evaluated against a test-specific dataset and are compared against two annotators. Files are named using the following pattern: 
   - `accuracy-{annotator}-test-{model}-{optimalScenarioForThisModel}`
 - `results/validation`: Results of experiments validating the performance of our optimal model against a novel data provider for this respiratory disease symptom identification task. Files are named using the following pattern: 
   - `TBD`
