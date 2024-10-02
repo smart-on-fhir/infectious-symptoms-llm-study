@@ -74,7 +74,7 @@ We encourage you to! That said, our pipeline for processing text data was more c
 3. Create a script that translates the CTAKEs document references into a label format akin to the `jsonToLabels.py` script. 
 4. Use this label file in your chart-review analysis, as done above. 
 
-# Replicating: Project Structure and Terminology
+## Replicating: Project Structure and Terminology
 
 Our goal of experimenting with an LLM is to create an effective way of interacting with a model for
 a given task – we can think of this as creating an effective prompting Strategy. To make this process
