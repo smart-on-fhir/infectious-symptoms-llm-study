@@ -27,35 +27,35 @@ note_processor = NoteProcessor(model, "./note_config/gpt_api.json", sleepRate=2)
 all_strategies = build_strategies()
 
 tuning_exp = {
-    "prompt-gpt35Turbo-Identity": all_strategies["identity"],
-    "prompt-gpt35Turbo-Rules": all_strategies["rules"],
-    "prompt-gpt35Turbo-Include": all_strategies["include"],
-    "prompt-gpt35Turbo-Exclude": all_strategies["exclude"],
-    "prompt-gpt35Turbo-Verbose": all_strategies["verbose"],
+    "development-gpt35Turbo-Identity": all_strategies["identity"],
+    "development-gpt35Turbo-Rules": all_strategies["rules"],
+    "development-gpt35Turbo-Include": all_strategies["include"],
+    "development-gpt35Turbo-Exclude": all_strategies["exclude"],
+    "development-gpt35Turbo-Verbose": all_strategies["verbose"],
     # DoublePass
-    "prompt-gpt35Turbo-IdentityDoublePass": all_strategies["identityDoublePass"],
-    "prompt-gpt35Turbo-RulesDoublePass": all_strategies["rulesDoublePass"],
-    "prompt-gpt35Turbo-IncludeDoublePass": all_strategies["includeDoublePass"],
-    "prompt-gpt35Turbo-ExcludeDoublePass": all_strategies["excludeDoublePass"],
-    "prompt-gpt35Turbo-VerboseDoublePass": all_strategies["verboseDoublePass"],
+    "development-gpt35Turbo-IdentityDoublePass": all_strategies["identityDoublePass"],
+    "development-gpt35Turbo-RulesDoublePass": all_strategies["rulesDoublePass"],
+    "development-gpt35Turbo-IncludeDoublePass": all_strategies["includeDoublePass"],
+    "development-gpt35Turbo-ExcludeDoublePass": all_strategies["excludeDoublePass"],
+    "development-gpt35Turbo-VerboseDoublePass": all_strategies["verboseDoublePass"],
     # JSON
-    "prompt-gpt35Turbo-IdentityJSON": all_strategies["identityJSON"],
-    "prompt-gpt35Turbo-RulesJSON": all_strategies["rulesJSON"],
-    "prompt-gpt35Turbo-IncludeJSON": all_strategies["includeJSON"],
-    "prompt-gpt35Turbo-ExcludeJSON": all_strategies["excludeJSON"],
-    "prompt-gpt35Turbo-VerboseJSON": all_strategies["verboseJSON"],
+    "development-gpt35Turbo-IdentityJSON": all_strategies["identityJSON"],
+    "development-gpt35Turbo-RulesJSON": all_strategies["rulesJSON"],
+    "development-gpt35Turbo-IncludeJSON": all_strategies["includeJSON"],
+    "development-gpt35Turbo-ExcludeJSON": all_strategies["excludeJSON"],
+    "development-gpt35Turbo-VerboseJSON": all_strategies["verboseJSON"],
     # JSON Double Pass
-    "prompt-gpt35Turbo-IdentityJSONDoublePass": all_strategies[
+    "development-gpt35Turbo-IdentityJSONDoublePass": all_strategies[
         "identityJSONDoublePass"
     ],
-    "prompt-gpt35Turbo-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
-    "prompt-gpt35Turbo-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
-    "prompt-gpt35Turbo-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
-    "prompt-gpt35Turbo-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
+    "development-gpt35Turbo-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
+    "development-gpt35Turbo-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
+    "development-gpt35Turbo-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
+    "development-gpt35Turbo-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
 }
 
 analysis_exp = {
-    "symptomstudy-gpt35Turbo-IdentityJSON": all_strategies["IdentityJSON"],
+    "test-gpt35Turbo-IdentityJSON": all_strategies["IdentityJSON"],
 }
 
 if __name__ == "__main__":

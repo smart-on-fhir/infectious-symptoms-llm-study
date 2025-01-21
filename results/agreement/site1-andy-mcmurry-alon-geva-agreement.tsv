@@ -1,0 +1,13 @@
+Symptom	Kappa	TP	FN	TN	FP
+All Symptoms	0.980	61	0	234	2
+Congestion or runny nose	0.886	5	0	21	1
+Cough	1.000	7	0	20	0
+Diarrhea	1.000	4	0	23	0
+Dyspnea	1.000	5	0	22	0
+Fatigue	0.899	6	0	20	1
+Fever or chills	1.000	11	0	16	0
+Headache	1.000	7	0	20	0
+Loss of taste or smell	1.000	1	0	26	0
+Muscle or body aches	1.000	3	0	24	0
+Nausea or vomiting	1.000	8	0	19	0
+Sore throat	1.000	4	0	23	0

@@ -1,6 +1,6 @@
 {
-    "DIR_TUNING": "/absolute/path/to/prompt/tuning/notes",
-    "DIR_OUTPUT_TUNING": "/absolute/path/where/prompt/tuning/output/should/be/written",
+    "DIR_TUNING": "/absolute/path/to/development/notes",
+    "DIR_OUTPUT_TUNING": "/absolute/path/where/development/output/should/be/written",
     "DIR_INPUT": "/absolute/path/to/test/notes",
     "DIR_OUTPUT": "/absolute/path/where/test/output/should/be/written",
     "PROMPT_TUNING_NOTES": "/absolute/path/to/list/of/notes/to/use/in/tuning.json"

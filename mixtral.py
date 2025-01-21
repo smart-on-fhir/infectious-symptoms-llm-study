@@ -21,33 +21,33 @@ note_processor = NoteProcessor(model, "./note_config/open_llm.json", sleep=False
 #
 all_strategies = build_strategies()
 tuning_exp = {
-    "prompt-mixtral-Identity": all_strategies["identity"],
-    "prompt-mixtral-Rules": all_strategies["rules"],
-    "prompt-mixtral-Include": all_strategies["include"],
-    "prompt-mixtral-Exclude": all_strategies["exclude"],
-    "prompt-mixtral-Verbose": all_strategies["verbose"],
+    "development-mixtral-Identity": all_strategies["identity"],
+    "development-mixtral-Rules": all_strategies["rules"],
+    "development-mixtral-Include": all_strategies["include"],
+    "development-mixtral-Exclude": all_strategies["exclude"],
+    "development-mixtral-Verbose": all_strategies["verbose"],
     # DoublePass
-    "prompt-mixtral-IdentityDoublePass": all_strategies["identityDoublePass"],
-    "prompt-mixtral-RulesDoublePass": all_strategies["rulesDoublePass"],
-    "prompt-mixtral-IncludeDoublePass": all_strategies["includeDoublePass"],
-    "prompt-mixtral-ExcludeDoublePass": all_strategies["excludeDoublePass"],
-    "prompt-mixtral-VerboseDoublePass": all_strategies["verboseDoublePass"],
+    "development-mixtral-IdentityDoublePass": all_strategies["identityDoublePass"],
+    "development-mixtral-RulesDoublePass": all_strategies["rulesDoublePass"],
+    "development-mixtral-IncludeDoublePass": all_strategies["includeDoublePass"],
+    "development-mixtral-ExcludeDoublePass": all_strategies["excludeDoublePass"],
+    "development-mixtral-VerboseDoublePass": all_strategies["verboseDoublePass"],
     # JSON
-    "prompt-mixtral-IdentityJSON": all_strategies["identityJSON"],
-    "prompt-mixtral-RulesJSON": all_strategies["rulesJSON"],
-    "prompt-mixtral-IncludeJSON": all_strategies["includeJSON"],
-    "prompt-mixtral-ExcludeJSON": all_strategies["excludeJSON"],
-    "prompt-mixtral-VerboseJSON": all_strategies["verboseJSON"],
+    "development-mixtral-IdentityJSON": all_strategies["identityJSON"],
+    "development-mixtral-RulesJSON": all_strategies["rulesJSON"],
+    "development-mixtral-IncludeJSON": all_strategies["includeJSON"],
+    "development-mixtral-ExcludeJSON": all_strategies["excludeJSON"],
+    "development-mixtral-VerboseJSON": all_strategies["verboseJSON"],
     # JSON Double Pass
-    "prompt-mixtral-IdentityJSONDoublePass": all_strategies["identityJSONDoublePass"],
-    "prompt-mixtral-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
-    "prompt-mixtral-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
-    "prompt-mixtral-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
-    "prompt-mixtral-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
+    "development-mixtral-IdentityJSONDoublePass": all_strategies["identityJSONDoublePass"],
+    "development-mixtral-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
+    "development-mixtral-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
+    "development-mixtral-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
+    "development-mixtral-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
 }
 
 analysis_exp = {
-    "symptomstudy-mixtral-ExcludeJSON": all_strategies["excludeJSON"],
+    "test-mixtral-ExcludeJSON": all_strategies["excludeJSON"],
 }
 
 if __name__ == "__main__":

@@ -1,0 +1,13 @@
+Label	F1	Sensitivity	Specificity	PPV	NPV	TP	FN	TN	FP
+All Symptoms	0.900	0.934	0.973	0.869	0.987	338	24	1820	51
+Congestion or runny nose	0.923	0.913	0.981	0.933	0.975	42	4	154	3
+Cough	0.980	0.980	0.994	0.980	0.994	48	1	153	1
+Diarrhea	0.792	0.950	0.951	0.679	0.994	19	1	174	9
+Dyspnea	0.826	0.760	0.989	0.905	0.967	19	6	176	2
+Fatigue	0.738	0.923	0.915	0.615	0.988	24	2	162	15
+Fever or chills	0.964	0.971	0.978	0.957	0.985	67	2	131	3
+Headache	0.901	1.000	0.959	0.821	1.000	32	0	164	7
+Loss of taste or smell	0.857	1.000	0.985	0.750	1.000	9	0	191	3
+Muscle or body aches	0.828	0.923	0.979	0.750	0.995	12	1	186	4
+Nausea or vomiting	0.926	0.909	0.980	0.943	0.967	50	5	145	3
+Sore throat	0.914	0.889	0.995	0.941	0.989	16	2	184	1

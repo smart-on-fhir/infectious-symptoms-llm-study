@@ -2,15 +2,19 @@
 
 Results and code used in CHIP's study on detecting infectious respiratory disease symptoms using large language models (LLMs). Code includes the experiments used in our study, as well as boilerplate classes/helper methods for running additional prompt experiments against LLAMA2/Mixtral/GPT models served via HuggingFace's Text Generation Inference (TGI) API or Azure's Open AI API to identify successful prompting strategies.
 
-## Results: Prompt, Test, and Validation Results
+MedArxiv Preprint can be found here: [https://www.medrxiv.org/content/10.1101/2024.12.16.24319044v1](https://www.medrxiv.org/content/10.1101/2024.12.16.24319044v1)
+
+## Results: Development, Test, and Validation Results
 
 In this repo's `results` folder you can find three sub-directories containing the tabular results of our experiments: 
-- `results/prompt`: Results of experiments identifying, for each LLM model, the optimal prompting scenario combining prompting instructions and output parsing pipelines. Four models are explored, and each model explores 20 different prompting scenarios. Models' symptom output are evaluated against a prompt-specific dataset. Files are named using the following pattern: 
-  - `accuracy-prompt-{model}-{promptingScenario}`
+- `results/development`: Results of experiments identifying, for each LLM model, the optimal prompting scenario combining prompting instructions and output parsing pipelines. Four models are explored, and each model explores 20 different prompting scenarios. Models' symptom output are evaluated against a development-specific dataset. Files are named using the following pattern: 
+  - `accuracy-development-{model}-{promptingScenario}`
 - `results/test`: Results of experiments identifying the optimal model for this respiratory disease symptom identification task, comparing the performance of model's using each model's optimal prompting scenario. Four models are explored. Models' symptom output are evaluated against a test-specific dataset and are compared against two annotators. Files are named using the following pattern: 
   - `accuracy-{annotator}-test-{model}-{optimalScenarioForThisModel}`
 - `results/validation`: Results of experiments validating the performance of our optimal model against a novel data provider for this respiratory disease symptom identification task. Files are named using the following pattern: 
-  - `TBD`
+  - `results/validation`: Results of validation experiments conducted at Site 2. Only GPT-4 is evaluated. 
+
+Additionally, `results/agreement` contains inter annotator agreement scores for annotators across Site 1 (annotating our Development and Test cohort) and Site 2 (annotating our Validation cohort). 
 
 ## Replicating: Generating LLM Symptom Responses
 
@@ -28,7 +32,7 @@ To generate some experimental output using an Azure-hosted GPT4 instance as an e
 python gpt4.py
 ```
 
-This will run a single experiment using a single prompting strategy – for GPT4, that's the optimal-identified Include instruction and the JSON pipeline. For each `<NOTE_ID>.txt` file, a corresponding `<NOTE_ID>.txt.<STRATEGY>`file will be generated in your note-config specified output directory, where `NOTE_ID` is the note's ID and `STRATEGY` corresponds to the prompting strategy's name. If you're following along exactly, you should see several files named `<NOTE_ID>.txt.symptomstudy-gpt4Turbo-IncludeJSON`.
+This will run a single experiment using a single prompting strategy – for GPT4, that's the optimal-identified Include instruction and the JSON pipeline. For each `<NOTE_ID>.txt` file, a corresponding `<NOTE_ID>.txt.<STRATEGY>`file will be generated in your note-config specified output directory, where `NOTE_ID` is the note's ID and `STRATEGY` corresponds to the prompting strategy's name. If you're following along exactly, you should see several files named `<NOTE_ID>.txt.test-gpt4Turbo-IncludeJSON`.
 
 ## Replicating: Getting Chart Review Results from LLM Symptom Responses
 
@@ -38,16 +42,16 @@ Producing Chart Review results is as simple as:
 1. Export your annotated notes from Label Studio as a `./data/labelstudio-export.json` file.
   - If you haven't uploaded your notes to Label Studio using the Cumulus ETL's `upload-notes` command, see our [Troubleshooting section](#troubleshooting) for advice on linking the export file's tasks to the LLM-generated output.
 2. Generate a Chart Review-consumable external label file using the `jsonToLabels.py` script. 
-  - Assuming your LLM responses lived in `./data/responses` and you wanted your exported label file to live in `./data`, you would run the following: `python jsonToLabels.py -e symptomstudy-gpt4Turbo-IncludeJSON -s data/responses -d data`
+  - Assuming your LLM responses lived in `./data/responses` and you wanted your exported label file to live in `./data`, you would run the following: `python jsonToLabels.py -e test-gpt4Turbo-IncludeJSON -s data/responses -d data`
 3. Create a `./data/config.yaml` file for Chart Review: Follow the instructions found [here](https://docs.smarthealthit.org/cumulus/chart-review/config.html). Make sure that your ground truth annotator ID matches the ID used in your labelstudio export file. To reference the above external label file as an annotator, add the following: 
 ```
-  symptomstudy-gpt4Turbo-IncludeJSON:
-    filename: ./symptomstudy-gpt4Turbo-IncludeJSON.csv
+  test-gpt4Turbo-IncludeJSON:
+    filename: ./test-gpt4Turbo-IncludeJSON.csv
 ```
   Make sure the relative path above is accurate relative to where this config lives.
 4. Run Chart Review: From within the directory containing your `config.yaml` and `labelstudio-export.json`, run the following with GROUND_TRUTH_ANNOTATOR replaced with whatever you specified in `config.yaml` file:
 ```
-chart-review accuracy --save <GROUND_TRUTH_ANNOTATOR> symptomstudy-gpt4Turbo-IncludeJSON
+chart-review accuracy --save <GROUND_TRUTH_ANNOTATOR> test-gpt4Turbo-IncludeJSON
 ```
 
 
