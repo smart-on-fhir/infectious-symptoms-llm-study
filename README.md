@@ -12,7 +12,7 @@ In this repo's `results` folder you can find three sub-directories containing th
 - `results/test`: Results of experiments identifying the optimal model for this respiratory disease symptom identification task, comparing the performance of model's using each model's optimal prompting scenario. Four models are explored. Models' symptom output are evaluated against a test-specific dataset and are compared against two annotators. Files are named using the following pattern: 
   - `accuracy-{annotator}-test-{model}-{optimalScenarioForThisModel}`
 - `results/validation`: Results of experiments validating the performance of our optimal model against a novel data provider for this respiratory disease symptom identification task. Files are named using the following pattern: 
-  - `results/validation`: Results of validation experiments conducted at Site 2. Only GPT-4 is evaluated. 
+  - `accuracy-{annotator}-test-gpt4Turbo-IncludeJSON`: Results of validation experiments conducted at Site 2 across annotators. Only GPT-4 is evaluated using the IncludeJSON prompting strategy. 
 
 Additionally, `results/agreement` contains inter annotator agreement scores for annotators across Site 1 (annotating our Development and Test cohort) and Site 2 (annotating our Validation cohort). 
 
