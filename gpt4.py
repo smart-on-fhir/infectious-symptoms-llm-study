@@ -32,12 +32,12 @@ tuning_exp = {
     "development-gpt4Turbo-Include": all_strategies["include"],
     "development-gpt4Turbo-Exclude": all_strategies["exclude"],
     "development-gpt4Turbo-Verbose": all_strategies["verbose"],
-    # DoublePass
-    "development-gpt4Turbo-IdentityDoublePass": all_strategies["identityDoublePass"],
-    "development-gpt4Turbo-RulesDoublePass": all_strategies["rulesDoublePass"],
-    "development-gpt4Turbo-IncludeDoublePass": all_strategies["includeDoublePass"],
-    "development-gpt4Turbo-ExcludeDoublePass": all_strategies["excludeDoublePass"],
-    "development-gpt4Turbo-VerboseDoublePass": all_strategies["verboseDoublePass"],
+    # Simplification
+    "development-gpt4Turbo-IdentitySimplification": all_strategies["identitySimplification"],
+    "development-gpt4Turbo-RulesSimplification": all_strategies["rulesSimplification"],
+    "development-gpt4Turbo-IncludeSimplification": all_strategies["includeSimplification"],
+    "development-gpt4Turbo-ExcludeSimplification": all_strategies["excludeSimplification"],
+    "development-gpt4Turbo-VerboseSimplification": all_strategies["verboseSimplification"],
     # JSON
     "development-gpt4Turbo-IdentityJSON": all_strategies["identityJSON"],
     "development-gpt4Turbo-RulesJSON": all_strategies["rulesJSON"],
@@ -45,15 +45,15 @@ tuning_exp = {
     "development-gpt4Turbo-ExcludeJSON": all_strategies["excludeJSON"],
     "development-gpt4Turbo-VerboseJSON": all_strategies["verboseJSON"],
     # JSON Double Pass
-    "development-gpt4Turbo-IdentityJSONDoublePass": all_strategies["identityJSONDoublePass"],
-    "development-gpt4Turbo-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
-    "development-gpt4Turbo-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
-    "development-gpt4Turbo-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
-    "development-gpt4Turbo-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
+    "development-gpt4Turbo-IdentityJSONValidation": all_strategies["identityJSONValidation"],
+    "development-gpt4Turbo-RulesJSONValidation": all_strategies["rulesJSONValidation"],
+    "development-gpt4Turbo-IncludeJSONValidation": all_strategies["includeJSONValidation"],
+    "development-gpt4Turbo-ExcludeJSONValidation": all_strategies["excludeJSONValidation"],
+    "development-gpt4Turbo-VerboseJSONValidation": all_strategies["verboseJSONValidation"],
 }
 
 analysis_exp = {
-    "test-gpt4Turbo-IncludeJSON": all_strategies["IncludeJSON"],
+    "test-gpt4Turbo-IncludeJSON": all_strategies["includeJSON"],
 }
 
 if __name__ == "__main__":

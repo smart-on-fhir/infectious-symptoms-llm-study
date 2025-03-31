@@ -1,3 +1,4 @@
+import pprint
 import requests
 
 
@@ -19,6 +20,13 @@ class TgiClient:
             "details": True,
             "max_new_tokens": 1000,
         }
+        pprint.pprint({
+            "inputs": payload,
+            "parameters": {
+                **default_parameters,
+                **request_parameters,
+            },
+        })
         response = requests.post(
             self.url,
             json={

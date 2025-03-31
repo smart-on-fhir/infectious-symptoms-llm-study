@@ -12,7 +12,7 @@ class Step:
         self.instruction = instruction
         # Should be covered in the run methods; "default" by default
         self.step_type = step_type
-        # Array of responses is passed by reference for future use/storage
+        # Array of responses is passed by reference for shared use/storage
         self.responses = responses
 
     def to_json(self):
@@ -21,7 +21,7 @@ class Step:
             "step_type": self.step_type,
         }
 
-    def run(self, model, context):
+    def get_context(self, context): 
         if self.step_type == "default":
             normalized_context = context
         elif self.step_type == "previous":
@@ -32,7 +32,10 @@ class Step:
             normalized_context = "\n".join(self.responses)
         else:
             raise ValueError("Unrecognized input type " + self.step_type)
+        return normalized_context
+
+    def run(self, model, context):
         return model.fetch_llm_response(
             instruction=self.instruction,
-            context=normalized_context,
+            context=self.get_context(context),
         )

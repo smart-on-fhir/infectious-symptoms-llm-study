@@ -35,12 +35,13 @@ class AzureGptModel(LlmInterface):
             instruction=instruction,
             context=context,
         )
+        messages = [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": payload},
+        ]
         response = self.client.chat.completions.create(
             model=self.model_type,  # model = "deployment_name".
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": payload},
-            ],
+            messages=messages,
         )
         # Based on https://platform.openai.com/docs/guides/text-generation/chat-completions-response-format
         return {

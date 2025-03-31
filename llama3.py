@@ -27,12 +27,12 @@ tuning_exp = {
     "prompt-llama3-Include": all_strategies["include"],
     "prompt-llama3-Exclude": all_strategies["exclude"],
     "prompt-llama3-Verbose": all_strategies["verbose"],
-    # DoublePass
-    "prompt-llama3-IdentityDoublePass": all_strategies["identityDoublePass"],
-    "prompt-llama3-RulesDoublePass": all_strategies["rulesDoublePass"],
-    "prompt-llama3-IncludeDoublePass": all_strategies["includeDoublePass"],
-    "prompt-llama3-ExcludeDoublePass": all_strategies["excludeDoublePass"],
-    "prompt-llama3-VerboseDoublePass": all_strategies["verboseDoublePass"],
+    # Simplification
+    "prompt-llama3-IdentitySimplification": all_strategies["identitySimplification"],
+    "prompt-llama3-RulesSimplification": all_strategies["rulesSimplification"],
+    "prompt-llama3-IncludeSimplification": all_strategies["includeSimplification"],
+    "prompt-llama3-ExcludeSimplification": all_strategies["excludeSimplification"],
+    "prompt-llama3-VerboseSimplification": all_strategies["verboseSimplification"],
     # JSON
     "prompt-llama3-IdentityJSON": all_strategies["identityJSON"],
     "prompt-llama3-RulesJSON": all_strategies["rulesJSON"],
@@ -40,15 +40,15 @@ tuning_exp = {
     "prompt-llama3-ExcludeJSON": all_strategies["excludeJSON"],
     "prompt-llama3-VerboseJSON": all_strategies["verboseJSON"],
     # JSON Double Pass
-    "prompt-llama3-IdentityJSONDoublePass": all_strategies["identityJSONDoublePass"],
-    "prompt-llama3-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
-    "prompt-llama3-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
-    "prompt-llama3-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
-    "prompt-llama3-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
+    "prompt-llama3-IdentityJSONValidation": all_strategies["identityJSONValidation"],
+    "prompt-llama3-RulesJSONValidation": all_strategies["rulesJSONValidation"],
+    "prompt-llama3-IncludeJSONValidation": all_strategies["includeJSONValidation"],
+    "prompt-llama3-ExcludeJSONValidation": all_strategies["excludeJSONValidation"],
+    "prompt-llama3-VerboseJSONValidation": all_strategies["verboseJSONValidation"],
 }
 
 # analysis_exp = {
-#     "symptomstudy-llama3-IdentityJSON": all_strategies["IdentityJSON"],
+#     "symptomstudy-llama3-IdentityJSON": all_strategies["identityJSON"],
 # }
 
 

@@ -27,12 +27,12 @@ tuning_exp = {
     "development-llama2-Include": all_strategies["include"],
     "development-llama2-Exclude": all_strategies["exclude"],
     "development-llama2-Verbose": all_strategies["verbose"],
-    # DoublePass
-    "development-llama2-IdentityDoublePass": all_strategies["identityDoublePass"],
-    "development-llama2-RulesDoublePass": all_strategies["rulesDoublePass"],
-    "development-llama2-IncludeDoublePass": all_strategies["includeDoublePass"],
-    "development-llama2-ExcludeDoublePass": all_strategies["excludeDoublePass"],
-    "development-llama2-VerboseDoublePass": all_strategies["verboseDoublePass"],
+    # Simplification
+    "development-llama2-IdentitySimplification": all_strategies["identitySimplification"],
+    "development-llama2-RulesSimplification": all_strategies["rulesSimplification"],
+    "development-llama2-IncludeSimplification": all_strategies["includeSimplification"],
+    "development-llama2-ExcludeSimplification": all_strategies["excludeSimplification"],
+    "development-llama2-VerboseSimplification": all_strategies["verboseSimplification"],
     # JSON
     "development-llama2-IdentityJSON": all_strategies["identityJSON"],
     "development-llama2-RulesJSON": all_strategies["rulesJSON"],
@@ -40,15 +40,15 @@ tuning_exp = {
     "development-llama2-ExcludeJSON": all_strategies["excludeJSON"],
     "development-llama2-VerboseJSON": all_strategies["verboseJSON"],
     # JSON Double Pass
-    "development-llama2-IdentityJSONDoublePass": all_strategies["identityJSONDoublePass"],
-    "development-llama2-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
-    "development-llama2-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
-    "development-llama2-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
-    "development-llama2-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
+    "development-llama2-IdentityJSONValidation": all_strategies["identityJSONValidation"],
+    "development-llama2-RulesJSONValidation": all_strategies["rulesJSONValidation"],
+    "development-llama2-IncludeJSONValidation": all_strategies["includeJSONValidation"],
+    "development-llama2-ExcludeJSONValidation": all_strategies["excludeJSONValidation"],
+    "development-llama2-VerboseJSONValidation": all_strategies["verboseJSONValidation"],
 }
 
 analysis_exp = {
-    "test-llama2-IdentityJSON": all_strategies["IdentityJSON"],
+    "test-llama2-IdentityJSON": all_strategies["identityJSON"],
 }
 
 

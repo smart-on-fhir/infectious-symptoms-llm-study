@@ -1,3 +1,6 @@
+from pathlib import Path 
+import pprint
+import json
 from src.instructions import (
     exclude_instruction,
     identity_instruction,
@@ -38,7 +41,7 @@ def build_strategies():
         ]
     )
 
-    def newStratDoublePass(inst):
+    def newStratSimplification(inst):
         return Strategy(
             [
                 {"instruction": inst},
@@ -47,11 +50,11 @@ def build_strategies():
         )
 
     # 5 Double-Pass Strategies
-    sampleRulesDoublePass = newStratDoublePass(rules_instruction())
-    sampleIdentityDoublePass = newStratDoublePass(identity_instruction())
-    sampleIncludeDoublePass = newStratDoublePass(include_instruction())
-    sampleExcludeDoublePass = newStratDoublePass(exclude_instruction())
-    sampleVerboseDoublePass = newStratDoublePass(verbose_instruction())
+    sampleRulesSimplification = newStratSimplification(rules_instruction())
+    sampleIdentitySimplification = newStratSimplification(identity_instruction())
+    sampleIncludeSimplification = newStratSimplification(include_instruction())
+    sampleExcludeSimplification = newStratSimplification(exclude_instruction())
+    sampleVerboseSimplification = newStratSimplification(verbose_instruction())
 
     ##################################################
     #
@@ -89,7 +92,7 @@ def build_strategies():
         ]
     )
 
-    def jsonStratDoublePass(inst):
+    def jsonStratSimplification(inst):
         return Strategy(
             [
                 {"instruction": inst + jsonSchemaInst},
@@ -98,11 +101,11 @@ def build_strategies():
         )
 
     # 5 Baseline Strategies, JSON with Double Pass
-    sampleRulesJSONDoublePass = jsonStratDoublePass(rules_instruction())
-    sampleIdentityJSONDoublePass = jsonStratDoublePass(identity_instruction())
-    sampleIncludeJSONDoublePass = jsonStratDoublePass(include_instruction())
-    sampleExcludeJSONDoublePass = jsonStratDoublePass(exclude_instruction())
-    sampleVerboseJSONDoublePass = jsonStratDoublePass(verbose_instruction())
+    sampleRulesJSONValidation = jsonStratSimplification(rules_instruction())
+    sampleIdentityJSONValidation = jsonStratSimplification(identity_instruction())
+    sampleIncludeJSONValidation = jsonStratSimplification(include_instruction())
+    sampleExcludeJSONValidation = jsonStratSimplification(exclude_instruction())
+    sampleVerboseJSONValidation = jsonStratSimplification(verbose_instruction())
 
     return {
         "rules": sampleRules,
@@ -110,19 +113,32 @@ def build_strategies():
         "include": sampleInclude,
         "exclude": sampleExclude,
         "verbose": sampleVerbose,
-        "rulesDoublePass": sampleRulesDoublePass,
-        "identityDoublePass": sampleIdentityDoublePass,
-        "includeDoublePass": sampleIncludeDoublePass,
-        "excludeDoublePass": sampleExcludeDoublePass,
-        "verboseDoublePass": sampleVerboseDoublePass,
+        "rulesSimplification": sampleRulesSimplification,
+        "identitySimplification": sampleIdentitySimplification,
+        "includeSimplification": sampleIncludeSimplification,
+        "excludeSimplification": sampleExcludeSimplification,
+        "verboseSimplification": sampleVerboseSimplification,
         "rulesJSON": sampleRulesJSON,
         "identityJSON": sampleIdentityJSON,
         "includeJSON": sampleIncludeJSON,
         "excludeJSON": sampleExcludeJSON,
         "verboseJSON": sampleVerboseJSON,
-        "rulesJSONDoublePass": sampleRulesJSONDoublePass,
-        "identityJSONDoublePass": sampleIdentityJSONDoublePass,
-        "includeJSONDoublePass": sampleIncludeJSONDoublePass,
-        "excludeJSONDoublePass": sampleExcludeJSONDoublePass,
-        "verboseJSONDoublePass": sampleVerboseJSONDoublePass,
+        "rulesJSONValidation": sampleRulesJSONValidation,
+        "identityJSONValidation": sampleIdentityJSONValidation,
+        "includeJSONValidation": sampleIncludeJSONValidation,
+        "excludeJSONValidation": sampleExcludeJSONValidation,
+        "verboseJSONValidation": sampleVerboseJSONValidation,
     }
+
+
+def write_strategies():
+    """
+    Write JSON of strategies to disk in a .json file
+    """
+    all_strategies = build_strategies()
+    pprint.pprint(all_strategies)
+    serialized_strats = {}
+    for strat_name, strat in all_strategies.items(): 
+        serialized_strats[strat_name] = strat.to_json()
+    Path("strategies.json").write_text(json.dumps(serialized_strats))
+    return all_strategies

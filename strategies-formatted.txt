@@ -1,0 +1,481 @@
+Rules
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+Identity
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+Include
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Include positive symptoms from these medical section headings: "Chief Complaint", "History of Present Illness", "HPI", "Review of Systems", "Physical Exam", "Vital Signs", "Assessment and Plan", "Medical Decision Making".
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Include positive mentions of: "anosmia", "loss of taste", "loss of smell", "rhinorrhea", "congestion", "discharge", "nose is dripping", "runny nose", "stuffy nose", "cough", "tussive or post-tussive", "cough is unproductive", "productive cough", "dry cough", "wet cough", "producing sputum", "diarrhea", "watery stool", "fatigue", "tired", "exhausted", "weary", "malaise", "feeling generally unwell", "fever", "pyrexia", "chills", "temperature greater than or equal 100.4 Fahrenheit or 38 celsius", "Temperature >= 100.4F", "Temperature >= 38C", "headache", "HA", "migraine", "cephalgia", "head pain", "muscle or body aches", "muscle aches", "generalized aches and pains", "body aches", "myalgias", "myoneuralgia", "soreness", "generalized aches and pains", "nausea or vomiting", "Nausea", "vomiting", "emesis", "throwing up", "queasy", "regurgitated", "shortness of breath", "difficulty breathing", "SOB", "Dyspnea", "breathing is short", "increased breathing", "labored breathing", "distressed breathing", "sore throat", "throat pain", "pharyngeal pain", "pharyngitis", "odynophagia".
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+Exclude
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Exclude symptoms from these medical section headings: "Past Medical History", "PMHFamily History", "FHX", "Social History", "SHX", "Medications", "Allergies", "Imaging", "Diagnostic Study".Rule (3): Positive symptom mentions must be a definite medical synonym.
+Exclude these symptoms: "injury related to loss of taste or smell", "wheezing", "crackles", "croup", "loose stool", "bloody stool", "looked ill", "afebrile", "felt warm", "headache due to injury", "localized pain", "injury", "abdominal pain", "lower back pain", "gastritis", "gastroparesis", "BiPAP", "CPAP", "oxygen need", "streptococcus", "dysphagia", "hoarseness", "red throat".
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+Verbose
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Include positive symptoms from these medical section headings: "Chief Complaint", "History of Present Illness", "HPI", "Review of Systems", "Physical Exam", "Vital Signs", "Assessment and Plan", "Medical Decision Making".
+Exclude all symptoms from these medical section headings: "Past Medical History", "PMHFamily History", "FHX", "Social History", "SHX", "Medications", "Allergies", "Imaging", "Diagnostic Study".
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Include positive mentions of these medical terms: "anosmia", "loss of taste", "loss of smell", "rhinorrhea", "congestion", "discharge", "nose is dripping", "runny nose", "stuffy nose", "cough", "tussive or post-tussive", "cough is unproductive", "productive cough", "dry cough", "wet cough", "producing sputum", "diarrhea", "watery stool", "fatigue", "tired", "exhausted", "weary", "malaise", "feeling generally unwell", "fever", "pyrexia", "chills", "temperature greater than or equal 100.4 Fahrenheit or 38 celsius", "Temperature >= 100.4F", "Temperature >= 38C", "headache", "HA", "migraine", "cephalgia", "head pain", "muscle or body aches", "muscle aches", "generalized aches and pains", "body aches", "myalgias", "myoneuralgia", "soreness", "generalized aches and pains", "nausea or vomiting", "Nausea", "vomiting", "emesis", "throwing up", "queasy", "regurgitated", "shortness of breath", "difficulty breathing", "SOB", "Dyspnea", "breathing is short", "increased breathing", "labored breathing", "distressed breathing", "sore throat", "throat pain", "pharyngeal pain", "pharyngitis", "odynophagia".
+Exclude these symptoms: "injury related to loss of taste or smell", "wheezing", "crackles", "croup", "loose stool", "bloody stool", "looked ill", "afebrile", "felt warm", "headache due to injury", "localized pain", "injury", "abdominal pain", "lower back pain", "gastritis", "gastroparesis", "BiPAP", "CPAP", "oxygen need", "streptococcus", "dysphagia", "hoarseness", "red throat".
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+RulesSimplification
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+You are an expert editor reviewing a clinical note summary.
+The previous reviewer may have included irrelevant, negative symptoms in their summarization.
+Simplify repetitive information found in this summary, and remove mentions of negative symptoms from this summary (e.g. "No X, No recent Y, No recent changes in Z").
+ONLY reply with your new summary. Do NOT explain your answers.
+
+### Text ####
+<PREVIOUS_SUMMARY>
+
+
+
+IdentitySimplification
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+You are an expert editor reviewing a clinical note summary.
+The previous reviewer may have included irrelevant, negative symptoms in their summarization.
+Simplify repetitive information found in this summary, and remove mentions of negative symptoms from this summary (e.g. "No X, No recent Y, No recent changes in Z").
+ONLY reply with your new summary. Do NOT explain your answers.
+
+### Text ####
+<PREVIOUS_SUMMARY>
+
+
+
+IncludeSimplification
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Include positive symptoms from these medical section headings: "Chief Complaint", "History of Present Illness", "HPI", "Review of Systems", "Physical Exam", "Vital Signs", "Assessment and Plan", "Medical Decision Making".
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Include positive mentions of: "anosmia", "loss of taste", "loss of smell", "rhinorrhea", "congestion", "discharge", "nose is dripping", "runny nose", "stuffy nose", "cough", "tussive or post-tussive", "cough is unproductive", "productive cough", "dry cough", "wet cough", "producing sputum", "diarrhea", "watery stool", "fatigue", "tired", "exhausted", "weary", "malaise", "feeling generally unwell", "fever", "pyrexia", "chills", "temperature greater than or equal 100.4 Fahrenheit or 38 celsius", "Temperature >= 100.4F", "Temperature >= 38C", "headache", "HA", "migraine", "cephalgia", "head pain", "muscle or body aches", "muscle aches", "generalized aches and pains", "body aches", "myalgias", "myoneuralgia", "soreness", "generalized aches and pains", "nausea or vomiting", "Nausea", "vomiting", "emesis", "throwing up", "queasy", "regurgitated", "shortness of breath", "difficulty breathing", "SOB", "Dyspnea", "breathing is short", "increased breathing", "labored breathing", "distressed breathing", "sore throat", "throat pain", "pharyngeal pain", "pharyngitis", "odynophagia".
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+You are an expert editor reviewing a clinical note summary.
+The previous reviewer may have included irrelevant, negative symptoms in their summarization.
+Simplify repetitive information found in this summary, and remove mentions of negative symptoms from this summary (e.g. "No X, No recent Y, No recent changes in Z").
+ONLY reply with your new summary. Do NOT explain your answers.
+
+### Text ####
+<PREVIOUS_SUMMARY>
+
+
+
+ExcludeSimplification
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Exclude symptoms from these medical section headings: "Past Medical History", "PMHFamily History", "FHX", "Social History", "SHX", "Medications", "Allergies", "Imaging", "Diagnostic Study".Rule (3): Positive symptom mentions must be a definite medical synonym.
+Exclude these symptoms: "injury related to loss of taste or smell", "wheezing", "crackles", "croup", "loose stool", "bloody stool", "looked ill", "afebrile", "felt warm", "headache due to injury", "localized pain", "injury", "abdominal pain", "lower back pain", "gastritis", "gastroparesis", "BiPAP", "CPAP", "oxygen need", "streptococcus", "dysphagia", "hoarseness", "red throat".
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+You are an expert editor reviewing a clinical note summary.
+The previous reviewer may have included irrelevant, negative symptoms in their summarization.
+Simplify repetitive information found in this summary, and remove mentions of negative symptoms from this summary (e.g. "No X, No recent Y, No recent changes in Z").
+ONLY reply with your new summary. Do NOT explain your answers.
+
+### Text ####
+<PREVIOUS_SUMMARY>
+
+
+
+VerboseSimplification
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Include positive symptoms from these medical section headings: "Chief Complaint", "History of Present Illness", "HPI", "Review of Systems", "Physical Exam", "Vital Signs", "Assessment and Plan", "Medical Decision Making".
+Exclude all symptoms from these medical section headings: "Past Medical History", "PMHFamily History", "FHX", "Social History", "SHX", "Medications", "Allergies", "Imaging", "Diagnostic Study".
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Include positive mentions of these medical terms: "anosmia", "loss of taste", "loss of smell", "rhinorrhea", "congestion", "discharge", "nose is dripping", "runny nose", "stuffy nose", "cough", "tussive or post-tussive", "cough is unproductive", "productive cough", "dry cough", "wet cough", "producing sputum", "diarrhea", "watery stool", "fatigue", "tired", "exhausted", "weary", "malaise", "feeling generally unwell", "fever", "pyrexia", "chills", "temperature greater than or equal 100.4 Fahrenheit or 38 celsius", "Temperature >= 100.4F", "Temperature >= 38C", "headache", "HA", "migraine", "cephalgia", "head pain", "muscle or body aches", "muscle aches", "generalized aches and pains", "body aches", "myalgias", "myoneuralgia", "soreness", "generalized aches and pains", "nausea or vomiting", "Nausea", "vomiting", "emesis", "throwing up", "queasy", "regurgitated", "shortness of breath", "difficulty breathing", "SOB", "Dyspnea", "breathing is short", "increased breathing", "labored breathing", "distressed breathing", "sore throat", "throat pain", "pharyngeal pain", "pharyngitis", "odynophagia".
+Exclude these symptoms: "injury related to loss of taste or smell", "wheezing", "crackles", "croup", "loose stool", "bloody stool", "looked ill", "afebrile", "felt warm", "headache due to injury", "localized pain", "injury", "abdominal pain", "lower back pain", "gastritis", "gastroparesis", "BiPAP", "CPAP", "oxygen need", "streptococcus", "dysphagia", "hoarseness", "red throat".
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+You are an expert editor reviewing a clinical note summary.
+The previous reviewer may have included irrelevant, negative symptoms in their summarization.
+Simplify repetitive information found in this summary, and remove mentions of negative symptoms from this summary (e.g. "No X, No recent Y, No recent changes in Z").
+ONLY reply with your new summary. Do NOT explain your answers.
+
+### Text ####
+<PREVIOUS_SUMMARY>
+
+
+
+RulesJSON
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+IdentityJSON
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+IncludeJSON
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Include positive symptoms from these medical section headings: "Chief Complaint", "History of Present Illness", "HPI", "Review of Systems", "Physical Exam", "Vital Signs", "Assessment and Plan", "Medical Decision Making".
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Include positive mentions of: "anosmia", "loss of taste", "loss of smell", "rhinorrhea", "congestion", "discharge", "nose is dripping", "runny nose", "stuffy nose", "cough", "tussive or post-tussive", "cough is unproductive", "productive cough", "dry cough", "wet cough", "producing sputum", "diarrhea", "watery stool", "fatigue", "tired", "exhausted", "weary", "malaise", "feeling generally unwell", "fever", "pyrexia", "chills", "temperature greater than or equal 100.4 Fahrenheit or 38 celsius", "Temperature >= 100.4F", "Temperature >= 38C", "headache", "HA", "migraine", "cephalgia", "head pain", "muscle or body aches", "muscle aches", "generalized aches and pains", "body aches", "myalgias", "myoneuralgia", "soreness", "generalized aches and pains", "nausea or vomiting", "Nausea", "vomiting", "emesis", "throwing up", "queasy", "regurgitated", "shortness of breath", "difficulty breathing", "SOB", "Dyspnea", "breathing is short", "increased breathing", "labored breathing", "distressed breathing", "sore throat", "throat pain", "pharyngeal pain", "pharyngitis", "odynophagia".
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+ExcludeJSON
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Exclude symptoms from these medical section headings: "Past Medical History", "PMHFamily History", "FHX", "Social History", "SHX", "Medications", "Allergies", "Imaging", "Diagnostic Study".Rule (3): Positive symptom mentions must be a definite medical synonym.
+Exclude these symptoms: "injury related to loss of taste or smell", "wheezing", "crackles", "croup", "loose stool", "bloody stool", "looked ill", "afebrile", "felt warm", "headache due to injury", "localized pain", "injury", "abdominal pain", "lower back pain", "gastritis", "gastroparesis", "BiPAP", "CPAP", "oxygen need", "streptococcus", "dysphagia", "hoarseness", "red throat".
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+VerboseJSON
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Include positive symptoms from these medical section headings: "Chief Complaint", "History of Present Illness", "HPI", "Review of Systems", "Physical Exam", "Vital Signs", "Assessment and Plan", "Medical Decision Making".
+Exclude all symptoms from these medical section headings: "Past Medical History", "PMHFamily History", "FHX", "Social History", "SHX", "Medications", "Allergies", "Imaging", "Diagnostic Study".
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Include positive mentions of these medical terms: "anosmia", "loss of taste", "loss of smell", "rhinorrhea", "congestion", "discharge", "nose is dripping", "runny nose", "stuffy nose", "cough", "tussive or post-tussive", "cough is unproductive", "productive cough", "dry cough", "wet cough", "producing sputum", "diarrhea", "watery stool", "fatigue", "tired", "exhausted", "weary", "malaise", "feeling generally unwell", "fever", "pyrexia", "chills", "temperature greater than or equal 100.4 Fahrenheit or 38 celsius", "Temperature >= 100.4F", "Temperature >= 38C", "headache", "HA", "migraine", "cephalgia", "head pain", "muscle or body aches", "muscle aches", "generalized aches and pains", "body aches", "myalgias", "myoneuralgia", "soreness", "generalized aches and pains", "nausea or vomiting", "Nausea", "vomiting", "emesis", "throwing up", "queasy", "regurgitated", "shortness of breath", "difficulty breathing", "SOB", "Dyspnea", "breathing is short", "increased breathing", "labored breathing", "distressed breathing", "sore throat", "throat pain", "pharyngeal pain", "pharyngitis", "odynophagia".
+Exclude these symptoms: "injury related to loss of taste or smell", "wheezing", "crackles", "croup", "loose stool", "bloody stool", "looked ill", "afebrile", "felt warm", "headache due to injury", "localized pain", "injury", "abdominal pain", "lower back pain", "gastritis", "gastroparesis", "BiPAP", "CPAP", "oxygen need", "streptococcus", "dysphagia", "hoarseness", "red throat".
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+
+
+RulesJSONValidation
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+If the following text is parseable, valid JSON, do nothing and return the text as is.
+Otherwise, remove all non-JSON information. Then format the text so that it's valid, parsable JSON that conforms to the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+```json
+<PREVIOUS_JSON_OUTPUT>
+```
+
+
+
+IdentityJSONValidation
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+If the following text is parseable, valid JSON, do nothing and return the text as is.
+Otherwise, remove all non-JSON information. Then format the text so that it's valid, parsable JSON that conforms to the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+```json
+<PREVIOUS_JSON_OUTPUT>
+```
+
+
+
+IncludeJSONValidation
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Include positive symptoms from these medical section headings: "Chief Complaint", "History of Present Illness", "HPI", "Review of Systems", "Physical Exam", "Vital Signs", "Assessment and Plan", "Medical Decision Making".
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Include positive mentions of: "anosmia", "loss of taste", "loss of smell", "rhinorrhea", "congestion", "discharge", "nose is dripping", "runny nose", "stuffy nose", "cough", "tussive or post-tussive", "cough is unproductive", "productive cough", "dry cough", "wet cough", "producing sputum", "diarrhea", "watery stool", "fatigue", "tired", "exhausted", "weary", "malaise", "feeling generally unwell", "fever", "pyrexia", "chills", "temperature greater than or equal 100.4 Fahrenheit or 38 celsius", "Temperature >= 100.4F", "Temperature >= 38C", "headache", "HA", "migraine", "cephalgia", "head pain", "muscle or body aches", "muscle aches", "generalized aches and pains", "body aches", "myalgias", "myoneuralgia", "soreness", "generalized aches and pains", "nausea or vomiting", "Nausea", "vomiting", "emesis", "throwing up", "queasy", "regurgitated", "shortness of breath", "difficulty breathing", "SOB", "Dyspnea", "breathing is short", "increased breathing", "labored breathing", "distressed breathing", "sore throat", "throat pain", "pharyngeal pain", "pharyngitis", "odynophagia".
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+If the following text is parseable, valid JSON, do nothing and return the text as is.
+Otherwise, remove all non-JSON information. Then format the text so that it's valid, parsable JSON that conforms to the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+```json
+<PREVIOUS_JSON_OUTPUT>
+```
+
+
+
+ExcludeJSONValidation
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Exclude symptoms from these medical section headings: "Past Medical History", "PMHFamily History", "FHX", "Social History", "SHX", "Medications", "Allergies", "Imaging", "Diagnostic Study".Rule (3): Positive symptom mentions must be a definite medical synonym.
+Exclude these symptoms: "injury related to loss of taste or smell", "wheezing", "crackles", "croup", "loose stool", "bloody stool", "looked ill", "afebrile", "felt warm", "headache due to injury", "localized pain", "injury", "abdominal pain", "lower back pain", "gastritis", "gastroparesis", "BiPAP", "CPAP", "oxygen need", "streptococcus", "dysphagia", "hoarseness", "red throat".
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+If the following text is parseable, valid JSON, do nothing and return the text as is.
+Otherwise, remove all non-JSON information. Then format the text so that it's valid, parsable JSON that conforms to the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+```json
+<PREVIOUS_JSON_OUTPUT>
+```
+
+
+
+VerboseJSONValidation
+- Instruction:
+You are a helpful assistant identifying symptoms from emergency department notes that could relate to infectious respiratory diseases.
+Output positively documented symptoms, looking out specifically for the following: Congestion or runny nose, Cough, Diarrhea, Dyspnea, Fatigue, Fever or chills, Headache, Loss of taste or smell, Muscle or body aches, Nausea or vomiting, Sore throat.
+Symptoms only need to be positively mentioned once to be included.
+Do not mention symptoms that are not present in the note.
+
+Follow these rules:
+Rule (1): Symptoms must be positively documented and relevant to the presenting illness or reason for visit.
+Rule (2): Medical section headings must be specific to the present emergency department encounter.
+Include positive symptoms from these medical section headings: "Chief Complaint", "History of Present Illness", "HPI", "Review of Systems", "Physical Exam", "Vital Signs", "Assessment and Plan", "Medical Decision Making".
+Exclude all symptoms from these medical section headings: "Past Medical History", "PMHFamily History", "FHX", "Social History", "SHX", "Medications", "Allergies", "Imaging", "Diagnostic Study".
+Rule (3): Positive symptom mentions must be a definite medical synonym.
+Include positive mentions of these medical terms: "anosmia", "loss of taste", "loss of smell", "rhinorrhea", "congestion", "discharge", "nose is dripping", "runny nose", "stuffy nose", "cough", "tussive or post-tussive", "cough is unproductive", "productive cough", "dry cough", "wet cough", "producing sputum", "diarrhea", "watery stool", "fatigue", "tired", "exhausted", "weary", "malaise", "feeling generally unwell", "fever", "pyrexia", "chills", "temperature greater than or equal 100.4 Fahrenheit or 38 celsius", "Temperature >= 100.4F", "Temperature >= 38C", "headache", "HA", "migraine", "cephalgia", "head pain", "muscle or body aches", "muscle aches", "generalized aches and pains", "body aches", "myalgias", "myoneuralgia", "soreness", "generalized aches and pains", "nausea or vomiting", "Nausea", "vomiting", "emesis", "throwing up", "queasy", "regurgitated", "shortness of breath", "difficulty breathing", "SOB", "Dyspnea", "breathing is short", "increased breathing", "labored breathing", "distressed breathing", "sore throat", "throat pain", "pharyngeal pain", "pharyngitis", "odynophagia".
+Exclude these symptoms: "injury related to loss of taste or smell", "wheezing", "crackles", "croup", "loose stool", "bloody stool", "looked ill", "afebrile", "felt warm", "headache due to injury", "localized pain", "injury", "abdominal pain", "lower back pain", "gastritis", "gastroparesis", "BiPAP", "CPAP", "oxygen need", "streptococcus", "dysphagia", "hoarseness", "red throat".
+Your reply must be parsable as JSON.
+Format your response using only the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}. Each JSON key should correspond to a symptom, and each value should be true if that symptom is indicated in the clinical note; false otherwise.
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+<CLINICAL_NOTE>
+
+===SECOND REQUEST===
+- Instruction:
+If the following text is parseable, valid JSON, do nothing and return the text as is.
+Otherwise, remove all non-JSON information. Then format the text so that it's valid, parsable JSON that conforms to the following JSON schema: {"Congestion or runny nose": boolean, "Cough": boolean, "Diarrhea": boolean, "Dyspnea": boolean, "Fatigue": boolean, "Fever or chills": boolean, "Headache": boolean, "Loss of taste or smell": boolean, "Muscle or body aches": boolean, "Nausea or vomiting": boolean, "Sore throat": boolean}
+Never explain yourself, and only reply with JSON.
+
+### Text ####
+```json
+<PREVIOUS_JSON_OUTPUT>
+```

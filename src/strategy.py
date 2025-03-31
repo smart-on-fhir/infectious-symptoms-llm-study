@@ -20,4 +20,5 @@ class Strategy:
             self.responses.append(response["text"])
             self.total_tokens += response["stats"]["total_tokens"]
         # Only the final response is returned
+        print(self.responses)
         return {"text": self.responses[-1], "total_tokens": self.total_tokens}

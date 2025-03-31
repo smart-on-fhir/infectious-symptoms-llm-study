@@ -4,6 +4,7 @@ import os
 import random
 import time
 from pathlib import Path
+from typing import Self
 
 
 class NoteProcessor:
@@ -251,3 +252,5 @@ class NoteProcessor:
             note_list=note_list,
             skip_list=skip_list,
         )
+
+        

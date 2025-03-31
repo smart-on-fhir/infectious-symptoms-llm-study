@@ -26,12 +26,12 @@ tuning_exp = {
     "development-mixtral8x22b-Include": all_strategies["include"],
     "development-mixtral8x22b-Exclude": all_strategies["exclude"],
     "development-mixtral8x22b-Verbose": all_strategies["verbose"],
-    # DoublePass
-    "development-mixtral8x22b-IdentityDoublePass": all_strategies["identityDoublePass"],
-    "development-mixtral8x22b-RulesDoublePass": all_strategies["rulesDoublePass"],
-    "development-mixtral8x22b-IncludeDoublePass": all_strategies["includeDoublePass"],
-    "development-mixtral8x22b-ExcludeDoublePass": all_strategies["excludeDoublePass"],
-    "development-mixtral8x22b-VerboseDoublePass": all_strategies["verboseDoublePass"],
+    # Simplification
+    "development-mixtral8x22b-IdentitySimplification": all_strategies["identitySimplification"],
+    "development-mixtral8x22b-RulesSimplification": all_strategies["rulesSimplification"],
+    "development-mixtral8x22b-IncludeSimplification": all_strategies["includeSimplification"],
+    "development-mixtral8x22b-ExcludeSimplification": all_strategies["excludeSimplification"],
+    "development-mixtral8x22b-VerboseSimplification": all_strategies["verboseSimplification"],
     # JSON
     "development-mixtral8x22b-IdentityJSON": all_strategies["identityJSON"],
     "development-mixtral8x22b-RulesJSON": all_strategies["rulesJSON"],
@@ -39,18 +39,18 @@ tuning_exp = {
     "development-mixtral8x22b-ExcludeJSON": all_strategies["excludeJSON"],
     "development-mixtral8x22b-VerboseJSON": all_strategies["verboseJSON"],
     # JSON Double Pass
-    "development-mixtral8x22b-IdentityJSONDoublePass": all_strategies[
-        "identityJSONDoublePass"
+    "development-mixtral8x22b-IdentityJSONValidation": all_strategies[
+        "identityJSONValidation"
     ],
-    "development-mixtral8x22b-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
-    "development-mixtral8x22b-IncludeJSONDoublePass": all_strategies[
-        "includeJSONDoublePass"
+    "development-mixtral8x22b-RulesJSONValidation": all_strategies["rulesJSONValidation"],
+    "development-mixtral8x22b-IncludeJSONValidation": all_strategies[
+        "includeJSONValidation"
     ],
-    "development-mixtral8x22b-ExcludeJSONDoublePass": all_strategies[
-        "excludeJSONDoublePass"
+    "development-mixtral8x22b-ExcludeJSONValidation": all_strategies[
+        "excludeJSONValidation"
     ],
-    "development-mixtral8x22b-VerboseJSONDoublePass": all_strategies[
-        "verboseJSONDoublePass"
+    "development-mixtral8x22b-VerboseJSONValidation": all_strategies[
+        "verboseJSONValidation"
     ],
 }
 

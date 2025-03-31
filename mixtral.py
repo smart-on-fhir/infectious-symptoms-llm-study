@@ -26,12 +26,12 @@ tuning_exp = {
     "development-mixtral-Include": all_strategies["include"],
     "development-mixtral-Exclude": all_strategies["exclude"],
     "development-mixtral-Verbose": all_strategies["verbose"],
-    # DoublePass
-    "development-mixtral-IdentityDoublePass": all_strategies["identityDoublePass"],
-    "development-mixtral-RulesDoublePass": all_strategies["rulesDoublePass"],
-    "development-mixtral-IncludeDoublePass": all_strategies["includeDoublePass"],
-    "development-mixtral-ExcludeDoublePass": all_strategies["excludeDoublePass"],
-    "development-mixtral-VerboseDoublePass": all_strategies["verboseDoublePass"],
+    # Simplification
+    "development-mixtral-IdentitySimplification": all_strategies["identitySimplification"],
+    "development-mixtral-RulesSimplification": all_strategies["rulesSimplification"],
+    "development-mixtral-IncludeSimplification": all_strategies["includeSimplification"],
+    "development-mixtral-ExcludeSimplification": all_strategies["excludeSimplification"],
+    "development-mixtral-VerboseSimplification": all_strategies["verboseSimplification"],
     # JSON
     "development-mixtral-IdentityJSON": all_strategies["identityJSON"],
     "development-mixtral-RulesJSON": all_strategies["rulesJSON"],
@@ -39,11 +39,11 @@ tuning_exp = {
     "development-mixtral-ExcludeJSON": all_strategies["excludeJSON"],
     "development-mixtral-VerboseJSON": all_strategies["verboseJSON"],
     # JSON Double Pass
-    "development-mixtral-IdentityJSONDoublePass": all_strategies["identityJSONDoublePass"],
-    "development-mixtral-RulesJSONDoublePass": all_strategies["rulesJSONDoublePass"],
-    "development-mixtral-IncludeJSONDoublePass": all_strategies["includeJSONDoublePass"],
-    "development-mixtral-ExcludeJSONDoublePass": all_strategies["excludeJSONDoublePass"],
-    "development-mixtral-VerboseJSONDoublePass": all_strategies["verboseJSONDoublePass"],
+    "development-mixtral-IdentityJSONValidation": all_strategies["identityJSONValidation"],
+    "development-mixtral-RulesJSONValidation": all_strategies["rulesJSONValidation"],
+    "development-mixtral-IncludeJSONValidation": all_strategies["includeJSONValidation"],
+    "development-mixtral-ExcludeJSONValidation": all_strategies["excludeJSONValidation"],
+    "development-mixtral-VerboseJSONValidation": all_strategies["verboseJSONValidation"],
 }
 
 analysis_exp = {
