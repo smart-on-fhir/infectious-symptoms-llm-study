@@ -44,7 +44,7 @@ tuning_exp = {
     "development-gpt4Turbo-IncludeJSON": all_strategies["includeJSON"],
     "development-gpt4Turbo-ExcludeJSON": all_strategies["excludeJSON"],
     "development-gpt4Turbo-VerboseJSON": all_strategies["verboseJSON"],
-    # JSON Double Pass
+    # JSON Validation
     "development-gpt4Turbo-IdentityJSONValidation": all_strategies["identityJSONValidation"],
     "development-gpt4Turbo-RulesJSONValidation": all_strategies["rulesJSONValidation"],
     "development-gpt4Turbo-IncludeJSONValidation": all_strategies["includeJSONValidation"],

@@ -39,7 +39,7 @@ tuning_exp = {
     "development-llama2-IncludeJSON": all_strategies["includeJSON"],
     "development-llama2-ExcludeJSON": all_strategies["excludeJSON"],
     "development-llama2-VerboseJSON": all_strategies["verboseJSON"],
-    # JSON Double Pass
+    # JSON Validation
     "development-llama2-IdentityJSONValidation": all_strategies["identityJSONValidation"],
     "development-llama2-RulesJSONValidation": all_strategies["rulesJSONValidation"],
     "development-llama2-IncludeJSONValidation": all_strategies["includeJSONValidation"],

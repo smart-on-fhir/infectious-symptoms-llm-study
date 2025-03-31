@@ -44,7 +44,7 @@ tuning_exp = {
     "development-gpt35Turbo-IncludeJSON": all_strategies["includeJSON"],
     "development-gpt35Turbo-ExcludeJSON": all_strategies["excludeJSON"],
     "development-gpt35Turbo-VerboseJSON": all_strategies["verboseJSON"],
-    # JSON Double Pass
+    # JSON Validation
     "development-gpt35Turbo-IdentityJSONValidation": all_strategies[
         "identityJSONValidation"
     ],
@@ -60,8 +60,8 @@ analysis_exp = {
 
 if __name__ == "__main__":
     note_processor.run_prompt_tuning(
-        experiment=tuning_exp, experiment_name="test-prompts-gpt3-tuning"
+        experiment=tuning_exp, experiment_name="gpt3-tuning"
     )
     # note_processor.run_analysis(
-    #     experiment=analysis_exp, experiment_name="test-prompts-gpt3-analysis"
+    #     experiment=analysis_exp, experiment_name="gpt3-analysis"
     # )

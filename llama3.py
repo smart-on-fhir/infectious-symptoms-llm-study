@@ -39,7 +39,7 @@ tuning_exp = {
     "prompt-llama3-IncludeJSON": all_strategies["includeJSON"],
     "prompt-llama3-ExcludeJSON": all_strategies["excludeJSON"],
     "prompt-llama3-VerboseJSON": all_strategies["verboseJSON"],
-    # JSON Double Pass
+    # JSON Validation
     "prompt-llama3-IdentityJSONValidation": all_strategies["identityJSONValidation"],
     "prompt-llama3-RulesJSONValidation": all_strategies["rulesJSONValidation"],
     "prompt-llama3-IncludeJSONValidation": all_strategies["includeJSONValidation"],

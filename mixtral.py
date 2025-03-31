@@ -38,7 +38,7 @@ tuning_exp = {
     "development-mixtral-IncludeJSON": all_strategies["includeJSON"],
     "development-mixtral-ExcludeJSON": all_strategies["excludeJSON"],
     "development-mixtral-VerboseJSON": all_strategies["verboseJSON"],
-    # JSON Double Pass
+    # JSON Validation
     "development-mixtral-IdentityJSONValidation": all_strategies["identityJSONValidation"],
     "development-mixtral-RulesJSONValidation": all_strategies["rulesJSONValidation"],
     "development-mixtral-IncludeJSONValidation": all_strategies["includeJSONValidation"],
