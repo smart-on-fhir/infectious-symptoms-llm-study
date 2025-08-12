@@ -185,7 +185,7 @@ crit3_include = {
     ],
 }
 crit3_exclude = {
-    "Loss of taste or smell": ["injury related to loss of taste or smell"],
+    "Loss of taste or smell": ["inury related to loss of taste or smell"],
     "Congestion or runny nose": [],
     "Cough": ["wheezing", "crackles", "croup"],
     "Diarrhea": ["loose stool", "bloody stool"],

@@ -1,4 +1,4 @@
 from src.models.vllm_client import VllmClient
 
-class LLAMA3Model(VllmClient):
+class GptOssModel(VllmClient):
     pass

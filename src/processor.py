@@ -53,7 +53,7 @@ class NoteProcessor:
             else {**DEFAULT_CONFIG, **final_note_config}
         )
 
-    def _get_(self):
+    def _get_relevant_note_list(self):
         """
         :returns: list of notes ids used for for prompt-tuning; None if no such list exists in config
         """
@@ -124,7 +124,7 @@ class NoteProcessor:
         :returns: the note and the note's name (helpful when one is selected randomly)
         """
         return self._get_note(
-            self.note_config["DIR_TUNING"], name, self._get_()
+            self.note_config["DIR_TUNING"], name, self._get_relevant_note_list()
         )
 
     def _process_dir(
@@ -229,7 +229,7 @@ class NoteProcessor:
             experiment,
             experiment_name,
             # Note list for tuning should be the tuning subset by default
-            note_list=note_list or self._get_(),
+            note_list=note_list or self._get_relevant_note_list(),
             skip_list=skip_list,
         )
 
