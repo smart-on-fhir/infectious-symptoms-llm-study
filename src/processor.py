@@ -135,6 +135,7 @@ class NoteProcessor:
         experiment_name: str = "experiment",
         note_list=None,
         skip_list=None,
+        limit: int = -1
     ) -> None:
         """
         Run an experiment against all notes in input_dir
@@ -144,6 +145,7 @@ class NoteProcessor:
         :param experiment_name: name for the experiment file; 'experiment' by default
         :param note_list: notes to process because we have labels for them; None by default
         :param skip_list: notes to skip because of documented reasons; None by default
+        :param limit: max number of notes to process; -1 means no cap
         """
         start = datetime.datetime.now()
         print("START: ", start)
@@ -163,6 +165,12 @@ class NoteProcessor:
         # For all files in the source directory
         for index, fname in enumerate(os.listdir(input_dir)):
             note, _ = self._get_note(input_dir, fname)
+            if index > limit and limit != -1: 
+                print("###################################")
+                print("# Max Note Limit Hit; stopping...")
+                print("###################################")
+                break
+
             print("###################################")
             print(f"# Note {index + 1}: '{fname}'")
             print("###################################")
@@ -239,6 +247,7 @@ class NoteProcessor:
         experiment_name: str = "analysis-experiment",
         note_list=None,
         skip_list=None,
+        limit: int = -1
     ):
         """
         Run prompt-tuning data set to determine the most performant prompt
@@ -251,6 +260,7 @@ class NoteProcessor:
             experiment_name,
             note_list=note_list,
             skip_list=skip_list,
+            limit=limit
         )
 
         

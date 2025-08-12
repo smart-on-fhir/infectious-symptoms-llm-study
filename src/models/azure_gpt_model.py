@@ -1,4 +1,5 @@
 import os
+import re
 from dotenv import load_dotenv
 from openai import AzureOpenAI
 from src.models.llm_interface import LlmInterface
@@ -12,7 +13,7 @@ load_dotenv()
 #
 ###############################################################################
 class AzureGptModel(LlmInterface):
-    def __init__(self, url=None, api_key=None, api_version=None, model_type=None):
+    def __init__(self, url=None, api_key=None, api_version=None, model_type=None, REMOVE_WS_FLAG: bool = False):
         self.client = AzureOpenAI(
             azure_endpoint=url or os.getenv("AZURE_OPENAI_ENDPOINT"),
             api_key=api_key or os.getenv("AZURE_OPENAI_API_KEY"),
@@ -22,9 +23,15 @@ class AzureGptModel(LlmInterface):
         self.prompt_format = (
             "### Instructions ###\n%(instruction)s ### Text ###\n%(context)s"
         )
+        self.REMOVE_WS_FLAG = REMOVE_WS_FLAG
 
     def get_model_info(self):
         raise NotImplementedError
+
+
+    def remove_trailing_whitespace(self, text):
+        return re.sub(r"\s+$", "", text, flags=re.MULTILINE)
+
 
     def fetch_llm_response(
         self,
@@ -35,6 +42,9 @@ class AzureGptModel(LlmInterface):
             instruction=instruction,
             context=context,
         )
+        if self.REMOVE_WS_FLAG: 
+            payload = self.remove_trailing_whitespace(payload)
+
         messages = [
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": payload},
